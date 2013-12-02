@@ -10,6 +10,7 @@ package controller.containing;
  */
 public class Container {
 
+    private int id;
     /*
      * Dimensies voor buitenkant van de container
      */
@@ -60,7 +61,8 @@ public class Container {
     private String contentDangerCont;
     private String isoCode;
 
-    public Container(String dateArrive, double timeArrive1, double timeArrive2, String vehicleArrive, String companyArrive, int xLoc, int yLoc, int zLoc, String dateDept, double timeDept1, double timeDept2, String vehicleDept, String companyDept, String ownerCont, int idCont, int weightCont, String contentCont, String contentTypeCont, String contentDangerCont, String isoCode) {
+    public Container(int id, String dateArrive, double timeArrive1, double timeArrive2, String vehicleArrive, String companyArrive, int xLoc, int yLoc, int zLoc, String dateDept, double timeDept1, double timeDept2, String vehicleDept, String companyDept, String ownerCont, int idCont, int weightCont, String contentCont, String contentTypeCont, String contentDangerCont, String isoCode) {
+        this.id = id;
         this.dateArrive = dateArrive;
         this.timeArrive1 = timeArrive1;
         this.timeArrive2 = timeArrive2;
