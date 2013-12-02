@@ -13,7 +13,11 @@ import java.util.PriorityQueue;
  *
  * @author Iva
  */
-public class DijkstraAlgorithm
+/**
+ *
+ * @author Johan
+ */
+public class DijkstraAlgorithm 
   {
     public static void computePaths(Vertex source)
       {
@@ -50,21 +54,42 @@ public class DijkstraAlgorithm
          Collections.reverse(path);
           return path;
     }
-    public static void makePath(Vertex a,Vertex b){
+    public DijkstraAlgorithm(){
         
-            computePaths(a);
-	    List<Vertex> path = getShortestPathTo(b);
-	    System.out.println("Path: " + path);
+    }
+    public static void makePath(String a){
+        
+        Points p = new Points();    
+        if(a.equals("zeeschip")){
+                
+                computePaths(p.WP8);
+                List<Vertex> path = getShortestPathTo(p.CSC1);
+                System.out.println("Path: " + path);
+                
+            }
+        if (a.equals("vrachtauto")){
+            
+                computePaths(p.WP8);
+                List<Vertex> path = getShortestPathTo(p.TCC1);
+                System.out.println("Path: " + path);
+            
+        }
+        if (a.equals("trein")){
+            
+                computePaths(p.WP8);
+                List<Vertex> path = getShortestPathTo(p.TC1);
+                System.out.println("Path: " + path);
+            
+        }
+        if (a.equals("binnenschip")){
+            
+                computePaths(p.WP8);
+                List<Vertex> path = getShortestPathTo(p.BC1);
+                System.out.println("Path: " + path);
+            
+        }
+
         
     }
     
- 
-     public static void main(String[] args)
-     {
-         
-         Points p = new Points();
-         makePath(p.CSC5,p.WP7); 
-
-	
-    }
  }
