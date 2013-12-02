@@ -1,0 +1,49 @@
+package mygame;
+
+import com.jme3.app.SimpleApplication;
+import com.jme3.light.DirectionalLight;
+import com.jme3.renderer.RenderManager;
+import com.jme3.math.ColorRGBA;
+import com.jme3.math.Vector3f;
+
+
+/**
+ * test
+ * @author normenhansen
+ */
+public class Main extends SimpleApplication 
+{
+    public static void main(String[] args) 
+    {
+        Main app = new Main();
+        app.start();        
+    }
+    
+    @Override
+    public void simpleInitApp()
+    {  
+        flyCam.setMoveSpeed(25);
+
+        /** A white, directional light source */ 
+        DirectionalLight sun = new DirectionalLight();
+        sun.setDirection((new Vector3f(-0.5f, -0.5f, -0.5f)).normalizeLocal());
+        sun.setColor(ColorRGBA.White);
+        rootNode.addLight(sun); 
+
+        Terrain terrain = new Terrain(assetManager, rootNode); 
+        terrain.initTerrain();
+        viewPort.setBackgroundColor(ColorRGBA.Blue);      
+        
+        
+    }    
+    
+    @Override
+    public void simpleUpdate(float tpf) {
+        //TODO: add update code
+    }
+
+    @Override
+    public void simpleRender(RenderManager rm) {
+        //TODO: add render code
+    }
+}
