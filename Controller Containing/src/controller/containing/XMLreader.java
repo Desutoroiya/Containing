@@ -5,6 +5,9 @@
 package controller.containing;
 
 import java.io.File;
+import java.util.ArrayList;
+
+import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
@@ -14,7 +17,7 @@ import org.w3c.dom.NodeList;
 
 /**
  *
- * @author Iva
+ * @author Enzo
  */
 public class XMLreader {
     
@@ -23,6 +26,9 @@ public class XMLreader {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        List<Container> _containerList;
+        _containerList = new ArrayList<Container>();
+        
         try{
             File ContainerList = new File("xml7.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -37,23 +43,29 @@ public class XMLreader {
             
             for(int i =0; i < nodes.getLength(); i++){
                 Node node = nodes.item(i);
-                
+                int id = 01+i;
                 if(node.getNodeType()== Node.ELEMENT_NODE){
                     Element element =  (Element) node;
-                    System.out.println("record Eigenaar:" + getValue("naam",element));
-                    System.out.println("record aankomst:"+ getValue("van", element)+" tot:" +getValue("tot",element));
-                    System.out.println("record vervoer_aankomst:"+getValue("soort_vervoer",element));
-                    System.out.println("vertek: "+getDoubleValue("soort_vervoer",element));
-                    //System.out.println("record vervoer_vertrek:"+getValue("vertrek soort_vervoer",element));
+                  
+                    Container _container = new Container(id,getValue("d", element)+getValue("m", element)+getValue("j", element),getDoubleValue(0,"van", element),getDoubleValue(1,"tot", element),getValue("soort_vervoer", element),
+                            getValue("bedrijf", element),getIntValue(0,"x", element),getIntValue(0,"y", element),getIntValue(0,"z", element),getDoubleValue("d",element)+getDoubleValue("m",element)+
+                            getDoubleValue("j",element),getDoubleValue(1,"van",element),getDoubleValue(1,"tot",element),getDoubleValue("soort_vervoer",element),getDoubleValue("bedrijf",element),getValue("eigenaar", element),getIntValue(0,"containernr", element),
+                            getIntValue(0,"leeg", element)+getIntValue(0,"inhoud",element),getDoubleValue("naam",element),getValue("soort", element),getValue("gevaar", element),getValue("ISO",element));
+                    _containerList.add(_container);
+                  
                     
-                    System.out.println("==================");
+                    
                 }
             }
         } catch(Exception ex){
             ex.printStackTrace();
         }
+        for(int i = 0;i<_containerList.size();i++){
+            System.out.println(_containerList.get(i));
+        }
     }
 
+    
 private static String getValue(String tag, Element element){
     NodeList nodes = element.getElementsByTagName(tag).item(0).getChildNodes();
     Node node = (Node) nodes.item(0);
@@ -65,4 +77,18 @@ private static String getDoubleValue(String tag1, Element element){
     Node node =(Node) nodes1.item(0);
     return node.getNodeValue();
 }
+private static int getIntValue(int index,String tag, Element element){
+    NodeList nodes = element.getElementsByTagName(tag).item(index).getChildNodes();
+    Node node = (Node) nodes.item(0);
+    String transform=node.getNodeValue();
+    int value = Integer.parseInt(transform);
+    return value;
+}
+  private static double getDoubleValue(int index, String tag, Element element){
+     NodeList nodes = element.getElementsByTagName(tag).item(index).getChildNodes();
+    Node node = (Node) nodes.item(0);
+      String transform= node.getNodeValue();
+      double value =Double.parseDouble(transform);
+      return value;
+  }      
 }
