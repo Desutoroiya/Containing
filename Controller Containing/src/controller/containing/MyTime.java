@@ -20,7 +20,7 @@ public class MyTime
     }
     
     public static void main(String[] args){
-        runTime();
+        
     }
     
     public String getCurrentDate()
