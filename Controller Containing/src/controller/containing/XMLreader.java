@@ -26,11 +26,13 @@ public class XMLreader {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        SortAlgorithm s = new SortAlgorithm();
+        
         List<Container> _containerList;
         _containerList = new ArrayList<Container>();
         
         try{
-            File ContainerList = new File("xml7.xml");
+            File ContainerList = new File("xml1.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(ContainerList);
@@ -43,19 +45,20 @@ public class XMLreader {
             
             for(int i =0; i < nodes.getLength(); i++){
                 Node node = nodes.item(i);
+                Element element =  (Element) node;
+                
                 int id = 01+i;
+                
                 if(node.getNodeType()== Node.ELEMENT_NODE){
-                    Element element =  (Element) node;
-                  
                     Container _container = new Container(id,getValue("d", element)+getValue("m", element)+getValue("j", element),getDoubleValue(0,"van", element),getDoubleValue(1,"tot", element),getValue("soort_vervoer", element),
-                            getValue("bedrijf", element),getIntValue(0,"x", element),getIntValue(0,"y", element),getIntValue(0,"z", element),getDoubleValue("d",element)+getDoubleValue("m",element)+
-                            getDoubleValue("j",element),getDoubleValue(1,"van",element),getDoubleValue(1,"tot",element),getDoubleValue("soort_vervoer",element),getDoubleValue("bedrijf",element),getValue("eigenaar", element),getIntValue(0,"containernr", element),
-                            getIntValue(0,"leeg", element)+getIntValue(0,"inhoud",element),getDoubleValue("naam",element),getValue("soort", element),getValue("gevaar", element),getValue("ISO",element));
+                           getValue("bedrijf", element),getIntValue(0,"x", element),getIntValue(0,"y", element),getIntValue(0,"z", element),getDoubleValue("d",element)+getDoubleValue("m",element)+
+                           getDoubleValue("j",element),getDoubleValue(1,"van",element),getDoubleValue(1,"tot",element),getDoubleValue("soort_vervoer",element),getDoubleValue("bedrijf",element),getValue("eigenaar", element),getIntValue(0,"containernr", element),
+                           getIntValue(0,"leeg", element)+getIntValue(0,"inhoud",element),getDoubleValue("naam",element),getValue("soort", element),getValue("gevaar", element),getValue("ISO",element));
                     _containerList.add(_container);
-                  
-                    
-                    
+                    s.arrivePeriod(getDoubleValue(0,"van", element),getDoubleValue(0,"tot", element));
                 }
+                
+                
             }
         } catch(Exception ex){
             ex.printStackTrace();

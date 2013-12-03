@@ -8,12 +8,12 @@ package controller.containing;
  *
  * @author Ivar
  */
-public class ControllerContaining {
-
+public class ControllerContaining{
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        //SortAlgorithm s = new SortAlgorithm();
+        //s.arrivePeriod(00.00, 01.00);
     }
 }
