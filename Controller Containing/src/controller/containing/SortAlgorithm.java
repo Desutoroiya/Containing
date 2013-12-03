@@ -52,9 +52,6 @@ public class SortAlgorithm {
             period = "60+";
             priority = 4;
         }
-        
-        System.out.println("period " + period);
-        System.out.println("prio " + priority);
     }
         
     

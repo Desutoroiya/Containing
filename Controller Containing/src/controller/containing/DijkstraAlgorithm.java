@@ -57,7 +57,7 @@ public class DijkstraAlgorithm
     public DijkstraAlgorithm(){
         
     }
-    public static void makePath(String a){
+    public void makePath(String a){
         
         Points p = new Points();    
         if(a.equals("zeeschip")){
