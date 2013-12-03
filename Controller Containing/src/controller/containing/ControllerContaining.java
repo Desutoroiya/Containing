@@ -13,8 +13,6 @@ public class ControllerContaining{
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //SortAlgorithm s = new SortAlgorithm();
-        //s.arrivePeriod(00.00, 01.00);
         XMLreader x = new XMLreader();
         x.XMLreader();
     }
