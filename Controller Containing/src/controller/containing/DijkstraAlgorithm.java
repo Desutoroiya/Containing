@@ -52,6 +52,7 @@ public class DijkstraAlgorithm
               path.add(vertex);
  
          Collections.reverse(path);
+         System.out.print(path);
           return path;
     }
     public DijkstraAlgorithm(){

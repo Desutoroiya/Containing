@@ -6,6 +6,7 @@
 
 package controller.containing;
 
+import java.util.Arrays;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -39,43 +40,23 @@ public class DijkstraAlgorithmTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of computePaths method, of class DijkstraAlgorithm.
-     */
-    @Test
-    public void testComputePaths() {
-        System.out.println("computePaths");
-        Vertex source = null;
-        DijkstraAlgorithm.computePaths(source);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getShortestPathTo method, of class DijkstraAlgorithm.
-     */
-    @Test
-    public void testGetShortestPathTo() {
-        System.out.println("getShortestPathTo");
-        Vertex target = null;
-        List<Vertex> expResult = null;
-        List<Vertex> result = DijkstraAlgorithm.getShortestPathTo(target);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of makePath method, of class DijkstraAlgorithm.
      */
     @Test
     public void testMakePath() {
-        System.out.println("makePath");
-        String a = "";
+        System.out.println("* DijkstraAlgorithmTest: testMakePath()");
+        String a = "zeeschip";
         DijkstraAlgorithm instance = new DijkstraAlgorithm();
         instance.makePath(a);
+        Points p = new Points();
+        List<Vertex> expResult = Arrays.asList(p.CSC1);
+        List<Vertex> result = DijkstraAlgorithm.getShortestPathTo(p.CSC1);
+        assertEquals(expResult, result);
+        // TODO review the generated test 
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
     
 }
