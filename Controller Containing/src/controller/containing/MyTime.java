@@ -59,7 +59,7 @@ public class MyTime
         clock.start();   
         
         String time = ""+hour+":"+minutes+":"+seconds+"";
-        return time;
+        
     }
     
         
