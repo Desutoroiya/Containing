@@ -24,7 +24,7 @@ public class XMLreader {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public void XMLreader() {
         // TODO code application logic here
         SortAlgorithm s = new SortAlgorithm();
         DijkstraAlgorithm z = new DijkstraAlgorithm();
@@ -33,7 +33,7 @@ public class XMLreader {
         _containerList = new ArrayList<Container>();
         
         try{
-            File ContainerList = new File("xml5.xml");
+            File ContainerList = new File("xml1.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(ContainerList);
@@ -57,6 +57,7 @@ public class XMLreader {
                            getIntValue(0,"leeg", element)+getIntValue(0,"inhoud",element),getDoubleValue("naam",element),getValue("soort", element),getValue("gevaar", element),getValue("ISO",element));
                     _containerList.add(_container);
                     s.arrivePeriod(getDoubleValue(0,"van", element),getDoubleValue(0,"tot", element));
+                    s.deptPeriod(getDoubleValue(1,"van", element), getDoubleValue(1,"tot", element));
                     z.makePath(getValue("soort_vervoer", element));
                 }
                 
@@ -66,10 +67,12 @@ public class XMLreader {
             ex.printStackTrace();
         }
         for(int i = 0;i<_containerList.size();i++){
+            System.out.println("--------------------------");
             System.out.println(_containerList.get(i));
-            System.out.println("period aankomst " + s.period);
-            System.out.println("period vertrek " + s.period);
-            System.out.println("prio " + s.priority);
+            System.out.println("period aankomst " + s.periodArrive);
+            System.out.println("prio " + s.priorityArrive);
+            System.out.println("period vertrek " + s.periodDept);
+            System.out.println("prio " + s.priorityDept);
         }
     }
 

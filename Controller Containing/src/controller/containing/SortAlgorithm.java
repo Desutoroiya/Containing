@@ -16,8 +16,8 @@ public class SortAlgorithm {
      * timeDept1+2, vertrektijden
      * tot5,20,60 = periodelengtes voor prioriteitstelling
      */
-    int priority;
-    String period;
+    int priorityArrive, priorityDept;
+    String periodArrive, periodDept;
     
     double timeArrive1, timeArrive2;
     
@@ -30,27 +30,50 @@ public class SortAlgorithm {
     public void arrivePeriod(double timeArrive1, double timeArrive2){
         /*
          * Aankomsttijdvak = aankomsttijd2-aankomsttijd1
+         */
+        
+        double periodArriveD = timeArrive2 - timeArrive1;
+        
+        if (periodArriveD <= tot5){
+            periodArrive = "minder dan 5";
+            priorityArrive = 1;
+        }
+        else if (periodArriveD <= tot20){
+            periodArrive = "5 tot 20";
+            priorityArrive = 2;
+        }
+        else if (periodArriveD <= tot60){
+            periodArrive = "20 tot 60";
+            priorityArrive = 3;
+        }
+        else if (periodArriveD > tot60){
+            periodArrive = "60+";
+            priorityArrive = 4;
+        }
+    }
+    
+    public void deptPeriod(double timeDept1, double timeDept2){
+        /*
          * Vertrektijdvak = vertrektijd2-vertrektijd1
          */
         
-        double periodArrive = timeArrive2 - timeArrive1;
-        double periodDept = timeDept2 - timeDept1;
+        double periodDeptD = timeDept2 - timeDept1;
         
-        if (periodArrive <= tot5){
-            period = "minder dan 5";
-            priority = 1;
+        if (periodDeptD <= tot5){
+            periodDept = "minder dan 5";
+            priorityDept = 1;
         }
-        else if (periodArrive <= tot20){
-            period = "5 tot 20";
-            priority = 2;
+        else if (periodDeptD <= tot20){
+            periodDept = "5 tot 20";
+            priorityDept = 2;
         }
-        else if (periodArrive <= tot60){
-            period = "20 tot 60";
-            priority = 3;
+        else if (periodDeptD <= tot60){
+            periodDept = "20 tot 60";
+            priorityDept = 3;
         }
-        else if (periodArrive > tot60){
-            period = "60+";
-            priority = 4;
+        else if (periodDeptD > tot60){
+            periodDept = "60+";
+            priorityDept = 4;
         }
     }
         
