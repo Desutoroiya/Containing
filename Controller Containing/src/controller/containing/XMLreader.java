@@ -59,6 +59,10 @@ public class XMLreader {
                     s.arrivePeriod(getDoubleValue(0,"van", element),getDoubleValue(0,"tot", element));
                     s.deptPeriod(getDoubleValue(1,"van", element), getDoubleValue(1,"tot", element));
                     z.makePath(getValue("soort_vervoer", element));
+                    
+                    DijkstraAlgorithm d = new DijkstraAlgorithm();
+
+                    d.makePath(getValue("soort_vervoer",element));
                 }
                 
                 
