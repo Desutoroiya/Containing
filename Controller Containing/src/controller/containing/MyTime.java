@@ -60,7 +60,14 @@ public class MyTime
         
         String time = ""+hour+":"+minutes+":"+seconds+"";
         
-    }
+    }   
     
+    public void StopWatch(){
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        stopWatch.stop();
+        
+        System.out.println("Tijd=" + stopWatch.getElapsedTime());
+    }
         
 }

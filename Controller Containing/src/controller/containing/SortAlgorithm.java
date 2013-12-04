@@ -4,11 +4,15 @@
  */
 package controller.containing;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Niels
  */
 public class SortAlgorithm {
+    MyTime time = new MyTime();
     /*
      * priority = HOOG-LAAG ; 1,2,3,4
      * period = case identifier
@@ -19,6 +23,7 @@ public class SortAlgorithm {
     int priorityArrive, priorityDept;
     String periodArrive, periodDept;
     
+    double currentTime;// = time.;
     double timeArrive1, timeArrive2;
     
     double timeDept1, timeDept2;
@@ -30,7 +35,12 @@ public class SortAlgorithm {
     public void arrivePeriod(double timeArrive1, double timeArrive2){
         /*
          * Aankomsttijdvak = aankomsttijd2-aankomsttijd1
+         * Als huidige tijd > time Arrive 1 dan huidig = Arrive 1
          */
+        
+        if(currentTime > timeArrive1){
+            timeArrive1 = currentTime;
+        }
         
         double periodArriveD = timeArrive2 - timeArrive1;
         
@@ -38,13 +48,13 @@ public class SortAlgorithm {
             periodArrive = "minder dan 5";
             priorityArrive = 1;
         }
-        else if (periodArriveD <= tot20){
+        else if (periodArriveD > tot5 || periodArriveD <= tot20){
             periodArrive = "5 tot 20";
             priorityArrive = 2;
         }
         else if (periodArriveD <= tot60){
             periodArrive = "20 tot 60";
-            priorityArrive = 3;
+           priorityArrive = 3;
         }
         else if (periodArriveD > tot60){
             periodArrive = "60+";
@@ -56,6 +66,10 @@ public class SortAlgorithm {
         /*
          * Vertrektijdvak = vertrektijd2-vertrektijd1
          */
+        
+        if(currentTime > timeDept1){
+            timeDept1 = currentTime;
+        }
         
         double periodDeptD = timeDept2 - timeDept1;
         
@@ -76,23 +90,30 @@ public class SortAlgorithm {
             priorityDept = 4;
         }
     }
-        
     
-    //List zas = new ArrayList();
-    //int array1[] = {1, 2, 3, 4, 5};
+    /*
+     * Sort op basis van hoogte en lengte
+     */
+    
+    List YAS = new ArrayList();
+    int containerHeight[] = {1, 2, 3, 4, 5};  // Y
+    int containerWidth[] = {1, 2, 3, 4, 5};   // X
+    int containerLenght[] = {1, 2, 3, 4, 5};  // Z
     
     
     //zeeschip / binnenschip
-    //String soort_vervoer = null;
+    String soort_vervoer;
     
-    //public void getHighest(){
-    //    if (soort_vervoer == "schip"){
-    //        int hoogste = array1[4];
-    //        for (int i = 0; i <array1.length; i++){
-    //            if (array1[i]>hoogste){
-    //                hoogste = array1[i];
-    //           }
-    //        }
-    //   }
-    //}
+    public void getHighest(){
+        if (soort_vervoer == "schip"){
+            int hoogste = containerHeight[4];
+            for (int y = 0; y <containerHeight.length; y++){
+                for (int x = 5; x <containerHeight.length; x++){
+                    for (int z = 5; z < containerHeight.length; z++){
+                        
+                    }
+                }
+            }
+       }
+    }
 }
