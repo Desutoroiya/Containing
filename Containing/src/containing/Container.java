@@ -1,3 +1,7 @@
+
+import javax.swing.Box;
+import javax.xml.soap.Node;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -9,6 +13,16 @@
  */
 public class Container 
 {
+    private AssetManager assetManager;
+    private Node rootNode;
+    
+    public Container(AssetManager assetManager, Node rootNode)
+    {
+        this.assetManager = assetManager;   
+        this.rootNode = rootNode;
+    }
+    
+    
     /*
      * Dimensies voor buitenkant van de container
      */
@@ -69,6 +83,18 @@ public class Container
         this.contentDangerCont = contentDangerCont;
         this.isoCode = isoCode;
     }
+    
+    public Geometry initContainer()
+    {
+        //Create container size: L = 122m  B = 24m H = 26m
+        Box cont = new Box(Vector3f.ZERO, length, hight, width);
+        Geometry container = new Geometry("Box", cont);
+        Material cont_mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        cont_mat.setColor("Color", ColorRGBA.Blue);
+        container.setMaterial(cont_mat);     
+        return container;
+    }    
+    
 
 }
 
