@@ -1,12 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller.containing;
 
 /**
  *
- * @author Iva
+ * @author Johan
+ * 
+ * This class is used in the creation of the graph. 
+ * It is used to link points to each other, 
+ * the actual graph however is created in the Points class.
  */
 public class Edge {
     

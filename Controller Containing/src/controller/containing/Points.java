@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package controller.containing;
 
 /**
@@ -11,6 +5,11 @@ package controller.containing;
  * @author Johan
  */
 public class Points {
+    
+    /**
+     * This class has all the Vertexes used to make the graph used in the Dijkstra class.
+     * Each vehicle crane, storage crane and way point has it's own Vertex.
+     */
   
                 Vertex SF1 = new Vertex("Strorage 1 Front");
                 Vertex SF2 = new Vertex("Strorage 2 Front");
@@ -105,6 +104,12 @@ public class Points {
                 Vertex WP13 = new Vertex("Middle Bottom Dock Way");
                 Vertex WP14 = new Vertex("Right Bottom Dock Way");
                 
+                /**
+                 * The constructor creates the actual graph. 
+                 * Each Vertex is linked to other Vertexes. 
+                 * There is also given a weight to each point, 
+                 * this is the amount it will cost to reach this point from your current one.
+                 */
                 
                 public Points(){
                     

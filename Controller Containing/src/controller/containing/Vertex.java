@@ -1,12 +1,16 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller.containing;
 
 /**
  *
- * @author Iva
+ * @author Johan
+ * 
+ * This class is used in the calculation of the shortest path, 
+ * it doesn't actually calculate but the elements in this class are needed in the DijkstraAlgorithm class. 
+ * The name String is the name given to a Vertex in the points class.
+ * Edge[] are the points connected to the Vertex, 
+ * these can also be seen in the points class.
+ * 
+ * The other attributes are explained in the DijkstraAlgotrithm class.
  */
 public class Vertex implements Comparable<Vertex> {
         
