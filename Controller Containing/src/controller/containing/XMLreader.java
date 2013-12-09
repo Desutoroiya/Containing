@@ -25,13 +25,18 @@ public class XMLreader {
      * @param args the command line arguments
      */
     public void XMLreader() {
-        // TODO code application logic here
+       /*
+        *  instance sortAlgorithm and Dijkstra creates container lists
+        */
         SortAlgorithm s = new SortAlgorithm();
         DijkstraAlgorithm z = new DijkstraAlgorithm();
         
         List<Container> _containerList;
         _containerList = new ArrayList<Container>();
         
+        /*
+         * loads the XML File
+         */
         try{
             File ContainerList = new File("xml1.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -43,7 +48,9 @@ public class XMLreader {
             NodeList nodes = doc.getElementsByTagName("record");
             NodeList nodes1 = doc.getElementsByTagName("vertrek");
             System.out.println("====================");
-            
+            /*
+             * loops through the XML file and creates a container for every record
+             */
             for(int i =0; i < nodes.getLength(); i++){
                 Node node = nodes.item(i);
                 Element element =  (Element) node;
@@ -80,18 +87,26 @@ public class XMLreader {
         }
     }
 
-    
+    /*
+     *  returns string from the corresponding element
+     */
 private static String getValue(String tag, Element element){
     NodeList nodes = element.getElementsByTagName(tag).item(0).getChildNodes();
     Node node = (Node) nodes.item(0);
     return node.getNodeValue();
     }
 
+/*
+ * return a string where the index is 1
+ */
 private static String getDoubleValue(String tag1, Element element){
     NodeList nodes1 = element.getElementsByTagName(tag1).item(1).getChildNodes();
     Node node =(Node) nodes1.item(0);
     return node.getNodeValue();
 }
+/*
+ * returns an int with the given index
+ */
 private static int getIntValue(int index,String tag, Element element){
     NodeList nodes = element.getElementsByTagName(tag).item(index).getChildNodes();
     Node node = (Node) nodes.item(0);
@@ -99,6 +114,9 @@ private static int getIntValue(int index,String tag, Element element){
     int value = Integer.parseInt(transform);
     return value;
 }
+/*
+ *  returns a double  with the given index
+ */
   private static double getDoubleValue(int index, String tag, Element element){
      NodeList nodes = element.getElementsByTagName(tag).item(index).getChildNodes();
     Node node = (Node) nodes.item(0);
