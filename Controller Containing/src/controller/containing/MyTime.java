@@ -15,8 +15,9 @@ import java.util.logging.Logger;
  */
 public class MyTime 
 {
-    public MyTime(){
-        
+    public void MyTime(){
+        long time = System.currentTimeMillis() / 1000000;
+        System.out.println("Tijd" + time);
     }
     
     public static void main(String[] args){
