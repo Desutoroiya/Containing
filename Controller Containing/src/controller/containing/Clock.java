@@ -39,7 +39,10 @@ class Clock {
                 if( currentSecond == 60 ) {
                     reset();
                 }
+                //original
                 time.setText( String.format("%s:%02d", sdf.format(calendar.getTime()), currentSecond ));
+                //test
+                //time.setText( String.format("%s", sdf.format(calendar.getTime())));
                 currentSecond++;
             }
         });
