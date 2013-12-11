@@ -8,6 +8,9 @@ package mygame;
  *
  * @author Enzo van Kessel
  */
-public class VehController {
-    
+public interface  VehController {
+    public boolean Checkloaded();
+   public void move();
+        
+   
 }

@@ -45,6 +45,10 @@ public class Main extends SimpleApplication
         agv.setLocalTranslation(4.6f, 0.9f, -19.5f);
         rootNode.attachChild(agv);
         agv.move();
+        
+        Truck truck = new Truck(assetManager);
+        truck.CreateTruck();
+        rootNode.attachChild(truck);
     }    
     
     @Override
