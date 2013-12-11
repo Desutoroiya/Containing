@@ -5,16 +5,10 @@ package mygame;
  */
 
 import com.jme3.asset.AssetManager;
-import com.jme3.bounding.BoundingBox;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
-import com.jme3.math.FastMath;
-import com.jme3.math.Quaternion;
-import com.jme3.math.Vector3f;
-import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import com.jme3.scene.debug.Grid;
 
 /**
  *
@@ -79,6 +73,9 @@ public class Terrain
         return containerCrane; 
     }
     
+    /*
+     * Terrain set on -1 position so every model will be placed on the surface
+     */
     public Spatial loadTerrain()
     {
        Spatial terrain = assetManager.loadModel("Models/terrain.j3o");
@@ -86,10 +83,14 @@ public class Terrain
        return terrain;
     }    
     
+    /*
+     * 
+     */
     public Spatial loadContainer()
     {
         Spatial container = assetManager.loadModel("Models/container.j3o");
         Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        mat.setColor("Color", ColorRGBA.randomColor());
         container.setMaterial(mat);
         return container;
     }
