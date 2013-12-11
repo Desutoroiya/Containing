@@ -21,7 +21,7 @@ public class AGV extends Node {
     public AssetManager assetManager;
     private MotionPath path;
     private MotionEvent motionControl;
-    public boolean loaded =false;
+    public boolean loaded = false;
     public AGV(AssetManager assetManager){
         this.assetManager = assetManager;
         
@@ -43,10 +43,11 @@ public class AGV extends Node {
         path.addWayPoint(new Vector3f(76,0.9f,19.5f));
         path.addWayPoint(new Vector3f(4.6f,0.9f,19.5f));
         path.addWayPoint(new Vector3f(4.6f,0.9f,-19.5f));
+        path.addWayPoint(new Vector3f(-67.2f,0.9f,-19.5f));
         
         motionControl = new MotionEvent(this,path);
-        path.setCurveTension(0.1f);
-        //motionControl.setDirectionType(MotionEvent.Direction.PathAndRotation);
+        path.setCurveTension(0f);
+        motionControl.setDirectionType(MotionEvent.Direction.PathAndRotation);
         motionControl.setRotation(new Quaternion().fromAngleNormalAxis(-FastMath.HALF_PI,Vector3f.UNIT_Y));
         motionControl.setSpeed(Speed(loaded));
         motionControl.play();
