@@ -40,10 +40,10 @@ public class AGV extends Node {
     }
     public void move(){
         path = new MotionPath();
-        path.addWayPoint(new Vector3f(76,0.9f,19.5f));
-        path.addWayPoint(new Vector3f(4.6f,0.9f,19.5f));
-        path.addWayPoint(new Vector3f(4.6f,0.9f,-19.5f));
-        path.addWayPoint(new Vector3f(-67.2f,0.9f,-19.5f));
+        path.addWayPoint(new Vector3f(76,0,19.5f));
+        path.addWayPoint(new Vector3f(4.6f,0,19.5f));
+        path.addWayPoint(new Vector3f(4.6f,0,-19.5f));
+        path.addWayPoint(new Vector3f(-67.2f,0,-19.5f));
         
         motionControl = new MotionEvent(this,path);
         path.setCurveTension(0f);
