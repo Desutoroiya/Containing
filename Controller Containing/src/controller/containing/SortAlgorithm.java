@@ -23,7 +23,7 @@ public class SortAlgorithm {
     int priorityArrive, priorityDept;
     String periodArrive, periodDept;
     
-    double currentTimeDubbel = Double.parseDouble(csort.currentTimeClock);
+    double currentTimeDubbel;// = Double.parseDouble());
     
     double currentTime = currentTimeDubbel;// = time.;
     double timeArrive1, timeArrive2;

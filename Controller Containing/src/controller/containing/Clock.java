@@ -16,14 +16,9 @@ import javax.swing.Timer;
 
 class Clock {
     private final JLabel time = new JLabel();
-    private final SimpleDateFormat sdf  = new SimpleDateFormat("hh.mm");
-    private int currentSecond;
+    private final SimpleDateFormat sdf  = new SimpleDateFormat("hh:mm");
+    private int   currentSecond;
     private Calendar calendar;
-    public String currentTimeClock;    
-    public double tijd;
-    //VERSNELLING
-    private final int speed = 100; // 1000 is realtime
-    
 
     public static void main( String [] args ) {
         JFrame frame = new JFrame();
@@ -39,19 +34,12 @@ class Clock {
     }
     public void start(){
         reset();
-        Timer timer = new Timer(speed, new ActionListener(){
+        Timer timer = new Timer(1000, new ActionListener(){
         public void actionPerformed( ActionEvent e ) {
                 if( currentSecond == 60 ) {
                     reset();
-                    tijd += 00.01;
                 }
-                //ZONDER SECONDS
-                //time.setText( String.format("%s", sdf.format(calendar.getTime())));
-                //MET SECONDS
-                //time.setText( String.format("%s.%02d", sdf.format(calendar.getTime()), currentSecond));
-                //TEST
-                //String tst = Double.toString(tijd);
-                //time.setText(tst);
+                time.setText( String.format("%s:%02d", sdf.format(calendar.getTime()), currentSecond ));
                 currentSecond++;
             }
         });

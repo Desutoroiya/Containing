@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.Timer;
 
 /**
@@ -17,37 +19,39 @@ import javax.swing.Timer;
  * @author Niels Riemersma
  */
 public class Klokje {
+    private final JLabel time = new JLabel();
     private final SimpleDateFormat sdf  = new SimpleDateFormat("hh.mm");
     private int currentSecond;
     private Calendar calendar;
     private double actualTime;
     private String tijd = Double.toString(actualTime);
     //VERSNELLING
-    private final int speed = 100; // 1000 is realtime
+    private final int speed = 1000; // 1000 is realtime
     
     private void reset(){
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);     
+        currentSecond = calendar.get(Calendar.SECOND);
     }
     
     public void start(){
-        reset();
         Timer timer = new Timer(speed, new ActionListener(){
             public void actionPerformed( ActionEvent e ) {
                 if ( currentSecond == 60){
                     actualTime += 00.01;
-                    currentSecond = 0;
+                    reset();
                 }
+                time.setText( String.format("%s:%02d", sdf.format(calendar.getTime()), currentSecond ));
                 currentSecond++;
             }
         });
         timer.start();
     }
     
-    public void yolo(){
-        start();
-        System.out.println(tijd);
+    public static void main( String [] args ) {
+        JFrame frame = new JFrame();
+        Clock clock = new Clock();
+        frame.add( clock.time );
+        frame.pack();
+        frame.setVisible( true );
+        clock.start();
     }
-    
 }
