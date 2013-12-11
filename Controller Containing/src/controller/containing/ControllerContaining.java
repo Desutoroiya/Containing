@@ -14,7 +14,7 @@ public class ControllerContaining{
      */
     public static void main(String[] args) {
         XMLreader x = new XMLreader();
-        MyTime m = new MyTime();
-        m.MyTime();
+        Klokje klok = new Klokje();
+        klok.yolo();
     }
 }

@@ -12,7 +12,7 @@ import java.util.List;
  * @author Niels
  */
 public class SortAlgorithm {
-    MyTime time = new MyTime();
+    Clock csort = new Clock();
     /*
      * priority = HOOG-LAAG ; 1,2,3,4
      * period = case identifier
@@ -23,7 +23,9 @@ public class SortAlgorithm {
     int priorityArrive, priorityDept;
     String periodArrive, periodDept;
     
-    double currentTime;// = time.;
+    double currentTimeDubbel = Double.parseDouble(csort.currentTimeClock);
+    
+    double currentTime = currentTimeDubbel;// = time.;
     double timeArrive1, timeArrive2;
     
     double timeDept1, timeDept2;

@@ -20,10 +20,6 @@ public class MyTime
         System.out.println("Tijd" + time);
     }
     
-    public static void main(String[] args){
-        
-    }
-    
     public String getCurrentDate()
     {
         Calendar cal = new GregorianCalendar();
