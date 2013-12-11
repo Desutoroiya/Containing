@@ -40,8 +40,11 @@ public class Main extends SimpleApplication
         terrain.initTerrain();
         viewPort.setBackgroundColor(ColorRGBA.Blue);      
 
-        
-        
+        AGV agv = new AGV(assetManager);
+        agv.CreateAGV();
+        agv.setLocalTranslation(4.6f, 0.9f, -19.5f);
+        rootNode.attachChild(agv);
+        agv.move();
     }    
     
     @Override
