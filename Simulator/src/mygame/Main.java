@@ -5,6 +5,7 @@ import com.jme3.light.AmbientLight;
 import com.jme3.light.DirectionalLight;
 import com.jme3.renderer.RenderManager;
 import com.jme3.math.ColorRGBA;
+import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 
 
@@ -48,6 +49,8 @@ public class Main extends SimpleApplication
         
         Truck truck = new Truck(assetManager);
         truck.CreateTruck();
+        truck.setLocalTranslation(69.5f,0,24f);
+        truck.rotate(0,1.5707f,0);
         rootNode.attachChild(truck);
     }    
     

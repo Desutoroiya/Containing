@@ -33,8 +33,8 @@ public class Truck extends Node implements VehController  {
         Spatial Truck = assetManager.loadModel("Models/Truck/truckMachine.j3o");
         this.attachChild(Cart);
         this.attachChild(Truck);
-        Cart.setLocalTranslation(0,1.15f, 0);
-        Truck.setLocalTranslation(0,1.15f,0);
+        Cart.setLocalTranslation(0,0, 0);
+        Truck.setLocalTranslation(0,0f,0);
         
     }
 }
