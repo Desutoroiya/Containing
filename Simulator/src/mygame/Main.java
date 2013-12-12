@@ -53,6 +53,13 @@ public class Main extends SimpleApplication
         truck.setLocalTranslation(69.5f,0,24f);
         rootNode.attachChild(truck);
         truck.move();
+        
+        
+       Train train = new Train(assetManager);
+       
+       train.createTrain();
+       train.setLocalTranslation(-63,0.1f,-28);
+       rootNode.attachChild(train);
     }    
     
     @Override

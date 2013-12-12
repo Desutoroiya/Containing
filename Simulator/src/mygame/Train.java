@@ -16,7 +16,7 @@ public class Train extends Node implements VehController {
     private AssetManager assetManager;
 
     public Train(AssetManager assetManager){
-        
+        this.assetManager = assetManager;
     }
     public boolean Checkloaded() {
         throw new UnsupportedOperationException("Not supported yet.");
@@ -26,8 +26,15 @@ public class Train extends Node implements VehController {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     public void createTrain(){
-       Spatial train = assetManager.loadModel("Models/Train.j3o");
-       this.attachChild(train);
+      for(int i = 0;i<10;i++){
+        Spatial trainCart = assetManager.loadModel("Models/Train/trainCart.j3o");
+        this.attachChild(trainCart);
+        trainCart.setLocalTranslation(1.43f*i, 0, 0);
+      }
+       Spatial trainMachine = assetManager.loadModel("Models/Train/trainMachine.j3o");
+       this.attachChild(trainMachine);
+       
+       
        
     }
 }
