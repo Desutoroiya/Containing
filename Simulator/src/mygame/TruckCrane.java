@@ -41,18 +41,15 @@ public class TruckCrane extends Node {
         this.attachChild(TCraneLift);
         Spatial TCraneBase = assetManager.loadModel("Models/Storagecrane/scraneBase.j3o");
         
-        for(int i = 0; i < 19; i++){
-            this.setLocalTranslation(X, Y, Z);
-            this.rotate(0, 1.5707f, 0);
-            X -= 3;
-        }
+        this.setLocalTranslation(baseP1);
+        this.rotate(0, 1.5707f, 0);
         this.attachChild(TCraneBase);
     }
 
-    public void moveBase() {
+    public void moveBase(float X, float Y, float Z) {
         mpBase = new MotionPath();
-        mpBase.addWayPoint(new Vector3f(baseP1));
-        mpBase.addWayPoint(new Vector3f(baseP2));
+        mpBase.addWayPoint(new Vector3f(X,Y,Z));
+        mpBase.addWayPoint(new Vector3f(X,Y,Z-2));
 
         meTCrane = new MotionEvent(this, mpBase);
         mpBase.setCurveTension(0f);
