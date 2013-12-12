@@ -24,6 +24,7 @@ public class Main extends SimpleApplication
     @Override
     public void simpleInitApp()
     {  
+        cam.setLocation(new Vector3f(0,10,0));
         flyCam.setMoveSpeed(25);
 
         /** A white, directional light source */ 
@@ -50,8 +51,8 @@ public class Main extends SimpleApplication
         Truck truck = new Truck(assetManager);
         truck.CreateTruck();
         truck.setLocalTranslation(69.5f,0,24f);
-        truck.rotate(0,1.5707f,0);
         rootNode.attachChild(truck);
+        truck.move();
     }    
     
     @Override
