@@ -33,7 +33,6 @@ public class Terrain
     {   
         rootNode.attachChild(loadTerrain());
         rootNode.attachChild(loadStorageCrane());
-        rootNode.attachChild(loadContainer());
         rootNode.attachChild(loadContainerCrane());
     }    
     

@@ -54,6 +54,11 @@ public class Main extends SimpleApplication
         rootNode.attachChild(truck);
         truck.move();
         
+        Truck truc = new Truck(assetManager);
+        truc.CreateTruck();
+        truc.setLocalTranslation(69.5f,0,24f);
+        rootNode.attachChild(truc);
+        
         
        Train train = new Train(assetManager);
        

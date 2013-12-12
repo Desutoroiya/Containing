@@ -28,20 +28,29 @@ public class Truck extends Node implements VehController  {
     
     public void move(){
         
-        this.setLocalTranslation(0, 3.14f, 0);
+        float distance = 69.5f;
+        boolean full = true;
         
         path = new MotionPath();
         path.addWayPoint(new Vector3f(80f,0f,28f));
-        path.addWayPoint(new Vector3f(76f,0f,28f));
-        path.addWayPoint(new Vector3f(70f,0f,28f));
-        path.addWayPoint(new Vector3f(65f,0f,28f));
 
+        
+        for(int i = 0; i < 19; i++){
+            
+        path.addWayPoint(new Vector3f(distance,0f,28f));
+        
+        distance -=3;
+        
+        path.addWayPoint(new Vector3f((distance),0f,28f));
+        path.addWayPoint(new Vector3f((distance),0f,24f));
+        
+        }
         
         motionControl = new MotionEvent(this,path);
         path.setCurveTension(0f);
         motionControl.setDirectionType(MotionEvent.Direction.PathAndRotation);
         motionControl.setRotation(new Quaternion().fromAngleNormalAxis(-FastMath.HALF_PI,Vector3f.UNIT_Y));
-        motionControl.setSpeed(0.2f);
+        motionControl.setSpeed(0.5f);
         motionControl.play();
     }
 
@@ -55,7 +64,7 @@ public class Truck extends Node implements VehController  {
         this.attachChild(Cart);
         this.attachChild(Truck);
         Cart.setLocalTranslation(0,0, 0);
-        Truck.setLocalTranslation(0,0f,0);
+        Truck.setLocalTranslation(0,0,0);
         
         
     }
