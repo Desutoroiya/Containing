@@ -4,6 +4,8 @@
  */
 package controller.containing;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Fons
@@ -14,7 +16,7 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form MainFrame
      */
     public MainFrame() {
-        initComponents();
+        initComponents();        
     }
 
     /**
@@ -103,7 +105,23 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]){
+        
+        Container container = new Container(0, "13/12/2004", 0.00, 0.10, "vrachtauto", "DijckLogisticsBV", 1, 0, 0, "22/12/2004", 
+                                            0.00, 12.00, "zeeschip", "ChinaShippingAgency", "FlowersNL", 19965, 81, "nitrotolueen",
+                                            "gas", "brandbaar", "1496-1");
+        
+        
+        
+        
+        XMLreader test = new XMLreader();
+        System.out.println("Lijst:" +test.getContainerList());
+        
+        
+        
+        
+        
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

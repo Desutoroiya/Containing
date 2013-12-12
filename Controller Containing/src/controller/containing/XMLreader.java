@@ -21,9 +21,19 @@ import org.w3c.dom.NodeList;
  */
 public class XMLreader {
     
-    /**
-     * @param args the command line arguments
-     */
+    private List<Container> _containerList;
+    
+    public static void main(String[] args)
+    {
+        
+    }
+    
+    public List<Container> getContainerList()
+    {
+        return this._containerList;
+    }
+    
+    
     public void XMLreader() {
        /*
         *  instance sortAlgorithm and Dijkstra creates container lists
@@ -31,8 +41,8 @@ public class XMLreader {
         SortAlgorithm s = new SortAlgorithm();
         DijkstraAlgorithm z = new DijkstraAlgorithm();
         
-        List<Container> _containerList;
-        _containerList = new ArrayList<Container>();
+        
+        _containerList = new ArrayList<>();
         
         /*
          * loads the XML File
