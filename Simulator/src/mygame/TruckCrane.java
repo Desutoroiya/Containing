@@ -22,8 +22,7 @@ public class TruckCrane extends Node {
     private float X = 69.5f;
     private float Y = 0;
     private float Z = 24f;
-    private Vector3f baseP1 = new Vector3f(X, Y, Z);
-    private Vector3f baseP2 = new Vector3f(X, Y, Z - 2);
+    
     private int location;
     private boolean moving = false;
     private float baseSpeed = 1.0f;
@@ -33,17 +32,21 @@ public class TruckCrane extends Node {
         this.rootNode = rootNode;
     }
 
-    public void createTruckCrane() {
+    public void createTruckCrane(int id) {
         /*
          * Creates a new cranelift for trucks
          */
         Spatial TCraneLift = assetManager.loadModel("Models/Storagecrane/scraneLift.j3o");
         this.attachChild(TCraneLift);
         Spatial TCraneBase = assetManager.loadModel("Models/Storagecrane/scraneBase.j3o");
-        
-        this.setLocalTranslation(baseP1);
-        this.rotate(0, 1.5707f, 0);
         this.attachChild(TCraneBase);
+        Spatial TCraneHook = assetManager.loadModel("Models/Storagecrane/scraneLift.j3o");
+        this.attachChild(TCraneHook);
+        
+        this.setLocalTranslation(X,Y,Z);
+        TCraneLift.setLocalTranslation(X,Y-1,Z);
+        TCraneHook.setLocalTranslation(X,Y-2,Z);
+        this.rotate(0, 1.5707f, 0);
     }
 
     public void moveBase(float X, float Y, float Z) {
@@ -60,8 +63,13 @@ public class TruckCrane extends Node {
     public void moveHook(boolean moving) {
         if (moving == false) {
             mpHook = new MotionPath();
-            mpHook.addWayPoint(new Vector3f(baseP2.x, 5, baseP2.z));
-            mpHook.addWayPoint(new Vector3f(baseP2.x, 0, baseP2.z));
+            mpHook.addWayPoint(new Vector3f(X, 5, Z));
+            mpHook.addWayPoint(new Vector3f(X, 0, Z));
+            
+            meTCHook = new MotionEvent(this, mpHook);
+            mpHook.setCurveTension(0f);
+            meTCHook.setSpeed(baseSpeed);
+            meTCHook.play();
         } else {
             //Movement in progress, pls wait
         }
