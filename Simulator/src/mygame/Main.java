@@ -5,7 +5,6 @@ import com.jme3.light.AmbientLight;
 import com.jme3.light.DirectionalLight;
 import com.jme3.renderer.RenderManager;
 import com.jme3.math.ColorRGBA;
-import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 
 
@@ -65,6 +64,17 @@ public class Main extends SimpleApplication
        train.createTrain();
        train.setLocalTranslation(-63,0.1f,-28);
        rootNode.attachChild(train);
+       
+       TruckCrane tc = new TruckCrane(assetManager);
+       for (int i = 0; i < 19; i++){
+            float X = 69.5f; float Y = 0; float Z = 24f;
+            tc.createTruckCrane();
+            tc.setLocalTranslation(X, Y, Z);
+            rootNode.attachChild(tc);
+            tc.moveBase();
+            
+            X -= 3;
+       }
     }    
     
     @Override
