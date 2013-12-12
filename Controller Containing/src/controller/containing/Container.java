@@ -85,5 +85,13 @@ public class Container {
         this.isoCode = isoCode;
     }
     
-    
+    @Override
+    public String toString()
+    {
+        return "[" + Container.class.getSimpleName() + 
+        " " +id + " " + dateArrive + " " +  timeArrive1 + " " +  timeArrive2 + " " +  vehicleArrive + " " +  companyArrive+ 
+        " " +  xLoc + " " +  yLoc + " " +  zLoc + " " +  dateDept + " " +  timeDept1 + " " +  timeDept2 + " " +  vehicleDept + 
+        " " +  companyDept + " " +  ownerCont + " " +  idCont + " " +  weightCont + " " +  contentCont + " " +  contentTypeCont + 
+        " " +  contentDangerCont + " " +  isoCode+ "]";
+    }    
 }
