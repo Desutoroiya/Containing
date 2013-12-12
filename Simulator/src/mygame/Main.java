@@ -81,6 +81,32 @@ public class Main extends SimpleApplication {
 
             X -= 3;
         }
+        float Xtraincrane = -62.5f;
+        float Ytraincrane = 0;
+        float Ztraincrane = -28;
+        
+        for (int i = 0; i < 4; i++){
+            TrainCrane trainc = new TrainCrane(assetManager);
+            trainc.createTrainCrane();
+            trainc.setLocalTranslation(Xtraincrane, Ytraincrane, Ztraincrane);
+            rootNode.attachChild(trainc);
+            Xtraincrane += 10;
+        }
+        
+        float Xstorecrane = 0;
+        float Ystorecrane = 0;
+        float Zstorecrane = 0;
+        
+        for (int i = 0; i < 12; i++){
+            StoreCrane storec = new StoreCrane(assetManager);
+            storec.createStoreCrane();
+            storec.setLocalTranslation(Xstorecrane, Ystorecrane, Zstorecrane);
+            rootNode.attachChild(storec);
+            Xstorecrane +=5;
+            
+        }
+            
+        
     }
 
     @Override

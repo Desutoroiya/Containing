@@ -32,11 +32,13 @@ public class StoreCrane extends Node {
         this.rootNode = rootNode;
     }
 
-    public void createTrainCrane() {
-        Spatial TrainCraneLift = assetManager.loadModel("Models/Storagecrane/scraneLift.j3o");
-        this.attachChild(TrainCraneLift);
-        Spatial TrainCraneBase = assetManager.loadModel("Models/Storagecrane/scraneBase.j3o");
-        this.attachChild(TrainCraneBase);
+    public void createStoreCrane() {
+        Spatial StoreCraneLift = assetManager.loadModel("Models/Storagecrane/scraneLift.j3o");
+        this.attachChild(StoreCraneLift);
+        Spatial StoreCraneBase = assetManager.loadModel("Models/Storagecrane/scraneBase.j3o");
+        this.attachChild(StoreCraneBase);
+        Spatial StoreCraneHook = assetManager.loadModel("Models/Storagecrane/scraneHook.j3o");
+        this.attachChild(StoreCraneHook);
 
         this.setLocalTranslation(0, 0, -28);
         this.rotate(0, 1.5707f, 0);
