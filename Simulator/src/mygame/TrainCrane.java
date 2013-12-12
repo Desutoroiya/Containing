@@ -19,17 +19,14 @@ public class TrainCrane extends Node {
 
     private Node rootNode;
     public AssetManager assetManager;
-    
     private MotionPath trainBase;
     private MotionEvent meTrainCrane;
-    
-    private Vector3f firstpoint = new Vector3f(0,0,0);
-    private Vector3f secondpoint = new Vector3f(0,5,0);
-    
+    private Vector3f firstpoint = new Vector3f(0, 0, 0);
+    private Vector3f secondpoint = new Vector3f(0, 5, 0);
     private int location;
     private boolean moving = false;
     private float baseSpeed = 1.0f;
-    
+
     public TrainCrane(AssetManager assetManager) {
         this.assetManager = assetManager;
         this.rootNode = rootNode;
@@ -43,7 +40,7 @@ public class TrainCrane extends Node {
 
         this.setLocalTranslation(-63, 0.1f, -28);
         this.rotate(0, 1.5707f, 0);
-        
+
     }
 
     public void moveBase() {
@@ -51,7 +48,7 @@ public class TrainCrane extends Node {
         trainBase = new MotionPath();
         trainBase.addWayPoint(new Vector3f(firstpoint));
         trainBase.addWayPoint(new Vector3f(secondpoint));
-        
+
         meTrainCrane = new MotionEvent(this, trainBase);
         trainBase.setCurveTension(0f);
         meTrainCrane.setSpeed(baseSpeed);
