@@ -12,16 +12,15 @@ import com.jme3.scene.Spatial;
  *
  * @author Enzo van Kessel
  */
-public class Barge extends Node implements VehController{
+public class Ship extends Node implements VehController {
     private AssetManager assetManager;
-    public Barge(AssetManager assetManager){
+    
+    public Ship(AssetManager assetManager){
         this.assetManager = assetManager;
     }
-    public void createBarge(){
-        Spatial barge = assetManager.loadModel("Models/ship.j3o");
-        this.attachChild(barge);
-        this.scale(0.5f, 1, 1);
-        
+    public void createShip(){
+        Spatial ship = assetManager.loadModel("Models/ship.j3o");
+        this.attachChild(ship);
     }
 
     public boolean Checkloaded() {
