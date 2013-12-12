@@ -10,7 +10,5 @@ package mygame;
  */
 public interface  VehController {
     public boolean Checkloaded();
-   public void move();
-        
-   
+    public void move();
 }
