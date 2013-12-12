@@ -35,10 +35,7 @@ public class Terrain
         rootNode.attachChild(loadStorageCrane());
         rootNode.attachChild(loadContainer());
         rootNode.attachChild(loadContainerCrane());
-
-
     }    
-    
     
     /*
      * In total 24 storage cranes on the terrain
@@ -56,8 +53,6 @@ public class Terrain
         storageCrane.attachChild(storageHook);
         return storageCrane;
     }
-    
-    
     
     public Node loadContainerCrane()
     {
@@ -83,17 +78,5 @@ public class Terrain
        return terrain;
     }    
     
-    /*
-     * 
-     */
-    public Spatial loadContainer()
-    {
-        Spatial container = assetManager.loadModel("Models/container.j3o");
-        Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        mat.setColor("Color", ColorRGBA.randomColor());
-        container.setMaterial(mat);
-        return container;
-    }
-
 }
 
