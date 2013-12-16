@@ -32,40 +32,12 @@ public class Terrain
     public void initTerrain()
     {   
         rootNode.attachChild(loadTerrain());
-        rootNode.attachChild(loadStorageCrane());
-        rootNode.attachChild(loadContainerCrane());
     }    
     
     /*
      * In total 24 storage cranes on the terrain
      */
-    public Node loadStorageCrane()
-    {
-        Node storageCrane = new Node();
-        
-        Spatial storageBase = assetManager.loadModel("Models/Storagecrane/scraneBase.j3o");
-        Spatial storageLift = assetManager.loadModel("Models/Storagecrane/scraneLift.j3o");
-        Spatial storageHook = assetManager.loadModel("Models/Storagecrane/scraneHook.j3o");
-               
-        storageCrane.attachChild(storageBase);
-        storageCrane.attachChild(storageLift);
-        storageCrane.attachChild(storageHook);
-        return storageCrane;
-    }
     
-    public Node loadContainerCrane()
-    {
-        Node containerCrane = new Node();
-        
-        Spatial craneBase = assetManager.loadModel("Models/Shipcrane/craneBase.j3o");
-        Spatial CraneLift = assetManager.loadModel("Models/Shipcrane/craneLift.j3o");
-        Spatial CraneHook = assetManager.loadModel("Models/Shipcrane/craneHook.j3o");
-        
-        containerCrane.attachChild(craneBase);
-        containerCrane.attachChild(CraneLift);
-        containerCrane.attachChild(CraneHook);
-        return containerCrane; 
-    }
     
     /*
      * Terrain set on -1 position so every model will be placed on the surface

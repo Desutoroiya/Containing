@@ -100,17 +100,53 @@ public class Main extends SimpleApplication {
             Xtraincrane += 10;
         }
         
-        float Xstorecrane = 0;
-        float Ystorecrane = 0;
-        float Zstorecrane = 0;
+        float XstorecraneOne = 3.5f;
+        float YstorecraneOne = 0;
+        float ZstorecraneOne = -16.5f;
         
         for (int i = 0; i < 12; i++){
             StoreCrane storec = new StoreCrane(assetManager);
             storec.createStoreCrane();
-            storec.setLocalTranslation(Xstorecrane, Ystorecrane, Zstorecrane);
+            storec.setLocalTranslation(XstorecraneOne, YstorecraneOne, ZstorecraneOne);
             rootNode.attachChild(storec);
-            Zstorecrane +=5;
+            ZstorecraneOne +=3;
             
+        }
+        
+        float XstorecraneTwo = 5.5f;
+        float YstorecraneTwo = 0;
+        float ZstorecraneTwo = -16.5f;
+        
+        for (int i = 0; i < 12; i++){
+            StoreCrane storec = new StoreCrane(assetManager);
+            storec.createStoreCrane();
+            storec.setLocalTranslation(XstorecraneTwo, YstorecraneTwo, ZstorecraneTwo);
+            rootNode.attachChild(storec);
+            ZstorecraneTwo +=3;
+        }
+        
+        float Xshipcrane = -77;
+        float Yshipcrane = 0;
+        float Zshipcrane = -27;
+        
+        for (int i = 0; i < 10; i++){
+            ShipCrane shipc = new ShipCrane(assetManager);
+            shipc.createShipCrane();
+            shipc.setLocalTranslation(Xshipcrane, Yshipcrane, Zshipcrane);
+            rootNode.attachChild(shipc);
+            Zshipcrane +=6;
+        }
+        
+        float Xbargecrane = -65;
+        float Ybargecrane = 0;
+        float Zbargecrane = 29;
+        
+        for (int i = 0; i < 8; i++){
+            BargeCrane bargec = new BargeCrane(assetManager);
+            bargec.createBargeCrane();
+            bargec.setLocalTranslation(Xbargecrane, Ybargecrane, Zbargecrane);
+            rootNode.attachChild(bargec);
+            Xbargecrane +=10;
         }
             
         
