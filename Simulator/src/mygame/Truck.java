@@ -43,34 +43,30 @@ public class Truck extends Node implements VehController {
         path.addWayPoint(new Vector3f(80f, 0f, 28f));
 
 
-        /*if (looking) {
+        if (looking) {
             for (int i = 0; i < 20; i++) {
 
                 path.addWayPoint(new Vector3f(distanceX, distanceY, distanceZ));
                     
-                    if(Points.equals(new Vector3f(distanceX,distanceY,(distanceZ - 4)))){
-                       
-                         distancex -= 3;
+                        distanceX -= 3;
 
                         path.addWayPoint(new Vector3f(distanceX, distanceY, distanceZ));
                     
-                        distancez -= 4;
+                        distanceZ -= 4;
                     
                         path.addWayPoint(new Vector3f(distanceX, distanceY, distanceZ));
                     
-                        distancez += 4;
+                        distanceZ += 4;
                         
 
 
-                    } else {
-                    
+                    }
+        }else {
+
                         looking = false;
                         path.addWayPoint(new Vector3f(distanceX, 0f, 24f));
-                        break;
-                    }
-            }
-        } else {
-        }*/
+
+        }
 
         motionControl = new MotionEvent(this, path);
         path.setCurveTension(0f);
