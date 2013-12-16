@@ -17,8 +17,6 @@ import java.util.List;
  */
 public class Main extends SimpleApplication {
 
-    Node craneLift = new Node();
-
     public static void main(String[] args) {
         Main app = new Main();
         app.start();
@@ -36,20 +34,47 @@ public class Main extends SimpleApplication {
         sun.setDirection((new Vector3f(-0.5f, -0.5f, -0.5f)).normalizeLocal());
         sun.setColor(ColorRGBA.White);
         rootNode.addLight(sun);
+        
+        /*
+         * Ambient Lightning
+         */
 
         AmbientLight ambLight = new AmbientLight();
         ambLight.setColor(new ColorRGBA(1f, 1f, 0.8f, 0.2f));
         rootNode.addLight(ambLight);
+        
+        /*
+         * Loading terrain
+         */
 
         Terrain terrain = new Terrain(assetManager, rootNode);
         terrain.initTerrain();
         viewPort.setBackgroundColor(ColorRGBA.Blue);
+        
+        float Xagv = 4.6f;
+        float Yagv = 0;
+        float Zagv = -19.5f;
+        
+        List<AGV> AGVList = new LinkedList<AGV>();
+        AGV[] agv = new AGV[100];
+        
+        for (int i = 0; i <100; i++){
+            agv[i] = new AGV(assetManager);
+            AGVList.add(agv[i]);
 
-        AGV agv = new AGV(assetManager);
-        agv.CreateAGV();
-        agv.setLocalTranslation(4.6f, 0.9f, -19.5f);
-        rootNode.attachChild(agv);
-        agv.move();
+            agv[i].CreateAGV();
+            agv[i].agv.setLocalTranslation(Xagv, Yagv, Zagv);
+            rootNode.attachChild(agv[i].agv);
+            
+            Xagv -= 1.5f;
+        }
+        
+//
+//        AGV agv = new AGV(assetManager);
+//        agv.CreateAGV();
+//        agv.setLocalTranslation(4.6f, 0.9f, -19.5f);
+//        rootNode.attachChild(agv);
+//        agv.move();
 
         Truck truck = new Truck(assetManager);
         truck.CreateTruck();
@@ -76,8 +101,7 @@ public class Main extends SimpleApplication {
         barge.createBarge();
         barge.setLocalTranslation(-62.5f, -0.5f, 31f);
         rootNode.attachChild(barge);
-
-
+        
         /*
          * Truck cranes maken
          * BEGIN
@@ -153,12 +177,11 @@ public class Main extends SimpleApplication {
         float ZstorecraneTwo = -16.5f;
         
         List<StoreCrane> StorageCraneList = new LinkedList<StoreCrane>();
-        StoreCrane[] storageCrane = new StoreCrane[25];
+        StoreCrane[] storageCrane = new StoreCrane[24];
 
         for (int i = 0; i < 12; i++) {
             storageCrane[i] = new StoreCrane(assetManager);
             StorageCraneList.add(storageCrane[i]);
-
             storageCrane[i].createStoreCrane();
             storageCrane[i].storageCrane.setLocalTranslation(XstorecraneOne, YstorecraneOne, ZstorecraneOne);
             
@@ -236,7 +259,6 @@ public class Main extends SimpleApplication {
          * Barge Cranes maken
          * EINDE
          */
-
     }
 
     @Override

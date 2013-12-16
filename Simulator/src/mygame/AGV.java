@@ -19,6 +19,7 @@ import com.jme3.scene.Spatial;
  */
 public class AGV extends Node {
     public AssetManager assetManager;
+    Node agv = new Node();
     private MotionPath path;
     private MotionEvent motionControl;
     public boolean loaded = false;
@@ -61,7 +62,7 @@ public class AGV extends Node {
     }
     public Spatial CreateAGV(){
          Spatial AGV = assetManager.loadModel("Models/agv.j3o");
-         this.attachChild(AGV);
+         agv.attachChild(AGV);
          return AGV;
     }
     

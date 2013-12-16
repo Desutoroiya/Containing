@@ -10,4 +10,10 @@ import java.util.List;
  * @author Allemaal
  */
 public class CraneController {
+//    AssetManager assetManager;
+//    Node rootNode;
+//    Node craneLift = new Node();
+//    public void loadCranes(){
+//        
+//    }
 }
