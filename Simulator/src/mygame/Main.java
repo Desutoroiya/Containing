@@ -7,6 +7,8 @@ import com.jme3.renderer.RenderManager;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * test
@@ -71,22 +73,30 @@ public class Main extends SimpleApplication {
          */
         float XtC = 69.5f;
         float YtC = 0;
-        float ZtC = 22f;
-        int id = 0;
+        float ZtC = 20.75f;
+        
+        List<TruckCrane> list = new LinkedList<TruckCrane>();
+        TruckCrane[] tc = new TruckCrane[20];
         
         for (int i = 0; i < 20; i++){
-            TruckCrane tc = new TruckCrane(assetManager);
-            tc.createTruckCrane(id);
-            tc.craneLift.setLocalTranslation(XtC, YtC, ZtC);
-            rootNode.attachChild(tc.craneLift);
+            tc[i] = new TruckCrane(assetManager);
+            list.add(tc[i]);
+            
+            tc[i].createTruckCrane();
+            tc[i].craneLift.setLocalTranslation(XtC, YtC, ZtC);
+            rootNode.attachChild(tc[i].craneLift);
             
             XtC -= 3;
-            id++;
             
-            //tc.moveBase(tc.craneLift.getLocalTranslation().x, tc.craneLift.getLocalTranslation().y, tc.craneLift.getLocalTranslation().z + 1);
             //SPACE
-            tc.moveHook();
+            //tc.moveHook();
+            //tc.moveLift();
         }
+        
+            tc[0].moveBase(XtC, YtC, ZtC);
+        
+        //tc[2].moveBase(tc[2].craneLift.getLocalTranslation().x, tc[2].craneLift.getLocalTranslation().y, tc[2].craneLift.getLocalTranslation().z + 1);
+        
         
         float Xtraincrane = -62.5f;
         float Ytraincrane = 0;
