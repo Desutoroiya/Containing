@@ -5,6 +5,7 @@ import com.jme3.light.AmbientLight;
 import com.jme3.light.DirectionalLight;
 import com.jme3.renderer.RenderManager;
 import com.jme3.math.ColorRGBA;
+import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
 import java.util.LinkedList;
@@ -70,17 +71,20 @@ public class Main extends SimpleApplication {
 
         /*
          * Truck cranes maken
+         * BEGIN
+         * NIELS RIEMERSMA
          */
+        TruckCrane truckCrane = new TruckCrane(assetManager);
         float XtC = 69.5f;
         float YtC = 0;
         float ZtC = 20.75f;
         
-        List<TruckCrane> list = new LinkedList<TruckCrane>();
+        List<TruckCrane> TruckCraneList = new LinkedList<TruckCrane>();
         TruckCrane[] tc = new TruckCrane[20];
         
         for (int i = 0; i < 20; i++){
             tc[i] = new TruckCrane(assetManager);
-            list.add(tc[i]);
+            TruckCraneList.add(tc[i]);
             
             tc[i].createTruckCrane();
             tc[i].craneLift.setLocalTranslation(XtC, YtC, ZtC);
@@ -93,10 +97,22 @@ public class Main extends SimpleApplication {
             //tc.moveLift();
         }
         
-            tc[0].moveBase(XtC, YtC, ZtC);
+        int iNiels = 1;
+        tc[iNiels].moveBase(tc[iNiels].craneLift.getLocalTranslation().x, tc[iNiels].craneLift.getLocalTranslation().y, tc[iNiels].craneLift.getLocalTranslation().z + 1);
+        int isNiels = 2;
+        tc[isNiels].moveHook();
+        int isniels2 = 3;
+        tc[isniels2].moveLift();
+        /*
+         * Truck Cranes maken 
+         * EINDE
+         */
         
-        //tc[2].moveBase(tc[2].craneLift.getLocalTranslation().x, tc[2].craneLift.getLocalTranslation().y, tc[2].craneLift.getLocalTranslation().z + 1);
-        
+        /*
+         * Train Cranes maken
+         * BEGIN
+         * IVAR DE LANGE
+         */
         
         float Xtraincrane = -62.5f;
         float Ytraincrane = 0;
@@ -110,6 +126,16 @@ public class Main extends SimpleApplication {
             Xtraincrane += 10;
         }
         
+        /*
+         * Train Cranes maken
+         * EINDE
+         */
+        
+        /*
+         * Storage Cranes maken
+         * BEGIN
+         * IVAR DE LANGE
+         */
         float XstorecraneOne = 3.5f;
         float YstorecraneOne = 0;
         float ZstorecraneOne = -16.5f;
@@ -135,6 +161,16 @@ public class Main extends SimpleApplication {
             ZstorecraneTwo +=3;
         }
         
+        /*
+         * Storage Cranes maken
+         * EINDE
+         */
+        
+        /*
+         * Ship Cranes maken
+         * BEGIN
+         * IVAR DE LANGE
+         */
         float Xshipcrane = -77;
         float Yshipcrane = 0;
         float Zshipcrane = -27;
@@ -147,6 +183,16 @@ public class Main extends SimpleApplication {
             Zshipcrane +=6;
         }
         
+        /*
+         * Ship Cranes maken
+         * EINDE
+         */
+        
+        /*
+         * Barge Cranes maken
+         * BEGIN
+         * IVAR DE LANGE
+         */
         float Xbargecrane = -65;
         float Ybargecrane = 0;
         float Zbargecrane = 29;
@@ -158,7 +204,11 @@ public class Main extends SimpleApplication {
             rootNode.attachChild(bargec);
             Xbargecrane +=10;
         }
-            
+        
+        /*
+         * Barge Cranes maken
+         * EINDE
+         */
         
     }
 
