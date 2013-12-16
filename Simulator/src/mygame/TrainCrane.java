@@ -19,6 +19,7 @@ import com.jme3.scene.Spatial;
 public class TrainCrane extends Node {
 
     private Node rootNode;
+    Node trainCrane = new Node();
     public AssetManager assetManager;
     private MotionPath trainBase;
     private MotionEvent meTrainCrane;
@@ -35,18 +36,12 @@ public class TrainCrane extends Node {
 
     public void createTrainCrane() {
         Spatial TrainCraneLift = assetManager.loadModel("Models/Traincrane/trainCraneLift.j3o");
-        this.attachChild(TrainCraneLift);
         Spatial TrainCraneBase = assetManager.loadModel("Models/Traincrane/trainCraneBase.j3o");
-        this.attachChild(TrainCraneBase);
         Spatial TrainCraneHook = assetManager.loadModel("Models/Traincrane/trainCraneHook.j3o");
-        this.attachChild(TrainCraneHook);
-
-        //this.setLocalTranslation(-63, 0.1f, -28);
-        this.rotate(0, 1.5707f, 0);
-
-        TrainCraneLift.rotate(0, FastMath.PI / 2, 0);
-        TrainCraneBase.rotate(0, FastMath.PI / 2, 0);
-        TrainCraneHook.rotate(0, FastMath.PI / 2, 0);
+        
+        trainCrane.attachChild(TrainCraneLift);
+        trainCrane.attachChild(TrainCraneBase);
+        trainCrane.attachChild(TrainCraneHook);
     }
 
     public void moveBase() {

@@ -19,6 +19,7 @@ import com.jme3.scene.Spatial;
 public class StoreCrane extends Node {
 
     private Node rootNode;
+    Node storageCrane = new Node();
     public AssetManager assetManager;
     private MotionPath storeBase;
     private MotionEvent meStoreCrane;
@@ -35,18 +36,12 @@ public class StoreCrane extends Node {
 
     public void createStoreCrane() {
         Spatial StoreCraneLift = assetManager.loadModel("Models/Storagecrane/scraneLift.j3o");
-        this.attachChild(StoreCraneLift);
         Spatial StoreCraneBase = assetManager.loadModel("Models/Storagecrane/scraneBase.j3o");
-        this.attachChild(StoreCraneBase);
         Spatial StoreCraneHook = assetManager.loadModel("Models/Storagecrane/scraneHook.j3o");
-        this.attachChild(StoreCraneHook);
-
-        this.setLocalTranslation(0, 0, 0);
-        this.rotate(0, 1.5707f, 0);
-
-        StoreCraneLift.rotate(0, FastMath.PI / 2, 0);
-        StoreCraneBase.rotate(0, FastMath.PI / 2, 0);
-        StoreCraneHook.rotate(0, FastMath.PI / 2, 0);
+        
+        storageCrane.attachChild(StoreCraneLift);
+        storageCrane.attachChild(StoreCraneBase);
+        storageCrane.attachChild(StoreCraneHook);
     }
 
     public void moveBase() {

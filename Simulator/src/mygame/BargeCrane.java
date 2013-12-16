@@ -18,6 +18,7 @@ import com.jme3.scene.Spatial;
 public class BargeCrane extends Node{
     
     private Node rootNode;
+    Node bargeCrane = new Node();
     public AssetManager assetManager;
     //private MotionPath ShipBase;
     //private MotionEvent meShipCrane;
@@ -34,13 +35,13 @@ public class BargeCrane extends Node{
     
     public void createBargeCrane(){
         Spatial BargeCraneLift = assetManager.loadModel("Models/Bargecrane/bargeCraneLift.j3o");
-        this.attachChild(BargeCraneLift);
         Spatial BargeCraneBase = assetManager.loadModel("Models/Bargecrane/bargeCraneBase.j3o");
-        this.attachChild(BargeCraneBase);
         Spatial BargeCraneHook = assetManager.loadModel("Models/Bargecrane/bargeCraneHook.j3o");
-        this.attachChild(BargeCraneHook);
         
-        this.setLocalTranslation(0,0,0);
-        this.rotate(0, 1.5707f, 0);
+        bargeCrane.attachChild(BargeCraneLift);
+        bargeCrane.attachChild(BargeCraneBase);
+        bargeCrane.attachChild(BargeCraneHook);
+        
+        bargeCrane.rotate(0, 1.5707f, 0);
     }
 }

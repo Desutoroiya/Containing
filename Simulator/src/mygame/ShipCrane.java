@@ -21,6 +21,7 @@ import com.jme3.scene.Spatial;
 public class ShipCrane extends Node{
     
     private Node rootNode;
+    Node shipCrane = new Node();
     public AssetManager assetManager;
     //private MotionPath ShipBase;
     //private MotionEvent meShipCrane;
@@ -37,18 +38,11 @@ public class ShipCrane extends Node{
     
     public void createShipCrane(){
         Spatial ShipCraneLift = assetManager.loadModel("Models/Shipcrane/craneLift.j3o");
-        this.attachChild(ShipCraneLift);
         Spatial ShipCraneBase = assetManager.loadModel("Models/Shipcrane/craneBase.j3o");
-        this.attachChild(ShipCraneBase);
         Spatial ShipCraneHook = assetManager.loadModel("Models/Shipcrane/craneHook.j3o");
-        this.attachChild(ShipCraneHook);
         
-        this.setLocalTranslation(0,0,0);
-        this.rotate(0, 1.5707f, 0);
-        
-        ShipCraneLift.rotate(0, FastMath.PI * 1.5f, 0);
-        ShipCraneBase.rotate(0, FastMath.PI * 1.5f, 0);
-        ShipCraneHook.rotate(0, FastMath.PI * 1.5f, 0);
-        
+        shipCrane.attachChild(ShipCraneLift);
+        shipCrane.attachChild(ShipCraneBase);
+        shipCrane.attachChild(ShipCraneHook);
     }
 }

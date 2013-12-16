@@ -5,7 +5,6 @@ import com.jme3.light.AmbientLight;
 import com.jme3.light.DirectionalLight;
 import com.jme3.renderer.RenderManager;
 import com.jme3.math.ColorRGBA;
-import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
 import java.util.LinkedList;
@@ -84,35 +83,29 @@ public class Main extends SimpleApplication {
          * BEGIN
          * NIELS RIEMERSMA
          */
-        TruckCrane truckCrane = new TruckCrane(assetManager);
-        float XtC = 69.5f;
-        float YtC = 0;
-        float ZtC = 20.75f;
+        float XtruckCrane = 69.5f;
+        float YtruckCrane = 0;
+        float ZtruckCrane = 20.75f;
 
         List<TruckCrane> TruckCraneList = new LinkedList<TruckCrane>();
-        TruckCrane[] tc = new TruckCrane[20];
+        TruckCrane[] truckCrane = new TruckCrane[20];
 
         for (int i = 0; i < 20; i++) {
-            tc[i] = new TruckCrane(assetManager);
-            TruckCraneList.add(tc[i]);
+            truckCrane[i] = new TruckCrane(assetManager);
+            TruckCraneList.add(truckCrane[i]);
 
-            tc[i].createTruckCrane();
-            tc[i].craneLift.setLocalTranslation(XtC, YtC, ZtC);
-            rootNode.attachChild(tc[i].craneLift);
+            truckCrane[i].createTruckCrane();
+            truckCrane[i].craneLift.setLocalTranslation(XtruckCrane, YtruckCrane, ZtruckCrane);
+            rootNode.attachChild(truckCrane[i].craneLift);
 
-            XtC -= 3;
-
-            //SPACE
-            //tc.moveHook();
-            //tc.moveLift();
+            XtruckCrane -= 3;
         }
-
-        int iNiels = 1;
-        tc[iNiels].moveBase(tc[iNiels].craneLift.getLocalTranslation().x, tc[iNiels].craneLift.getLocalTranslation().y, tc[iNiels].craneLift.getLocalTranslation().z + 1);
-        int isNiels = 2;
-        tc[isNiels].moveHook();
-        int isniels2 = 3;
-        tc[isniels2].moveLift();
+//        int iNiels = 1;
+//        tc[iNiels].moveBase(tc[iNiels].craneLift.getLocalTranslation().x, tc[iNiels].craneLift.getLocalTranslation().y, tc[iNiels].craneLift.getLocalTranslation().z + 1);
+//        int isNiels = 2;
+//        tc[isNiels].moveHook();
+//        int isniels2 = 3;
+//        tc[isniels2].moveLift();
         /*
          * Truck Cranes maken 
          * EINDE
@@ -123,20 +116,24 @@ public class Main extends SimpleApplication {
          * BEGIN
          * IVAR DE LANGE
          */
-
-
-        float Xtraincrane = -62.5f;
-        float Ytraincrane = 0;
-        float Ztraincrane = -27;
+        float XtrainCrane = -62.5f;
+        float YtrainCrane = 0;
+        float ZtrainCrane = -27;
+        
+        List<TrainCrane> TrainCraneList = new LinkedList<TrainCrane>();
+        TrainCrane[] trainCrane = new TrainCrane[4];
 
         for (int i = 0; i < 4; i++) {
-            TrainCrane trainc = new TrainCrane(assetManager);
-            trainc.createTrainCrane();
-            trainc.setLocalTranslation(Xtraincrane, Ytraincrane, Ztraincrane);
-            rootNode.attachChild(trainc);
-            Xtraincrane += 10;
-        }
+            trainCrane[i] = new TrainCrane(assetManager);
+            TrainCraneList.add(trainCrane[i]);
 
+            trainCrane[i].createTrainCrane();
+            trainCrane[i].trainCrane.setLocalTranslation(XtrainCrane, YtrainCrane, ZtrainCrane);
+            
+            rootNode.attachChild(trainCrane[i].trainCrane);
+            
+            XtrainCrane += 10;
+        }
         /*
          * Train Cranes maken
          * EINDE
@@ -150,28 +147,36 @@ public class Main extends SimpleApplication {
         float XstorecraneOne = 3.5f;
         float YstorecraneOne = 0;
         float ZstorecraneOne = -16.5f;
-
-        for (int i = 0; i < 12; i++) {
-            StoreCrane storec = new StoreCrane(assetManager);
-            storec.createStoreCrane();
-            storec.setLocalTranslation(XstorecraneOne, YstorecraneOne, ZstorecraneOne);
-            rootNode.attachChild(storec);
-            ZstorecraneOne += 3;
-
-        }
-
+        
         float XstorecraneTwo = 5.5f;
         float YstorecraneTwo = 0;
         float ZstorecraneTwo = -16.5f;
+        
+        List<StoreCrane> StorageCraneList = new LinkedList<StoreCrane>();
+        StoreCrane[] storageCrane = new StoreCrane[25];
 
         for (int i = 0; i < 12; i++) {
-            StoreCrane storec = new StoreCrane(assetManager);
-            storec.createStoreCrane();
-            storec.setLocalTranslation(XstorecraneTwo, YstorecraneTwo, ZstorecraneTwo);
-            rootNode.attachChild(storec);
+            storageCrane[i] = new StoreCrane(assetManager);
+            StorageCraneList.add(storageCrane[i]);
+
+            storageCrane[i].createStoreCrane();
+            storageCrane[i].storageCrane.setLocalTranslation(XstorecraneOne, YstorecraneOne, ZstorecraneOne);
+            
+            rootNode.attachChild(storageCrane[i].storageCrane);
+            
+            ZstorecraneOne += 3;
+        }
+        
+        for (int i = 12; i < 24; i++){
+            storageCrane[i] = new StoreCrane(assetManager);
+            StorageCraneList.add(storageCrane[i]);
+            storageCrane[i].createStoreCrane();            
+            storageCrane[i].storageCrane.setLocalTranslation(XstorecraneTwo, YstorecraneTwo, ZstorecraneTwo);
+            
+            rootNode.attachChild(storageCrane[i].storageCrane);
+            
             ZstorecraneTwo += 3;
         }
-
         /*
          * Storage Cranes maken
          * EINDE
@@ -185,12 +190,18 @@ public class Main extends SimpleApplication {
         float Xshipcrane = -77;
         float Yshipcrane = 0;
         float Zshipcrane = -27;
+        
+        List<ShipCrane> ShipCraneList = new LinkedList<ShipCrane>();
+        ShipCrane[] shipCrane = new ShipCrane[25];
 
         for (int i = 0; i < 10; i++) {
-            ShipCrane shipc = new ShipCrane(assetManager);
-            shipc.createShipCrane();
-            shipc.setLocalTranslation(Xshipcrane, Yshipcrane, Zshipcrane);
-            rootNode.attachChild(shipc);
+            shipCrane[i] = new ShipCrane(assetManager);
+            ShipCraneList.add(shipCrane[i]);
+            shipCrane[i].createShipCrane();            
+            shipCrane[i].shipCrane.setLocalTranslation(Xshipcrane, Yshipcrane, Zshipcrane);
+            
+            rootNode.attachChild(shipCrane[i].shipCrane);
+            
             Zshipcrane += 6;
         }
 
@@ -207,12 +218,17 @@ public class Main extends SimpleApplication {
         float Xbargecrane = -65;
         float Ybargecrane = 0;
         float Zbargecrane = 29;
+        
+        List<BargeCrane> BargeCraneList = new LinkedList<BargeCrane>();
+        BargeCrane[] bargeCrane = new BargeCrane[25];
 
         for (int i = 0; i < 8; i++) {
-            BargeCrane bargec = new BargeCrane(assetManager);
-            bargec.createBargeCrane();
-            bargec.setLocalTranslation(Xbargecrane, Ybargecrane, Zbargecrane);
-            rootNode.attachChild(bargec);
+            bargeCrane[i] = new BargeCrane(assetManager);
+            BargeCraneList.add(bargeCrane[i]);
+            bargeCrane[i].createBargeCrane();            
+            bargeCrane[i].bargeCrane.setLocalTranslation(Xbargecrane, Ybargecrane, Zbargecrane);
+            
+            rootNode.attachChild(bargeCrane[i].bargeCrane);
             Xbargecrane += 10;
         }
 
