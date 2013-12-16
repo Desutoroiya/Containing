@@ -12,6 +12,8 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -29,32 +31,46 @@ public class Truck extends Node implements VehController {
 
     public void move() {
 
-        float distance = 72.5f;
+        float distanceX = 72.5f;
+        float distanceY = 0f;
+        float distanceZ = 28f;
+        
         boolean looking = true;
+        
+        List <Vector3f> Points = new ArrayList <Vector3f>();
 
         path = new MotionPath();
         path.addWayPoint(new Vector3f(80f, 0f, 28f));
 
 
-        if (looking) {
+        /*if (looking) {
             for (int i = 0; i < 20; i++) {
 
-                path.addWayPoint(new Vector3f(distance, 0f, 28f));
-                //if () {
-
-                    distance -= 3;
-
-                    path.addWayPoint(new Vector3f((distance), 0f, 28f));
-                    path.addWayPoint(new Vector3f((distance), 0f, 24f));
-                /*} else {
+                path.addWayPoint(new Vector3f(distanceX, distanceY, distanceZ));
                     
-                    looking = false;
-                    path.addWayPoint(new Vector3f(distance, 0f, 24f));
-                    break;
-                }*/
+                    if(Points.equals(new Vector3f(distanceX,distanceY,(distanceZ - 4)))){
+                       
+                         distancex -= 3;
+
+                        path.addWayPoint(new Vector3f(distanceX, distanceY, distanceZ));
+                    
+                        distancez -= 4;
+                    
+                        path.addWayPoint(new Vector3f(distanceX, distanceY, distanceZ));
+                    
+                        distancez += 4;
+                        
+
+
+                    } else {
+                    
+                        looking = false;
+                        path.addWayPoint(new Vector3f(distanceX, 0f, 24f));
+                        break;
+                    }
             }
         } else {
-        }
+        }*/
 
         motionControl = new MotionEvent(this, path);
         path.setCurveTension(0f);
