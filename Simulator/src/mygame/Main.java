@@ -6,6 +6,7 @@ import com.jme3.light.DirectionalLight;
 import com.jme3.renderer.RenderManager;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
+import com.jme3.scene.Node;
 
 /**
  * test
@@ -13,6 +14,8 @@ import com.jme3.math.Vector3f;
  * @author normenhansen
  */
 public class Main extends SimpleApplication {
+    
+    Node craneLift = new Node();
 
     public static void main(String[] args) {
         Main app = new Main();
@@ -68,19 +71,25 @@ public class Main extends SimpleApplication {
         /*
          * Truck cranes maken
          */
-        float X = 69.5f;
-        float Y = 0;
-        float Z = 24f;
-
-        for (int i = 0; i < 20; i++) {
+        float XtC = 69.5f;
+        float YtC = 0;
+        float ZtC = 22f;
+        int id = 0;
+        
+        for (int i = 0; i < 20; i++){
             TruckCrane tc = new TruckCrane(assetManager);
-            tc.createTruckCrane();
-            tc.setLocalTranslation(X, Y, Z);
-            rootNode.attachChild(tc);
-            tc.moveBase(X, Y, Z);
-
-            X -= 3;
+            tc.createTruckCrane(id);
+            tc.craneLift.setLocalTranslation(XtC, YtC, ZtC);
+            rootNode.attachChild(tc.craneLift);
+            
+            XtC -= 3;
+            id++;
+            
+            tc.moveBase(tc.craneLift.getLocalTranslation().x, tc.craneLift.getLocalTranslation().y, tc.craneLift.getLocalTranslation().z + 2);
+            //SPACE
+            //tc.moveHook();
         }
+        
         float Xtraincrane = -62.5f;
         float Ytraincrane = 0;
         float Ztraincrane = -28;
