@@ -17,7 +17,7 @@ import com.jme3.scene.Spatial;
  *
  * @author Ivar
  */
-public class ShipCrane {
+public class ShipCrane extends Node{
     
     private Node rootNode;
     public AssetManager assetManager;
@@ -42,6 +42,8 @@ public class ShipCrane {
         Spatial ShipCraneHook = assetManager.loadModel("Models/Shipcrane/craneHook.j30");
         this.attachChild(ShipCraneHook);
         
+        this.setLocalTranslation(0, 0, 0);
+        this.rotate(0, 1.5707f, 0);
         
     }
 }
