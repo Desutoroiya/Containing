@@ -15,7 +15,6 @@ import com.jme3.scene.Spatial;
 public class TruckCrane extends Node {
 
     public AssetManager assetManager;
-    private Node rootNode;
     Node craneLift = new Node();
     private MotionPath mpBase;
     private MotionPath mpHook;
@@ -26,10 +25,11 @@ public class TruckCrane extends Node {
     private float Y = 0;
     private float Z = 0;//24f;
     
-    
-    private int location;
-    private boolean moving = false;
     private float baseSpeed = 1.0f;
+    
+    
+    
+    Vector3f Position = new Vector3f(X,Y,Z);
 
     public TruckCrane(AssetManager assetManager) {
         this.assetManager = assetManager;
@@ -43,8 +43,6 @@ public class TruckCrane extends Node {
         Spatial TCraneLift = assetManager.loadModel("Models/Storagecrane/scraneLift.j3o");
         Spatial TCraneBase = assetManager.loadModel("Models/Storagecrane/scraneBase.j3o");
         Spatial TCraneHook = assetManager.loadModel("Models/Storagecrane/scraneHook.j3o");
-        
-        Vector3f Position = new Vector3f(X,Y,Z);
         
         TCraneBase.setLocalTranslation(Position);
         TCraneLift.setLocalTranslation(new Vector3f(Position.x, Position.y - 0.25f, Position.z));
@@ -71,15 +69,15 @@ public class TruckCrane extends Node {
     }
 
     public void moveHook() {
+        Spatial deHook = craneLift.getChild(2);
+        mpHook = new MotionPath();
+        mpHook.addWayPoint(new Vector3f(Position.x, Position.y, Position.z));
+        mpHook.addWayPoint(new Vector3f(Position.x, Position.y - 0.5f, Position.z));
         
+        meTCHook = new MotionEvent(deHook, mpHook);
+        mpHook.setCurveTension(0f);
+        meTCHook.setSpeed(baseSpeed);
+        meTCHook.play();
         
-         mpHook = new MotionPath();
-         mpHook.addWayPoint(new Vector3f(craneLift.getLocalTranslation().x, craneLift.getLocalTranslation().y, craneLift.getLocalTranslation().z));
-         mpHook.addWayPoint(new Vector3f(craneLift.getLocalTranslation().x, craneLift.getLocalTranslation().y - 0.15f, craneLift.getLocalTranslation().z));
-            
-         meTCHook = new MotionEvent(craneLift, mpHook);
-         mpHook.setCurveTension(0f);
-         meTCHook.setSpeed(baseSpeed);
-         meTCHook.play();
     }
 }

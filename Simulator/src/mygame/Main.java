@@ -39,7 +39,6 @@ public class Main extends SimpleApplication {
         ambLight.setColor(new ColorRGBA(1f, 1f, 0.8f, 0.2f));
         rootNode.addLight(ambLight);
 
-
         Terrain terrain = new Terrain(assetManager, rootNode);
         terrain.initTerrain();
         viewPort.setBackgroundColor(ColorRGBA.Blue);
@@ -60,7 +59,6 @@ public class Main extends SimpleApplication {
         truc.CreateTruck();
         truc.setLocalTranslation(69.5f, 0, 24f);
         rootNode.attachChild(truc);
-
 
         Train train = new Train(assetManager);
         train.createTrain();
@@ -85,9 +83,9 @@ public class Main extends SimpleApplication {
             XtC -= 3;
             id++;
             
-            tc.moveBase(tc.craneLift.getLocalTranslation().x, tc.craneLift.getLocalTranslation().y, tc.craneLift.getLocalTranslation().z + 2);
+            //tc.moveBase(tc.craneLift.getLocalTranslation().x, tc.craneLift.getLocalTranslation().y, tc.craneLift.getLocalTranslation().z + 1);
             //SPACE
-            //tc.moveHook();
+            tc.moveHook();
         }
         
         float Xtraincrane = -62.5f;
@@ -111,7 +109,7 @@ public class Main extends SimpleApplication {
             storec.createStoreCrane();
             storec.setLocalTranslation(Xstorecrane, Ystorecrane, Zstorecrane);
             rootNode.attachChild(storec);
-            Xstorecrane +=5;
+            Zstorecrane +=5;
             
         }
             
