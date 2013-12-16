@@ -7,6 +7,7 @@ package mygame;
 import com.jme3.asset.AssetManager;
 import com.jme3.cinematic.MotionPath;
 import com.jme3.cinematic.events.MotionEvent;
+import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
@@ -22,7 +23,7 @@ public class StoreCrane extends Node {
     private MotionPath storeBase;
     private MotionEvent meStoreCrane;
     private Vector3f firstpoint = new Vector3f(0, 0, 0);
-    private Vector3f secondpoint = new Vector3f(0, 5, 0);
+    private Vector3f secondpoint = new Vector3f(0, 0, 5);
     private int location;
     private boolean moving = false;
     private float baseSpeed = 1.0f;
@@ -40,9 +41,12 @@ public class StoreCrane extends Node {
         Spatial StoreCraneHook = assetManager.loadModel("Models/Storagecrane/scraneHook.j3o");
         this.attachChild(StoreCraneHook);
 
-        this.setLocalTranslation(0, 0, -28);
+        this.setLocalTranslation(0, 0, 0);
         this.rotate(0, 1.5707f, 0);
 
+        StoreCraneLift.rotate(0, FastMath.PI / 2, 0);
+        StoreCraneBase.rotate(0, FastMath.PI / 2, 0);
+        StoreCraneHook.rotate(0, FastMath.PI / 2, 0);
     }
 
     public void moveBase() {

@@ -7,6 +7,7 @@ package mygame;
 import com.jme3.asset.AssetManager;
 import com.jme3.cinematic.MotionPath;
 import com.jme3.cinematic.events.MotionEvent;
+import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
@@ -43,6 +44,9 @@ public class TrainCrane extends Node {
         this.setLocalTranslation(-63, 0.1f, -28);
         this.rotate(0, 1.5707f, 0);
 
+        TrainCraneLift.rotate(0, FastMath.PI / 2, 0);
+        TrainCraneBase.rotate(0, FastMath.PI / 2, 0);
+        TrainCraneHook.rotate(0, FastMath.PI / 2, 0);
     }
 
     public void moveBase() {
