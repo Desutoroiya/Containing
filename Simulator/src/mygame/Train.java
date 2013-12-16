@@ -26,7 +26,7 @@ public class Train extends Node implements VehController {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     public void createTrain(){
-      for(int i = 0;i<100;i++){
+      for(int i = 0; i < 40; i++){
         Spatial trainCart = assetManager.loadModel("Models/Train/trainCart.j3o");
         this.attachChild(trainCart);
         trainCart.setLocalTranslation(1.43f*i, 0, 0);

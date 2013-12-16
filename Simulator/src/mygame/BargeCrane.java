@@ -33,11 +33,11 @@ public class BargeCrane extends Node{
     }
     
     public void createBargeCrane(){
-        Spatial BargeCraneLift = assetManager.loadModel("Models/Shipcrane/craneLift.j3o");
+        Spatial BargeCraneLift = assetManager.loadModel("Models/Bargecrane/bargeCraneLift.j3o");
         this.attachChild(BargeCraneLift);
-        Spatial BargeCraneBase = assetManager.loadModel("Models/Shipcrane/craneBase.j3o");
+        Spatial BargeCraneBase = assetManager.loadModel("Models/Bargecrane/bargeCraneBase.j3o");
         this.attachChild(BargeCraneBase);
-        Spatial BargeCraneHook = assetManager.loadModel("Models/Shipcrane/craneHook.j3o");
+        Spatial BargeCraneHook = assetManager.loadModel("Models/Bargecrane/bargeCraneHook.j3o");
         this.attachChild(BargeCraneHook);
         
         this.setLocalTranslation(0,0,0);

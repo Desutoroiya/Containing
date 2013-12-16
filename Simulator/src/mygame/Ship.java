@@ -5,6 +5,7 @@
 package mygame;
 
 import com.jme3.asset.AssetManager;
+import com.jme3.math.FastMath;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 
@@ -21,6 +22,7 @@ public class Ship extends Node implements VehController {
     public void createShip(){
         Spatial ship = assetManager.loadModel("Models/ship.j3o");
         this.attachChild(ship);
+        ship.rotate(0, FastMath.PI * 1.5f, 0);
     }
 
     public boolean Checkloaded() {

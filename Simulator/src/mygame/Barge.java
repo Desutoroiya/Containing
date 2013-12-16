@@ -5,6 +5,7 @@
 package mygame;
 
 import com.jme3.asset.AssetManager;
+import com.jme3.math.FastMath;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 
@@ -18,9 +19,9 @@ public class Barge extends Node implements VehController{
         this.assetManager = assetManager;
     }
     public void createBarge(){
-        Spatial barge = assetManager.loadModel("Models/ship.j3o");
+        Spatial barge = assetManager.loadModel("Models/bargeship.j3o");
         this.attachChild(barge);
-        this.scale(0.5f, 1, 1);
+        barge.rotate(0, FastMath.PI / 2, 0);
         
     }
 
