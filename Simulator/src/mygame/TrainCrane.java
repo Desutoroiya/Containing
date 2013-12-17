@@ -7,7 +7,6 @@ package mygame;
 import com.jme3.asset.AssetManager;
 import com.jme3.cinematic.MotionPath;
 import com.jme3.cinematic.events.MotionEvent;
-import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
@@ -22,11 +21,15 @@ public class TrainCrane extends Node {
     Node trainCrane = new Node();
     public AssetManager assetManager;
     private MotionPath trainBase;
+    private MotionPath trainHook;
+    private MotionPath trainLift;
     private MotionEvent meTrainCrane;
-    private Vector3f firstpoint = new Vector3f(0, 0, 0);
-    private Vector3f secondpoint = new Vector3f(0, 5, 0);
-    private int location;
-    private boolean moving = false;
+    private MotionEvent meTrainHook;
+    private MotionEvent meTrainLift;
+    public float x = 0f;
+    public float y = 0;
+    public float z = 0f;
+    Vector3f Position = new Vector3f(x, y, z);    
     private float baseSpeed = 1.0f;
 
     public TrainCrane(AssetManager assetManager) {
@@ -44,17 +47,53 @@ public class TrainCrane extends Node {
         trainCrane.attachChild(TrainCraneHook);
     }
 
-    public void moveBase() {
+    public void moveBase(float x, float y, float z) {
 
         trainBase = new MotionPath();
-        trainBase.addWayPoint(new Vector3f(firstpoint));
-        trainBase.addWayPoint(new Vector3f(secondpoint));
+        trainBase.addWayPoint(new Vector3f(x, y, z));
+        trainBase.addWayPoint(new Vector3f(x + 8, y, z));
 
-        meTrainCrane = new MotionEvent(this, trainBase);
+        meTrainCrane = new MotionEvent(trainCrane, trainBase);
         trainBase.setCurveTension(0f);
         meTrainCrane.setSpeed(baseSpeed);
         meTrainCrane.play();
+    }
 
+    public void moveHook() {
+        Spatial detrainHook = trainCrane.getChild(2);
+        trainHook = new MotionPath();
+        trainHook.addWayPoint(new Vector3f(Position));
+        trainHook.addWayPoint(new Vector3f(Position.x, Position.y - 0.5f, Position.z));
 
+        meTrainHook = new MotionEvent(detrainHook, trainHook);
+        trainHook.setCurveTension(0f);
+        meTrainHook.setSpeed(baseSpeed);
+        meTrainHook.play();
+    }
+
+    public void moveLift() {
+        Spatial detrainLift = trainCrane.getChild(0);
+        trainLift = new MotionPath();
+        trainLift.addWayPoint(new Vector3f(Position));
+        trainLift.addWayPoint(new Vector3f(Position.x, Position.y, Position.z + 2f));
+        trainLift.addWayPoint(new Vector3f(Position.x, Position.y, Position.z - 2f));
+        trainLift.addWayPoint(new Vector3f(Position));
+
+        meTrainLift = new MotionEvent(detrainLift, trainLift);
+        trainLift.setCurveTension(0f);
+        meTrainLift.setSpeed(baseSpeed);
+        meTrainLift.play();
+
+        Spatial detrainHook = trainCrane.getChild(2);
+        trainHook = new MotionPath();
+        trainHook.addWayPoint(new Vector3f(Position));
+        trainHook.addWayPoint(new Vector3f(Position.x, Position.y, Position.z + 2f));
+        trainHook.addWayPoint(new Vector3f(Position.x, Position.y, Position.z - 2f));
+        trainHook.addWayPoint(new Vector3f(Position));
+
+        meTrainHook = new MotionEvent(detrainHook, trainHook);
+        trainHook.setCurveTension(0f);
+        meTrainHook.setSpeed(baseSpeed);
+        meTrainHook.play();
     }
 }

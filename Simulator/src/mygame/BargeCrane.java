@@ -22,10 +22,6 @@ public class BargeCrane extends Node{
     public AssetManager assetManager;
     //private MotionPath ShipBase;
     //private MotionEvent meShipCrane;
-    //private Vector3f firstpoint = new Vector3f(0, 0, 0);
-    //private Vector3f secondpoint = new Vector3f(0, 5, 0);
-    //private int location;
-    //private boolean moving = false;
     //private float baseSpeed = 1.0f;
     
     public BargeCrane(AssetManager assetManager) {
