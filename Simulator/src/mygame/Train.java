@@ -33,6 +33,8 @@ public class Train extends Node implements VehController {
       }
        Spatial trainMachine = assetManager.loadModel("Models/Train/trainMachine.j3o");
        this.attachChild(trainMachine);
+       trainMachine.setLocalScale(1.5f);
+       trainMachine.setLocalTranslation(0.40f, 0, 0);
        
        
        

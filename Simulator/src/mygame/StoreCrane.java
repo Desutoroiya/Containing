@@ -42,6 +42,8 @@ public class StoreCrane extends Node {
         storageCrane.attachChild(StoreCraneLift);
         storageCrane.attachChild(StoreCraneBase);
         storageCrane.attachChild(StoreCraneHook);
+        
+        storageCrane.rotate(0, 1.5707f, 0);
     }
 
     public void moveBase() {

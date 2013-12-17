@@ -177,9 +177,9 @@ public class Main extends SimpleApplication {
         float ZstorecraneTwo = -16.5f;
         
         List<StoreCrane> StorageCraneList = new LinkedList<StoreCrane>();
-        StoreCrane[] storageCrane = new StoreCrane[24];
+        StoreCrane[] storageCrane = new StoreCrane[40];
 
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 23; i++) {
             storageCrane[i] = new StoreCrane(assetManager);
             StorageCraneList.add(storageCrane[i]);
             storageCrane[i].createStoreCrane();
@@ -187,10 +187,10 @@ public class Main extends SimpleApplication {
             
             rootNode.attachChild(storageCrane[i].storageCrane);
             
-            ZstorecraneOne += 3;
+            XstorecraneOne += 3;
         }
         
-        for (int i = 12; i < 24; i++){
+        for (int i = 23; i < 40; i++){
             storageCrane[i] = new StoreCrane(assetManager);
             StorageCraneList.add(storageCrane[i]);
             storageCrane[i].createStoreCrane();            
@@ -198,7 +198,7 @@ public class Main extends SimpleApplication {
             
             rootNode.attachChild(storageCrane[i].storageCrane);
             
-            ZstorecraneTwo += 3;
+            XstorecraneTwo += 3;
         }
         /*
          * Storage Cranes maken
