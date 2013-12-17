@@ -5,6 +5,7 @@
 package controller.containing;
 
 import java.io.File;
+import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.junit.After;
@@ -64,5 +65,19 @@ public class XMLreaderTest {
         } else {
             System.out.println("Test passed.");
         }
+    }
+
+    /**
+     * Test of getContainerList method, of class XMLreader.
+     */
+    @Test
+    public void testGetContainerList() {
+        System.out.println("getContainerList");
+        XMLreader instance = new XMLreader();
+        ArrayList<Container> expResult = null;
+        ArrayList<Container> result = instance.getContainerList();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 }

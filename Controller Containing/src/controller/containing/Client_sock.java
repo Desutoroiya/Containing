@@ -34,5 +34,8 @@ public class Client_sock
         {
 
         }
+        
+        XMLreader r = new XMLreader();
+        r.XMLreader();
     }
 }

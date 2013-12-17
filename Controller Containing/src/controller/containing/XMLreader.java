@@ -66,16 +66,13 @@ public class XMLreader {
                 {
                     _container = new Container(id, getValue("d", element) + getValue("m", element) + getValue("j", element), getDoubleValue(0, "van", element), getDoubleValue(1, "tot", element), getValue("soort_vervoer", element),
                             getValue("bedrijf", element), getIntValue(0, "x", element), getIntValue(0, "y", element), getIntValue(0, "z", element), getDoubleValue("d", element) + getDoubleValue("m", element)
-                            + getDoubleValue("j", element), getDoubleValue(1, "van", element), getDoubleValue(1, "tot", element), getDoubleValue("soort_vervoer", element), getDoubleValue("bedrijf", element), getValue("eigenaar", element), getIntValue(0, "containernr", element),
+                            + getDoubleValue("j", element), getDoubleValue(1, "van", element), getDoubleValue(1, "tot", element), getDoubleValue("soort_vervoer", element), getDoubleValue("bedrijf", element), getValue("naam", element), getIntValue(0, "containernr", element),
                             getIntValue(0, "leeg", element) + getIntValue(0, "inhoud", element), getDoubleValue("naam", element), getValue("soort", element), getValue("gevaar", element), getValue("ISO", element));
                     _containerList.add(_container);
                     s.arrivePeriod(getDoubleValue(0, "van", element), getDoubleValue(0, "tot", element));
                     s.deptPeriod(getDoubleValue(1, "van", element), getDoubleValue(1, "tot", element));
-                    z.makePath(getValue("soort_vervoer", element));
-
-                    DijkstraAlgorithm d = new DijkstraAlgorithm();
-
-                    d.makePath(getValue("soort_vervoer", element));
+                    
+                    _container.toString();
                 }
 
 
