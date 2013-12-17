@@ -20,9 +20,17 @@ public class BargeCrane extends Node{
     private Node rootNode;
     Node bargeCrane = new Node();
     public AssetManager assetManager;
-    //private MotionPath ShipBase;
-    //private MotionEvent meShipCrane;
-    //private float baseSpeed = 1.0f;
+    private MotionPath bargeBase;
+    private MotionPath bargeHook;
+    private MotionPath bargeLift;
+    private MotionEvent meBargeCrane;
+    private MotionEvent meBargeHook;
+    private MotionEvent meBargeLift;
+    public float x = 0f;
+    public float y = 0;
+    public float z = 0f;
+    Vector3f Position = new Vector3f(x, y, z);
+    private float baseSpeed = 1.0f;
     
     public BargeCrane(AssetManager assetManager) {
         this.assetManager = assetManager;
@@ -39,5 +47,54 @@ public class BargeCrane extends Node{
         bargeCrane.attachChild(BargeCraneHook);
         
         bargeCrane.rotate(0, 1.5707f, 0);
+    }
+     public void moveBase(float x, float y, float z) {
+
+        bargeBase = new MotionPath();
+        bargeBase.addWayPoint(new Vector3f(x, y, z));
+        bargeBase.addWayPoint(new Vector3f(x + 5, y, z));
+
+        meBargeCrane = new MotionEvent(bargeCrane, bargeBase);
+        bargeBase.setCurveTension(0f);
+        meBargeCrane.setSpeed(baseSpeed);
+        meBargeCrane.play();
+    }
+
+    public void moveHook() {
+        Spatial destoreHook = bargeCrane.getChild(2);
+        bargeHook = new MotionPath();
+        bargeHook.addWayPoint(new Vector3f(Position));
+        bargeHook.addWayPoint(new Vector3f(Position.x, Position.y - 0.5f, Position.z));
+        
+        meBargeHook = new MotionEvent(destoreHook, bargeHook);
+        bargeHook.setCurveTension(0f);
+        meBargeHook.setSpeed(baseSpeed);
+        meBargeHook.play();
+    }
+
+    public void moveLift() {
+        Spatial destoreLift = bargeCrane.getChild(0);
+        bargeLift = new MotionPath();
+        bargeLift.addWayPoint(new Vector3f(Position));
+        bargeLift.addWayPoint(new Vector3f(Position.x - 6f, Position.y, Position.z));
+        bargeLift.addWayPoint(new Vector3f(Position.x + 6f, Position.y, Position.z));
+        bargeLift.addWayPoint(new Vector3f(Position));
+
+        meBargeLift = new MotionEvent(destoreLift, bargeLift);
+        bargeLift.setCurveTension(0f);
+        meBargeLift.setSpeed(baseSpeed);
+        meBargeLift.play();
+
+        Spatial destoreHook = bargeCrane.getChild(2);
+        bargeHook = new MotionPath();
+        bargeHook.addWayPoint(new Vector3f(Position));
+        bargeHook.addWayPoint(new Vector3f(Position.x - 6f, Position.y, Position.z));
+        bargeHook.addWayPoint(new Vector3f(Position.x + 6f, Position.y, Position.z));
+        bargeHook.addWayPoint(new Vector3f(Position));
+
+        meBargeHook = new MotionEvent(destoreHook, bargeHook);
+        bargeHook.setCurveTension(0f);
+        meBargeHook.setSpeed(baseSpeed);
+        meBargeHook.play();
     }
 }

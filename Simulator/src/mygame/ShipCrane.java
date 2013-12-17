@@ -23,13 +23,17 @@ public class ShipCrane extends Node{
     private Node rootNode;
     Node shipCrane = new Node();
     public AssetManager assetManager;
-    //private MotionPath ShipBase;
-    //private MotionEvent meShipCrane;
-    //private Vector3f firstpoint = new Vector3f(0, 0, 0);
-    //private Vector3f secondpoint = new Vector3f(0, 5, 0);
-    //private int location;
-    //private boolean moving = false;
-    //private float baseSpeed = 1.0f;
+    private MotionPath shipBase;
+    private MotionPath shipHook;
+    private MotionPath shipLift;
+    private MotionEvent meShipCrane;
+    private MotionEvent meShipHook;
+    private MotionEvent meShipLift;
+    public float x = 0f;
+    public float y = 0;
+    public float z = 0f;
+    Vector3f Position = new Vector3f(x, y, z);
+    private float baseSpeed = 1.0f;
     
     public ShipCrane(AssetManager assetManager) {
         this.assetManager = assetManager;

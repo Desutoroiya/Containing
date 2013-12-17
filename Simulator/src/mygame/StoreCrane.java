@@ -53,7 +53,8 @@ public class StoreCrane extends Node {
 
         storeBase = new MotionPath();
         storeBase.addWayPoint(new Vector3f(x, y, z));
-        storeBase.addWayPoint(new Vector3f(x, y, z + 2));
+        storeBase.addWayPoint(new Vector3f(x, y, z - 36));
+        storeBase.addWayPoint(new Vector3f(x, y, z));
 
         meStoreCrane = new MotionEvent(storageCrane, storeBase);
         storeBase.setCurveTension(0f);

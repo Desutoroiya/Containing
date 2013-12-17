@@ -107,9 +107,9 @@ public class Main extends SimpleApplication {
          * BEGIN
          * NIELS RIEMERSMA
          */
-        float XtruckCrane = 69.5f;
+        float XtruckCrane = 69;
         float YtruckCrane = 0;
-        float ZtruckCrane = 20.75f;
+        float ZtruckCrane = 22f;
 
         List<TruckCrane> TruckCraneList = new LinkedList<TruckCrane>();
         TruckCrane[] truckCrane = new TruckCrane[20];
@@ -179,16 +179,16 @@ public class Main extends SimpleApplication {
          * BEGIN
          * IVAR DE LANGE
          */
-        float XstorecraneOne = 3.5f;
+        float XstorecraneOne = -64.5f;
         float YstorecraneOne = 0;
-        float ZstorecraneOne = -16.5f;
+        float ZstorecraneOne = 18;
 
-        float XstorecraneTwo = 10.5f;
+        float XstorecraneTwo = 7.5f;
         float YstorecraneTwo = 0;
-        float ZstorecraneTwo = 0;
+        float ZstorecraneTwo = 18;
 
         List<StoreCrane> StorageCraneList = new LinkedList<StoreCrane>();
-        StoreCrane[] storageCrane = new StoreCrane[40];
+        StoreCrane[] storageCrane = new StoreCrane[46];
 
         for (int i = 0; i < 23; i++) {
             storageCrane[i] = new StoreCrane(assetManager);
@@ -201,9 +201,7 @@ public class Main extends SimpleApplication {
             XstorecraneOne += 3;
         }
 
-
-
-        for (int i = 23; i < 40; i++) {
+        for (int i = 23; i < 46; i++) {
             storageCrane[i] = new StoreCrane(assetManager);
             StorageCraneList.add(storageCrane[i]);
             storageCrane[i].createStoreCrane();
@@ -214,7 +212,7 @@ public class Main extends SimpleApplication {
             XstorecraneTwo += 3;
         }
         int iStoreCrane = 30;        
-        storageCrane[iStoreCrane].moveBase(storageCrane[iStoreCrane].storageCrane.getLocalTranslation().x, storageCrane[iStoreCrane].storageCrane.getLocalTranslation().y, storageCrane[iStoreCrane].storageCrane.getLocalTranslation().z + 1);
+        storageCrane[iStoreCrane].moveBase(storageCrane[iStoreCrane].storageCrane.getLocalTranslation().x, storageCrane[iStoreCrane].storageCrane.getLocalTranslation().y, storageCrane[iStoreCrane].storageCrane.getLocalTranslation().z);
         int iStoreCrane1 = 2;
         storageCrane[iStoreCrane1].moveHook();
         int iStoreCrane2 = 10;
@@ -232,10 +230,10 @@ public class Main extends SimpleApplication {
          */
         float Xshipcrane = -77;
         float Yshipcrane = 0;
-        float Zshipcrane = -27;
+        float Zshipcrane = -24;
 
         List<ShipCrane> ShipCraneList = new LinkedList<ShipCrane>();
-        ShipCrane[] shipCrane = new ShipCrane[25];
+        ShipCrane[] shipCrane = new ShipCrane[10];
 
         for (int i = 0; i < 10; i++) {
             shipCrane[i] = new ShipCrane(assetManager);
@@ -245,7 +243,7 @@ public class Main extends SimpleApplication {
 
             rootNode.attachChild(shipCrane[i].shipCrane);
 
-            Zshipcrane += 6;
+            Zshipcrane += 5.5f;
         }
 
         /*
@@ -258,12 +256,12 @@ public class Main extends SimpleApplication {
          * BEGIN
          * IVAR DE LANGE
          */
-        float Xbargecrane = -65;
+        float Xbargecrane = -64;
         float Ybargecrane = 0;
         float Zbargecrane = 29;
 
         List<BargeCrane> BargeCraneList = new LinkedList<BargeCrane>();
-        BargeCrane[] bargeCrane = new BargeCrane[25];
+        BargeCrane[] bargeCrane = new BargeCrane[8];
 
         for (int i = 0; i < 8; i++) {
             bargeCrane[i] = new BargeCrane(assetManager);
@@ -272,8 +270,14 @@ public class Main extends SimpleApplication {
             bargeCrane[i].bargeCrane.setLocalTranslation(Xbargecrane, Ybargecrane, Zbargecrane);
 
             rootNode.attachChild(bargeCrane[i].bargeCrane);
-            Xbargecrane += 10;
+            Xbargecrane += 9.25f;
         }
+        int iBargeCrane = 1;        
+        bargeCrane[iBargeCrane].moveBase(bargeCrane[iBargeCrane].bargeCrane.getLocalTranslation().x + 1, bargeCrane[iBargeCrane].bargeCrane.getLocalTranslation().y, bargeCrane[iBargeCrane].bargeCrane.getLocalTranslation().z);
+        int iBargeCrane1 = 3;
+        bargeCrane[iBargeCrane1].moveHook();
+        int iBargeCrane2 = 5;
+        bargeCrane[iBargeCrane2].moveLift();
 
         /*
          * Barge Cranes maken

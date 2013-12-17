@@ -44,7 +44,7 @@ public class Terrain
      */
     public Spatial loadTerrain()
     {
-       Spatial terrain = assetManager.loadModel("Models/Terrain.j3o");
+       Spatial terrain = assetManager.loadModel("Models/terrain.j3o");
        terrain.setLocalTranslation(0, -1, 0);
        return terrain;
     }    
