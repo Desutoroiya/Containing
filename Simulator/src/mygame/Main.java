@@ -6,7 +6,6 @@ import com.jme3.light.DirectionalLight;
 import com.jme3.renderer.RenderManager;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
-import com.jme3.scene.Node;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -80,7 +79,13 @@ public class Main extends SimpleApplication {
             rootNode.attachChild(agv[i].agv);
 
             Xagv += 1f;
+            //System.out.println("ID= " + agv[i]);
         }
+        
+        for (int test = 0; test < 100; test++)
+            agv[test].move(agv[test].agv.getLocalTranslation(), new Vector3f(agv[test].agv.getLocalTranslation().x, agv[test].agv.getLocalTranslation().y, agv[test].agv.getLocalTranslation().z + 2));
+        
+        
 //
 //        AGV agv = new AGV(assetManager);
 //        agv.CreateAGV();
@@ -130,6 +135,7 @@ public class Main extends SimpleApplication {
             rootNode.attachChild(truckCrane[i].craneLift);
 
             XtruckCrane -= 3;
+            System.out.println("ID= " + truckCrane[i]);
         }
 //        int iNiels = 1;
 //        tc[iNiels].moveBase(tc[iNiels].craneLift.getLocalTranslation().x, tc[iNiels].craneLift.getLocalTranslation().y, tc[iNiels].craneLift.getLocalTranslation().z + 1);
@@ -137,6 +143,7 @@ public class Main extends SimpleApplication {
 //        tc[isNiels].moveHook();
 //        int isniels2 = 3;
 //        tc[isniels2].moveLift();
+//        truckCrane[10].moveBase(truckCrane[10].craneLift.getLocalTranslation().x, truckCrane[10].craneLift.getLocalTranslation().y, truckCrane[10].craneLift.getLocalTranslation().z + 1);
         /*
          * Truck Cranes maken 
          * EINDE

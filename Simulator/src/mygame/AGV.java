@@ -29,28 +29,28 @@ public class AGV extends Node {
         
         
     }
-    private int Speed(boolean loaded){
-        int speed;
+    private float Speed(boolean loaded){
+        float speed;
         if(loaded){
-            speed = 2;
+            speed = 1f;
         }
         else{
-            speed = 1;
+            speed = 1f;
         }
         return speed;
     }
-    public void move(){
+    public void move(Vector3f pos, Vector3f pos2){
         path = new MotionPath();
-        path.addWayPoint(new Vector3f(76,-0.1f,19.5f));
-        path.addWayPoint(new Vector3f(4.6f,-0.1f,19.5f));
-        path.addWayPoint(new Vector3f(4.6f,-0.1f,-19.5f));
-        path.addWayPoint(new Vector3f(-67.2f,-0.1f,-19.5f));
+        path.addWayPoint(pos);
+        path.addWayPoint(pos2);
+        //path.addWayPoint(new Vector3f(4.6f,-0.1f,-19.5f));
+        //path.addWayPoint(new Vector3f(-67.2f,-0.1f,-19.5f));
         
-        motionControl = new MotionEvent(this,path);
+        motionControl = new MotionEvent(agv,path);
         path.setCurveTension(0f);
         motionControl.setDirectionType(MotionEvent.Direction.PathAndRotation);
         motionControl.setRotation(new Quaternion().fromAngleNormalAxis(-FastMath.HALF_PI,Vector3f.UNIT_Y));
-        motionControl.setSpeed(Speed(loaded));
+        motionControl.setSpeed(Speed(false));
         motionControl.play();
     }
     public void pickUpContainer(){
