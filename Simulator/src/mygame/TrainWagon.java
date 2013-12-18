@@ -19,8 +19,12 @@ import com.jme3.scene.Spatial;
 public class TrainWagon extends Node implements VehController {
     boolean loaded= true;
     private AssetManager assetManager;
+    private Spatial container;
+   
+    
     public TrainWagon(AssetManager assetManager) {
         this.assetManager = assetManager;
+        
     }
     
     
@@ -41,14 +45,23 @@ public class TrainWagon extends Node implements VehController {
         this.attachChild(trainCart);
         trainCart.setLocalTranslation(0, 0, 0);
         if(loaded){
-            Spatial container = assetManager.loadModel("Models/container.j3o");
+           attachContainer();
+          
+        }
+        }
+    
+    public void attachContainer(){
+         container = assetManager.loadModel("Models/container.j3o");
             this.attachChild(container);
             container.setLocalTranslation(0, 0.1f, 0);
             container.rotate(0,FastMath.HALF_PI,0);
              Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
              mat.setColor("Color", ColorRGBA.randomColor());
         container.setMaterial(mat);
-        }
-        }
+    }
+    
+    public void detachContainer(){
+         container.removeFromParent();
+    }
     }
 
