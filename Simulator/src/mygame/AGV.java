@@ -63,6 +63,7 @@ public class AGV extends Node {
     public Spatial CreateAGV(){
          Spatial AGV = assetManager.loadModel("Models/agv.j3o");
          agv.attachChild(AGV);
+         agv.rotate(0, FastMath.HALF_PI,0);
          return AGV;
     }
     

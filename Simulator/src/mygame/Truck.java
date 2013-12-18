@@ -31,7 +31,7 @@ public class Truck extends Node implements VehController {
 
     public void move() {
 
-        float distanceX = 72.5f;
+        float distanceX = 72f;
         float distanceY = 0f;
         float distanceZ = 28f;
         
