@@ -5,6 +5,7 @@
 package mygame;
 
 import com.jme3.asset.AssetManager;
+import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
@@ -14,7 +15,7 @@ import com.jme3.scene.Spatial;
  * @author Enzo van Kessel
  */
 public class TrainWagon extends Node implements VehController {
-    boolean loaded;
+    boolean loaded= true;
     private AssetManager assetManager;
     public TrainWagon(AssetManager assetManager) {
         this.assetManager = assetManager;
@@ -36,7 +37,13 @@ public class TrainWagon extends Node implements VehController {
         
         Spatial trainCart = assetManager.loadModel("Models/Train/trainCart.j3o");
         this.attachChild(trainCart);
-        trainCart.setLocalTranslation(1.43f, 0, 0);
+        trainCart.setLocalTranslation(0, 0, 0);
+        if(loaded){
+            Spatial container = assetManager.loadModel("Models/container.j3o");
+            this.attachChild(container);
+            container.setLocalTranslation(0, 0.1f, 0);
+            container.rotate(0,FastMath.HALF_PI,0);
+        }
         }
     }
 

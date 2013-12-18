@@ -99,10 +99,7 @@ public class Main extends SimpleApplication {
         rootNode.attachChild(truck);
         truck.move();
 
-        Train train = new Train(assetManager);
-        train.createTrain();
-        train.setLocalTranslation(-63, 0.1f, -28);
-        rootNode.attachChild(train);
+        CreateTrain(5);
 
         Ship ship = new Ship(assetManager);
         ship.createShip();
@@ -314,5 +311,17 @@ public class Main extends SimpleApplication {
     @Override
     public void simpleRender(RenderManager rm) {
         //TODO: add render code
+    }
+    public void CreateTrain(int wagons){
+        Train train = new Train(assetManager);
+        train.createTrain();
+        train.setLocalTranslation(-63, 0.1f, -28);
+        rootNode.attachChild(train);
+        for(int i =0;i<wagons;i++){
+            TrainWagon wagon = new TrainWagon(assetManager);
+            wagon.CreateWagon();
+            wagon.setLocalTranslation(-63+(1.43f*i), 0.1f, -28);
+            rootNode.attachChild(wagon);
+        }
     }
 }
