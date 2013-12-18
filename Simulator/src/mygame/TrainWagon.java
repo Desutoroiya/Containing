@@ -5,6 +5,8 @@
 package mygame;
 
 import com.jme3.asset.AssetManager;
+import com.jme3.material.Material;
+import com.jme3.math.ColorRGBA;
 import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
@@ -43,6 +45,9 @@ public class TrainWagon extends Node implements VehController {
             this.attachChild(container);
             container.setLocalTranslation(0, 0.1f, 0);
             container.rotate(0,FastMath.HALF_PI,0);
+             Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+             mat.setColor("Color", ColorRGBA.randomColor());
+        container.setMaterial(mat);
         }
         }
     }
