@@ -51,14 +51,14 @@ public class Main extends SimpleApplication {
         terrain.initTerrain();
         viewPort.setBackgroundColor(ColorRGBA.Blue);
 
-        float Xagv = 4.6f;
+        float Xagv = 6f;
         float Yagv = 0;
-        float Zagv = -19.5f;
+        float Zagv = -22f;
 
         List<AGV> AGVList = new LinkedList<AGV>();
         AGV[] agv = new AGV[100];
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 50; i++) {
             agv[i] = new AGV(assetManager);
             AGVList.add(agv[i]);
 
@@ -66,7 +66,20 @@ public class Main extends SimpleApplication {
             agv[i].agv.setLocalTranslation(Xagv, Yagv, Zagv);
             rootNode.attachChild(agv[i].agv);
 
-            Xagv -= 1.5f;
+            Xagv += 1f;
+        }
+        
+        Xagv = 6f;
+        
+        for (int i = 50; i < 100; i++) {
+            agv[i] = new AGV(assetManager);
+            AGVList.add(agv[i]);
+
+            agv[i].CreateAGV();
+            agv[i].agv.setLocalTranslation(Xagv, Yagv, Zagv - 2f);
+            rootNode.attachChild(agv[i].agv);
+
+            Xagv += 1f;
         }
 //
 //        AGV agv = new AGV(assetManager);
@@ -80,11 +93,6 @@ public class Main extends SimpleApplication {
         truck.setLocalTranslation(69.5f, 0, 24f);
         rootNode.attachChild(truck);
         truck.move();
-
-        Truck truc = new Truck(assetManager);
-        truc.CreateTruck();
-        truc.setLocalTranslation(69.5f, 0, 24f);
-        rootNode.attachChild(truc);
 
         Train train = new Train(assetManager);
         train.createTrain();
