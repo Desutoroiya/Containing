@@ -68,7 +68,6 @@ public class Main extends SimpleApplication {
 
             Xagv -= 1.5f;
         }
-
 //
 //        AGV agv = new AGV(assetManager);
 //        agv.CreateAGV();
@@ -158,17 +157,17 @@ public class Main extends SimpleApplication {
 
             XtrainCrane += 10;
         }
-        
-        int iTrainCrane = 0;        
-        trainCrane[iTrainCrane].moveBase(trainCrane[iTrainCrane].trainCrane.getLocalTranslation().x + 1, trainCrane[iTrainCrane].trainCrane.getLocalTranslation().y, trainCrane[iTrainCrane].trainCrane.getLocalTranslation().z);
+
+        int iTrainCrane = 0;
+        trainCrane[iTrainCrane].moveBase(trainCrane[iTrainCrane].trainCrane.getLocalTranslation().x, trainCrane[iTrainCrane].trainCrane.getLocalTranslation().y, trainCrane[iTrainCrane].trainCrane.getLocalTranslation().z);
         int iTrainCrane1 = 1;
         trainCrane[iTrainCrane1].moveHook();
         int iTrainCrane2 = 2;
         trainCrane[iTrainCrane2].moveLift();
-        int iTrainCrane3 = 3;        
+        int iTrainCrane3 = 3;
         trainCrane[iTrainCrane3].moveBase(trainCrane[iTrainCrane3].trainCrane.getLocalTranslation().x + 1, trainCrane[iTrainCrane3].trainCrane.getLocalTranslation().y, trainCrane[iTrainCrane3].trainCrane.getLocalTranslation().z);
         
-        
+
         /*
          * Train Cranes maken
          * EINDE
@@ -211,13 +210,13 @@ public class Main extends SimpleApplication {
 
             XstorecraneTwo += 3;
         }
-        int iStoreCrane = 30;        
+        int iStoreCrane = 30;
         storageCrane[iStoreCrane].moveBase(storageCrane[iStoreCrane].storageCrane.getLocalTranslation().x, storageCrane[iStoreCrane].storageCrane.getLocalTranslation().y, storageCrane[iStoreCrane].storageCrane.getLocalTranslation().z);
         int iStoreCrane1 = 2;
         storageCrane[iStoreCrane1].moveHook();
         int iStoreCrane2 = 10;
         storageCrane[iStoreCrane2].moveLift();
-        
+
         /*
          * Storage Cranes maken
          * EINDE
@@ -245,6 +244,13 @@ public class Main extends SimpleApplication {
 
             Zshipcrane += 5.5f;
         }
+        
+        int iShipCrane = 1;
+        shipCrane[iShipCrane].moveBase(shipCrane[iShipCrane].shipCrane.getLocalTranslation().x, shipCrane[iShipCrane].shipCrane.getLocalTranslation().y, shipCrane[iShipCrane].shipCrane.getLocalTranslation().z);
+        int iShipCrane1 = 3;
+        shipCrane[iShipCrane1].moveHook();
+        int iShipCrane2 = 5;
+        shipCrane[iShipCrane2].moveLift();
 
         /*
          * Ship Cranes maken
@@ -272,7 +278,7 @@ public class Main extends SimpleApplication {
             rootNode.attachChild(bargeCrane[i].bargeCrane);
             Xbargecrane += 9.25f;
         }
-        int iBargeCrane = 1;        
+        int iBargeCrane = 1;
         bargeCrane[iBargeCrane].moveBase(bargeCrane[iBargeCrane].bargeCrane.getLocalTranslation().x + 1, bargeCrane[iBargeCrane].bargeCrane.getLocalTranslation().y, bargeCrane[iBargeCrane].bargeCrane.getLocalTranslation().z);
         int iBargeCrane1 = 3;
         bargeCrane[iBargeCrane1].moveHook();

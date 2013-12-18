@@ -49,9 +49,12 @@ public class TrainCrane extends Node {
 
     public void moveBase(float x, float y, float z) {
 
+        
         trainBase = new MotionPath();
         trainBase.addWayPoint(new Vector3f(x, y, z));
         trainBase.addWayPoint(new Vector3f(x + 7.5f, y, z));
+        trainBase.addWayPoint(new Vector3f(x, y, z));
+        
 
         meTrainCrane = new MotionEvent(trainCrane, trainBase);
         trainBase.setCurveTension(0f);
