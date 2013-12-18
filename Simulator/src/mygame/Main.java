@@ -134,13 +134,13 @@ public class Main extends SimpleApplication {
             XtruckCrane -= 3;
             System.out.println("ID= " + truckCrane[i]);
         }
-//        int iNiels = 1;
-//        tc[iNiels].moveBase(tc[iNiels].craneLift.getLocalTranslation().x, tc[iNiels].craneLift.getLocalTranslation().y, tc[iNiels].craneLift.getLocalTranslation().z + 1);
-//        int isNiels = 2;
-//        tc[isNiels].moveHook();
-//        int isniels2 = 3;
-//        tc[isniels2].moveLift();
-//        truckCrane[10].moveBase(truckCrane[10].craneLift.getLocalTranslation().x, truckCrane[10].craneLift.getLocalTranslation().y, truckCrane[10].craneLift.getLocalTranslation().z + 1);
+        int iTruckCrane = 1;
+        truckCrane[iTruckCrane].moveBase(truckCrane[iTruckCrane].craneLift.getLocalTranslation().x, truckCrane[iTruckCrane].craneLift.getLocalTranslation().y, truckCrane[iTruckCrane].craneLift.getLocalTranslation().z);
+        int iTruckCrane1 = 2;
+        truckCrane[iTruckCrane1].moveHook();
+        int iTruckCrane2 = 3;
+        truckCrane[iTruckCrane2].moveLift();
+        truckCrane[10].moveBase(truckCrane[10].craneLift.getLocalTranslation().x, truckCrane[10].craneLift.getLocalTranslation().y, truckCrane[10].craneLift.getLocalTranslation().z);
         /*
          * Truck Cranes maken 
          * EINDE
@@ -177,7 +177,7 @@ public class Main extends SimpleApplication {
         int iTrainCrane2 = 2;
         trainCrane[iTrainCrane2].moveLift();
         int iTrainCrane3 = 3;
-        trainCrane[iTrainCrane3].moveBase(trainCrane[iTrainCrane3].trainCrane.getLocalTranslation().x + 1, trainCrane[iTrainCrane3].trainCrane.getLocalTranslation().y, trainCrane[iTrainCrane3].trainCrane.getLocalTranslation().z);
+        trainCrane[iTrainCrane3].moveBase(trainCrane[iTrainCrane3].trainCrane.getLocalTranslation().x, trainCrane[iTrainCrane3].trainCrane.getLocalTranslation().y, trainCrane[iTrainCrane3].trainCrane.getLocalTranslation().z);
         
 
         /*
@@ -291,7 +291,7 @@ public class Main extends SimpleApplication {
             Xbargecrane += 9.25f;
         }
         int iBargeCrane = 1;
-        bargeCrane[iBargeCrane].moveBase(bargeCrane[iBargeCrane].bargeCrane.getLocalTranslation().x + 1, bargeCrane[iBargeCrane].bargeCrane.getLocalTranslation().y, bargeCrane[iBargeCrane].bargeCrane.getLocalTranslation().z);
+        bargeCrane[iBargeCrane].moveBase(bargeCrane[iBargeCrane].bargeCrane.getLocalTranslation().x, bargeCrane[iBargeCrane].bargeCrane.getLocalTranslation().y, bargeCrane[iBargeCrane].bargeCrane.getLocalTranslation().z);
         int iBargeCrane1 = 3;
         bargeCrane[iBargeCrane1].moveHook();
         int iBargeCrane2 = 5;
