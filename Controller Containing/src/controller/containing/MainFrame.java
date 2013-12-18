@@ -107,14 +107,40 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
 
-        XMLreader test = new XMLreader();
-        test.XMLreader();
+        XMLreader xml = new XMLreader();
+        xml.XMLreader();
         
-        ArrayList<Container> lijstContainers = test.getContainerList();
-        ArrayList<Container> Vrachtwagens = null;
+        ArrayList<Container> lijstContainers = xml.getContainerList();
+        
+        ArrayList<Container> Vrachtwagenslijst = new ArrayList<>();
+        ArrayList<Container> Zeeschiplijst = new ArrayList<>();
+        ArrayList<Container> Binnenschiplijst = new ArrayList<>();
+        ArrayList<Container> Treinlijst = new ArrayList<>();        
+        
         for(int i = 0; i < lijstContainers.size() ; i++)
-        {
-            System.out.println(lijstContainers.get(i).toString());
+        {            
+            if("vrachtauto".equals(lijstContainers.get(i).getVervoerder()))
+            {
+                Vrachtwagenslijst.add(lijstContainers.get(i));
+                System.out.println(Vrachtwagenslijst.get(i).toString());
+            }
+            
+            if("zeeschip".equals(lijstContainers.get(i).getVervoerder()))
+            {
+                Zeeschiplijst.add(lijstContainers.get(i));
+            }
+            
+            if("binnenschip".equals(lijstContainers.get(i).getVervoerder()))
+            {
+                Binnenschiplijst.add(lijstContainers.get(i));
+            }
+                                   
+            if("trein".equals(lijstContainers.get(i).getVervoerder()))
+            {
+                Treinlijst.add(lijstContainers.get(i));
+            }
+            
+            
             
         }
 

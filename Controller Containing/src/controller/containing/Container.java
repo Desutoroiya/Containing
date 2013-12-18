@@ -94,4 +94,9 @@ public class Container {
         " " +  companyDept + " " +  ownerCont + " " +  idCont + " " +  weightCont + " " +  contentCont + " " +  contentTypeCont + 
         " " +  contentDangerCont + " " +  isoCode+ "]";
     }    
+    
+    public String getVervoerder()
+    {
+        return this.vehicleArrive;
+    }
 }
