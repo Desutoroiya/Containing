@@ -51,50 +51,55 @@ public class ShipCrane extends Node {
     public void moveBase(float x, float y, float z) {
 
         shipBase = new MotionPath();
+        for (int i = 0; i < 50; i++){
         shipBase.addWayPoint(new Vector3f(x, y, z));
         shipBase.addWayPoint(new Vector3f(x, y, z + 3));
-
+        shipBase.setCycle(true);
+        }
         meShipCrane = new MotionEvent(shipCrane, shipBase);
         shipBase.setCurveTension(0f);
-        meShipCrane.setSpeed(baseSpeed);
+        meShipCrane.setSpeed(baseSpeed * 0.005f);
         meShipCrane.play();
     }
 
     public void moveHook() {
         Spatial destoreHook = shipCrane.getChild(2);
         shipHook = new MotionPath();
+        for (int i = 0; i < 50; i++){
         shipHook.addWayPoint(new Vector3f(Position));
         shipHook.addWayPoint(new Vector3f(Position.x, Position.y - 0.5f, Position.z));
-
+        shipHook.setCycle(true);
+        }
         meShipHook = new MotionEvent(destoreHook, shipHook);
         shipHook.setCurveTension(0f);
-        meShipHook.setSpeed(baseSpeed);
+        meShipHook.setSpeed(baseSpeed * 0.01f);
         meShipHook.play();
     }
 
     public void moveLift() {
         Spatial destoreLift = shipCrane.getChild(0);
         shipLift = new MotionPath();
+        for (int i = 0; i < 50; i++){
         shipLift.addWayPoint(new Vector3f(Position));
-        shipLift.addWayPoint(new Vector3f(Position.x - 6f, Position.y, Position.z));
         shipLift.addWayPoint(new Vector3f(Position.x + 6f, Position.y, Position.z));
-        shipLift.addWayPoint(new Vector3f(Position));
-
+        shipLift.setCycle(true);
+        }
         meShipLift = new MotionEvent(destoreLift, shipLift);
         shipLift.setCurveTension(0f);
-        meShipLift.setSpeed(baseSpeed);
+        meShipLift.setSpeed(baseSpeed * 0.01f);
         meShipLift.play();
 
         Spatial destoreHook = shipCrane.getChild(2);
         shipHook = new MotionPath();
+        for (int i = 0; i < 50; i++){
         shipHook.addWayPoint(new Vector3f(Position));
-        shipHook.addWayPoint(new Vector3f(Position.x - 6f, Position.y, Position.z));
         shipHook.addWayPoint(new Vector3f(Position.x + 6f, Position.y, Position.z));
-        shipHook.addWayPoint(new Vector3f(Position));
+        shipHook.setCycle(true);
+        }
 
         meShipHook = new MotionEvent(destoreHook, shipHook);
         shipHook.setCurveTension(0f);
-        meShipHook.setSpeed(baseSpeed);
+        meShipHook.setSpeed(baseSpeed * 0.01f);
         meShipHook.play();
     }
 }

@@ -46,20 +46,21 @@ public class TrainCrane extends Node {
         trainCrane.attachChild(TrainCraneBase);
         trainCrane.attachChild(TrainCraneHook);
     }
-
+  
     public void moveBase(float x, float y, float z) {
-
+        
         
         trainBase = new MotionPath();
+        for (int i = 0; i < 50; i++){
         trainBase.addWayPoint(new Vector3f(x, y, z));
         trainBase.addWayPoint(new Vector3f(x + 7.5f, y, z));
-        trainBase.addWayPoint(new Vector3f(x, y, z));
-        
-
+        trainBase.setCycle(true);
+        }
         meTrainCrane = new MotionEvent(trainCrane, trainBase);
         trainBase.setCurveTension(0f);
-        meTrainCrane.setSpeed(baseSpeed);
+        meTrainCrane.setSpeed(baseSpeed * 0.01f);
         meTrainCrane.play();
+        
     }
 
     public void moveHook() {

@@ -52,13 +52,15 @@ public class StoreCrane extends Node {
     public void moveBase(float x, float y, float z) {
 
         storeBase = new MotionPath();
+        for (int i = 0; i < 50; i++){
         storeBase.addWayPoint(new Vector3f(x, y, z));
         storeBase.addWayPoint(new Vector3f(x, y, z - 36));
-        storeBase.addWayPoint(new Vector3f(x, y, z));
+        storeBase.setCycle(true);
+        }
 
         meStoreCrane = new MotionEvent(storageCrane, storeBase);
         storeBase.setCurveTension(0f);
-        meStoreCrane.setSpeed(baseSpeed);
+        meStoreCrane.setSpeed(baseSpeed * 0.02f);
         meStoreCrane.play();
     }
 
