@@ -51,7 +51,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel1.setText("jLabel1");
 
-        jMenu1.setText("File");
+        jMenu1.setText("Project");
 
         jMenuItem4.setText("Load XML file");
         jMenu1.add(jMenuItem4);
@@ -107,21 +107,16 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
 
-        Container container = new Container(0, "13/12/2004", 0.00, 0.10, "vrachtauto", "DijckLogisticsBV", 1, 0, 0, "22/12/2004",
-                0.00, 12.00, "zeeschip", "ChinaShippingAgency", "FlowersNL", 19965, 81, "nitrotolueen",
-                "gas", "brandbaar", "1496-1");
-
-
-
-
         XMLreader test = new XMLreader();
         test.XMLreader();
-
-        System.out.println(test.getContainerList().toString());
-
-
-
-
+        
+        ArrayList<Container> lijstContainers = test.getContainerList();
+        ArrayList<Container> Vrachtwagens = null;
+        for(int i = 0; i < lijstContainers.size() ; i++)
+        {
+            System.out.println(lijstContainers.get(i).toString());
+            
+        }
 
 
         /* Set the Nimbus look and feel */
