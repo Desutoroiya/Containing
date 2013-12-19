@@ -22,36 +22,6 @@ Kd 0.36 0.36 0.36
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
 Ni 1.00
-newmtl lambert8SG
-illum 4
-Kd 0.50 0.50 0.50
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-Ni 1.00
-newmtl lambert9SG
-illum 4
-Kd 0.50 0.09 0.09
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-Ni 1.00
-newmtl lambert10SG
-illum 4
-Kd 1.00 1.00 1.00
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-Ni 1.00
-newmtl lambert16SG
-illum 4
-Kd 1.00 1.00 1.00
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-Ni 1.00
-newmtl lambert17SG
-illum 4
-Kd 0.50 0.50 0.50
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-Ni 1.00
 newmtl newship:ship:lambert2SG
 illum 4
 Kd 0.50 0.09 0.09
@@ -83,6 +53,204 @@ Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
 Ni 1.00
 newmtl newship1:ship:lambert4SG
+illum 4
+Kd 0.36 0.36 0.36
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl volwassenBargeShip:lambert2SG
+illum 4
+Kd 0.50 0.09 0.09
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl volwassenBargeShip:lambert3SG
+illum 4
+Kd 0.23 0.23 0.23
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl volwassenBargeShip:lambert4SG
+illum 4
+Kd 0.36 0.36 0.36
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl volwassenBargeShip:newship:ship:lambert2SG
+illum 4
+Kd 0.50 0.09 0.09
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl volwassenBargeShip:newship:ship:lambert3SG
+illum 4
+Kd 0.23 0.23 0.23
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl volwassenBargeShip:newship:ship:lambert4SG
+illum 4
+Kd 0.36 0.36 0.36
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl volwassenBargeShip:newship1:ship:lambert2SG
+illum 4
+Kd 0.50 0.09 0.09
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl volwassenBargeShip:newship1:ship:lambert3SG
+illum 4
+Kd 0.23 0.23 0.23
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl volwassenBargeShip:newship1:ship:lambert4SG
+illum 4
+Kd 0.36 0.36 0.36
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl volwassenSchip:lambert2SG
+illum 4
+Kd 0.50 0.09 0.09
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl volwassenSchip:lambert3SG
+illum 4
+Kd 0.23 0.23 0.23
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl volwassenSchip:lambert4SG
+illum 4
+Kd 0.36 0.36 0.36
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl volwassenSchip:newship:ship:lambert2SG
+illum 4
+Kd 0.50 0.09 0.09
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl volwassenSchip:newship:ship:lambert3SG
+illum 4
+Kd 0.23 0.23 0.23
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl volwassenSchip:newship:ship:lambert4SG
+illum 4
+Kd 0.36 0.36 0.36
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl volwassenSchip:newship1:ship:lambert2SG
+illum 4
+Kd 0.50 0.09 0.09
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl volwassenSchip:newship1:ship:lambert3SG
+illum 4
+Kd 0.23 0.23 0.23
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl volwassenSchip:newship1:ship:lambert4SG
+illum 4
+Kd 0.36 0.36 0.36
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl werkendeBargeShip:lambert2SG
+illum 4
+Kd 0.50 0.09 0.09
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl werkendeBargeShip:lambert3SG
+illum 4
+Kd 0.23 0.23 0.23
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl werkendeBargeShip:lambert4SG
+illum 4
+Kd 0.36 0.36 0.36
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl werkendeBargeShip:lambert8SG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl werkendeBargeShip:lambert18SG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl werkendeBargeShip:lambert19SG
+illum 4
+Kd 0.70 0.19 0.19
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl werkendeBargeShip:lambert21SG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl werkendeBargeShip:lambert24SG
+illum 4
+Kd 1.00 1.00 1.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl werkendeBargeShip:lambert25SG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl werkendeBargeShip:newship:ship:lambert2SG
+illum 4
+Kd 0.50 0.09 0.09
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl werkendeBargeShip:newship:ship:lambert3SG
+illum 4
+Kd 0.23 0.23 0.23
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl werkendeBargeShip:newship:ship:lambert4SG
+illum 4
+Kd 0.36 0.36 0.36
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl werkendeBargeShip:newship1:ship:lambert2SG
+illum 4
+Kd 0.50 0.09 0.09
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl werkendeBargeShip:newship1:ship:lambert3SG
+illum 4
+Kd 0.23 0.23 0.23
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl werkendeBargeShip:newship1:ship:lambert4SG
 illum 4
 Kd 0.36 0.36 0.36
 Ka 0.00 0.00 0.00
