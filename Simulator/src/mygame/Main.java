@@ -10,11 +10,23 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * test
+ * Main CONTROL SIM 
  *
- * @author normenhansen
+ * @author GROEP 8
  */
 public class Main extends SimpleApplication {
+    //TERRAIN LIGHT
+    DirectionalLight sun;
+    AmbientLight ambLight;
+    Terrain terrain;
+    
+    //variabelen voor containers
+    int containerAmount;
+    int containerAmountVar;
+    
+    // Aanroepen
+    Ship[] schip;
+    Barge[] barge;
 
     public static void main(String[] args) {
         Main app = new Main();
@@ -23,13 +35,54 @@ public class Main extends SimpleApplication {
 
     @Override
     public void simpleInitApp() {
-        cam.setLocation(new Vector3f(0, 10, 0));
+        //SET LOCATION FOR CAMERA + SPEED
+        cam.setLocation(new Vector3f(0, 10, 10));
         flyCam.setMoveSpeed(25);
+        
+        //LOAD ASSETS
+        loadTerrainLight();
+        loadAGV();
+        CreateTrain(5);
+        loadTruckCranes();
+        loadTrainCranes();
+        loadStorageCranes();
+        loadShipCranes();
+        loadBargeCranes();
+        loadShips();
+        loadBarges();
+        
+        //ALS LAATSTE IVM VERWIJZING NAAR SHIPS
+        loadContainers();
+    }
 
+    @Override
+    public void simpleUpdate(float tpf) {
+        //TODO: add update code
+    }
+
+    @Override
+    public void simpleRender(RenderManager rm) {
+        //TODO: add render code
+    }
+    
+    public void CreateTrain(int wagons){
+        Train train = new Train(assetManager);
+        train.createTrain();
+        train.setLocalTranslation(-63, 0.1f, -28);
+        rootNode.attachChild(train);
+        for(int i =0;i<wagons;i++){
+            TrainWagon wagon = new TrainWagon(assetManager);
+            wagon.CreateWagon();
+            wagon.setLocalTranslation(-63+(1.43f*i), 0.1f, -28);
+            rootNode.attachChild(wagon);
+        }
+    }
+    
+    public void loadTerrainLight(){
         /**
          * A white, directional light source
          */
-        DirectionalLight sun = new DirectionalLight();
+        sun = new DirectionalLight();
         sun.setDirection((new Vector3f(-0.5f, -0.5f, -0.5f)).normalizeLocal());
         sun.setColor(ColorRGBA.White);
         rootNode.addLight(sun);
@@ -37,18 +90,24 @@ public class Main extends SimpleApplication {
         /*
          * Ambient Lightning
          */
-
-        AmbientLight ambLight = new AmbientLight();
+        ambLight = new AmbientLight();
         ambLight.setColor(new ColorRGBA(1f, 1f, 0.8f, 0.2f));
         rootNode.addLight(ambLight);
 
         /*
          * Loading terrain
          */
-
-        Terrain terrain = new Terrain(assetManager, rootNode);
+        terrain = new Terrain(assetManager, rootNode);
         terrain.initTerrain();
-        viewPort.setBackgroundColor(ColorRGBA.Blue);
+        ColorRGBA backgroundColor = new ColorRGBA(0.3f,103,163,20);
+        viewPort.setBackgroundColor(backgroundColor);
+    }
+    
+    public void loadAGV(){
+        /*
+         * AGV lijst
+         * 100 stuks
+         */
 
         float Xagv = 6f;
         float Yagv = 0;
@@ -79,43 +138,10 @@ public class Main extends SimpleApplication {
             rootNode.attachChild(agv[i].agv);
 
             Xagv += 1f;
-            //System.out.println("ID= " + agv[i]);
         }
-        
-        for (int test = 0; test < 100; test++)
-            agv[test].move(agv[test].agv.getLocalTranslation(), new Vector3f(agv[test].agv.getLocalTranslation().x, agv[test].agv.getLocalTranslation().y, agv[test].agv.getLocalTranslation().z + 2));
-        
-        
-//
-//        AGV agv = new AGV(assetManager);
-//        agv.CreateAGV();
-//        agv.setLocalTranslation(4.6f, 0.9f, -19.5f);
-//        rootNode.attachChild(agv);
-//        agv.move();
-
-        Truck truck = new Truck(assetManager);
-        truck.CreateTruck();
-        truck.setLocalTranslation(69.5f, 0, 24f);
-        rootNode.attachChild(truck);
-        truck.move();
-
-        CreateTrain(5);
-
-        Ship ship = new Ship(assetManager, rootNode);
-        ship.createShip();
-        ship.ship.setLocalTranslation(-80, -0.5f, -20);
-        rootNode.attachChild(ship.ship);
-
-        Barge barge = new Barge(assetManager);
-        barge.createBarge();
-        barge.setLocalTranslation(-62.5f, -0.5f, 31f);
-        rootNode.attachChild(barge);
-
-        /*
-         * Truck cranes maken
-         * BEGIN
-         * NIELS RIEMERSMA
-         */
+    }
+    
+    public void loadTruckCranes(){
         float XtruckCrane = 69;
         float YtruckCrane = 0;
         float ZtruckCrane = 22f;
@@ -133,23 +159,9 @@ public class Main extends SimpleApplication {
 
             XtruckCrane -= 3;
         }
-        int iTruckCrane = 1;
-        truckCrane[iTruckCrane].moveBase(truckCrane[iTruckCrane].craneLift.getLocalTranslation().x, truckCrane[iTruckCrane].craneLift.getLocalTranslation().y, truckCrane[iTruckCrane].craneLift.getLocalTranslation().z);
-        int iTruckCrane1 = 2;
-        truckCrane[iTruckCrane1].moveHook();
-        int iTruckCrane2 = 3;
-        truckCrane[iTruckCrane2].moveLift();
-        truckCrane[10].moveBase(truckCrane[10].craneLift.getLocalTranslation().x, truckCrane[10].craneLift.getLocalTranslation().y, truckCrane[10].craneLift.getLocalTranslation().z);
-        /*
-         * Truck Cranes maken 
-         * EINDE
-         */
-
-        /*
-         * Train Cranes maken
-         * BEGIN
-         * IVAR DE LANGE
-         */
+    }
+    
+    public void loadTrainCranes(){
         float XtrainCrane = -62.5f;
         float YtrainCrane = 0;
         float ZtrainCrane = -27;
@@ -168,27 +180,9 @@ public class Main extends SimpleApplication {
 
             XtrainCrane += 10;
         }
-
-        int iTrainCrane = 0;
-        trainCrane[iTrainCrane].moveBase(trainCrane[iTrainCrane].trainCrane.getLocalTranslation().x, trainCrane[iTrainCrane].trainCrane.getLocalTranslation().y, trainCrane[iTrainCrane].trainCrane.getLocalTranslation().z);
-        int iTrainCrane1 = 1;
-        trainCrane[iTrainCrane1].moveHook();
-        int iTrainCrane2 = 2;
-        trainCrane[iTrainCrane2].moveLift();
-        int iTrainCrane3 = 3;
-        trainCrane[iTrainCrane3].moveBase(trainCrane[iTrainCrane3].trainCrane.getLocalTranslation().x, trainCrane[iTrainCrane3].trainCrane.getLocalTranslation().y, trainCrane[iTrainCrane3].trainCrane.getLocalTranslation().z);
-        
-
-        /*
-         * Train Cranes maken
-         * EINDE
-         */
-
-        /*
-         * Storage Cranes maken
-         * BEGIN
-         * IVAR DE LANGE
-         */
+    }
+    
+    public void loadStorageCranes(){
         float XstorecraneOne = -64.5f;
         float YstorecraneOne = 0;
         float ZstorecraneOne = 18;
@@ -221,23 +215,9 @@ public class Main extends SimpleApplication {
 
             XstorecraneTwo += 3;
         }
-        int iStoreCrane = 30;
-        storageCrane[iStoreCrane].moveBase(storageCrane[iStoreCrane].storageCrane.getLocalTranslation().x, storageCrane[iStoreCrane].storageCrane.getLocalTranslation().y, storageCrane[iStoreCrane].storageCrane.getLocalTranslation().z);
-        int iStoreCrane1 = 2;
-        storageCrane[iStoreCrane1].moveHook();
-        int iStoreCrane2 = 10;
-        storageCrane[iStoreCrane2].moveLift();
-
-        /*
-         * Storage Cranes maken
-         * EINDE
-         */
-
-        /*
-         * Ship Cranes maken
-         * BEGIN
-         * IVAR DE LANGE
-         */
+    }
+    
+    public void loadShipCranes(){
         float Xshipcrane = -77;
         float Yshipcrane = 0;
         float Zshipcrane = -24;
@@ -255,24 +235,9 @@ public class Main extends SimpleApplication {
 
             Zshipcrane += 5.5f;
         }
-        
-        int iShipCrane = 1;
-        shipCrane[iShipCrane].moveBase(shipCrane[iShipCrane].shipCrane.getLocalTranslation().x, shipCrane[iShipCrane].shipCrane.getLocalTranslation().y, shipCrane[iShipCrane].shipCrane.getLocalTranslation().z);
-        int iShipCrane1 = 3;
-        shipCrane[iShipCrane1].moveHook();
-        int iShipCrane2 = 5;
-        shipCrane[iShipCrane2].moveLift();
-
-        /*
-         * Ship Cranes maken
-         * EINDE
-         */
-
-        /*
-         * Barge Cranes maken
-         * BEGIN
-         * IVAR DE LANGE
-         */
+    }
+    
+    public void loadBargeCranes(){
         float Xbargecrane = -64;
         float Ybargecrane = 0;
         float Zbargecrane = 29;
@@ -289,31 +254,31 @@ public class Main extends SimpleApplication {
             rootNode.attachChild(bargeCrane[i].bargeCrane);
             Xbargecrane += 9.25f;
         }
-        int iBargeCrane = 1;
-        bargeCrane[iBargeCrane].moveBase(bargeCrane[iBargeCrane].bargeCrane.getLocalTranslation().x, bargeCrane[iBargeCrane].bargeCrane.getLocalTranslation().y, bargeCrane[iBargeCrane].bargeCrane.getLocalTranslation().z);
-        int iBargeCrane1 = 3;
-        bargeCrane[iBargeCrane1].moveHook();
-        int iBargeCrane2 = 5;
-        bargeCrane[iBargeCrane2].moveLift();
-
-        /*
-         * Barge Cranes maken
-         * EINDE
-         */
+    }
+    
+    public void loadContainers(){
+        containerAmountVar = 0;
+        containerAmount = 1500;
         
-        int containerAmountVar = 0;
-        int containerAmount = 1500;
+        /*
+         * Vanuit de cabine is de opbouw van id's als volgt:
+         * Rechtsonder = 0
+         * Linksonder = 74
+         */
 
         List<Container> containerList = new LinkedList<Container>();
         Container[] container = new Container[containerAmount];
         
-        float contXdist = ship.ship.getLocalTranslation().x - 0.5f;// - 80.5f
-        float contYdist = ship.ship.getLocalTranslation().y - 1.5f; // -2f
-        float contZdist = ship.ship.getLocalTranslation().z - 10.75f; // -30.5f
+        //Manual i,moet uit lijst komen
+        int i = 0;
         
-        for (int contZ = 0; contZ < 20; contZ++){
-            for (int contY = 0; contY < 15; contY++){
-                for (int contX = 0; contX < 5; contX++) {
+        float contXdist = schip[i].ship.getLocalTranslation().x - 0.5f;// - 80.5f
+        float contYdist = schip[i].ship.getLocalTranslation().y - 1.5f; // -2f
+        float contZdist = schip[i].ship.getLocalTranslation().z - 10.75f; // -30.5f
+        
+        for (int contZ = 0; contZ < 20; contZ++){ // 20
+            for (int contY = 0; contY < 15; contY++){ // 15
+                for (int contX = 0; contX < 5; contX++) { // 1
                     container[containerAmountVar] = new Container(assetManager, rootNode);
                     containerList.add(container[containerAmountVar]);
 
@@ -323,33 +288,58 @@ public class Main extends SimpleApplication {
                     contXdist += 0.255f;
                     containerAmountVar++;
                 }
-                contXdist = ship.ship.getLocalTranslation().x - 0.5f;
+                contXdist = schip[i].ship.getLocalTranslation().x - 0.5f;
                 contYdist +=0.265f;
             }
-            contYdist = ship.ship.getLocalTranslation().y - 1.5f;
+            contYdist = schip[i].ship.getLocalTranslation().y - 1.5f;
             contZdist += 1.25f;
         }
+        //testje van niels niet aankomen virus alles
+        //container[74].contNode.setLocalTranslation(new Vector3f(agv[0].agv.getLocalTranslation().x, agv[0].agv.getLocalTranslation().y + 1, agv[0].agv.getLocalTranslation().z));
     }
-
-    @Override
-    public void simpleUpdate(float tpf) {
-        //TODO: add update code
+    
+    public void loadTrucks(){
+        
+        float truckSpawnX = 69.5f;
+        float truckSpawnY = 0;
+        float truckSpawnZ = 24f;
+        
+        List<Truck> TruckList = new LinkedList<Truck>();
+        Truck[] truck = new Truck[10];
+        
+        for (int i = 0; i < 1; i++){
+            truck[i] = new Truck(assetManager);
+            TruckList.add(truck[i]);
+            
+            truck[i].createTruck();
+            truck[i].truck.setLocalTranslation(truckSpawnX, truckSpawnY, truckSpawnZ);
+            rootNode.attachChild(truck[i].truck);
+        }
     }
-
-    @Override
-    public void simpleRender(RenderManager rm) {
-        //TODO: add render code
+    
+    public void loadShips(){
+        List<Ship> ShipList = new LinkedList<Ship>();
+        schip = new Ship[2];
+        
+        for (int i = 0; i < 1; i++){
+            schip[i] = new Ship(assetManager, rootNode);
+            ShipList.add(schip[i]);
+            
+            schip[i].createShip();
+            schip[i].ship.setLocalTranslation(-80f, -1f, -20f);
+            rootNode.attachChild(schip[i].ship);
+        }
     }
-    public void CreateTrain(int wagons){
-        Train train = new Train(assetManager);
-        train.createTrain();
-        train.setLocalTranslation(-63, 0.1f, -28);
-        rootNode.attachChild(train);
-        for(int i =0;i<wagons;i++){
-            TrainWagon wagon = new TrainWagon(assetManager);
-            wagon.CreateWagon();
-            wagon.setLocalTranslation(-63+(1.43f*i), 0.1f, -28);
-            rootNode.attachChild(wagon);
+    
+    public void loadBarges(){
+        List<Barge> BargeList = new LinkedList<Barge>();
+        barge = new Barge[2];
+        
+        for (int i = 0; i < 1; i++){ 
+            barge[i] = new Barge(assetManager);
+            barge[i].createBarge();
+            barge[i].barge.setLocalTranslation(-62.5f, -1.25f, 31f);
+            rootNode.attachChild(barge[i].barge);
         }
     }
 }

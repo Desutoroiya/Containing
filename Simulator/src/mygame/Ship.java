@@ -14,9 +14,10 @@ import com.jme3.scene.Spatial;
  *
  * @author Enzo van Kessel
  */
-public class Ship extends Node implements VehController {
+public class Ship extends Node {
     AssetManager assetManager;
     Node rootNode;
+    
     Node ship = new Node();
     
     

@@ -14,13 +14,15 @@ import com.jme3.scene.Spatial;
  * @author Enzo van Kessel
  */
 public class Barge extends Node implements VehController{
-    private AssetManager assetManager;
+    AssetManager assetManager;
+    Node barge = new Node();
+    
     public Barge(AssetManager assetManager){
         this.assetManager = assetManager;
     }
     public void createBarge(){
-        Spatial barge = assetManager.loadModel("Models/bargeship.j3o");
-        this.attachChild(barge);
+        Spatial bargeSpat = assetManager.loadModel("Models/bargeship.j3o");
+        barge.attachChild(bargeSpat);
         barge.rotate(0, FastMath.PI / 2, 0);
         
     }

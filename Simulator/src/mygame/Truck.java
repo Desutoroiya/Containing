@@ -21,9 +21,10 @@ import java.util.List;
  */
 public class Truck extends Node implements VehController {
 
-    private AssetManager assetManager;
-    private MotionPath path;
-    private MotionEvent motionControl;
+    AssetManager assetManager;
+    MotionPath path;
+    MotionEvent motionControl;
+    Node truck = new Node();
 
     public Truck(AssetManager assetManager) {
         this.assetManager = assetManager;
@@ -80,14 +81,12 @@ public class Truck extends Node implements VehController {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void CreateTruck() {
+    public void createTruck() {
         Spatial Cart = assetManager.loadModel("Models/Truck/truckCart.j3o");
         Spatial Truck = assetManager.loadModel("Models/Truck/truckMachine.j3o");
-        this.attachChild(Cart);
-        this.attachChild(Truck);
-        Cart.setLocalTranslation(0, 0, 0);
-        Truck.setLocalTranslation(0, 0, 0);
-
-
+        truck.attachChild(Cart);
+        truck.attachChild(Truck);
+        
+        truck.setLocalTranslation(0, 0, 0);
     }
 }
