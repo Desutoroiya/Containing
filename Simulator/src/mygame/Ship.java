@@ -14,15 +14,19 @@ import com.jme3.scene.Spatial;
  * @author Enzo van Kessel
  */
 public class Ship extends Node implements VehController {
-    private AssetManager assetManager;
+    AssetManager assetManager;
+    Node rootNode;
+    Node ship = new Node();
     
-    public Ship(AssetManager assetManager){
+    
+    public Ship(AssetManager assetManager, Node rootNode){
         this.assetManager = assetManager;
+        this.rootNode = rootNode;
     }
     public void createShip(){
-        Spatial ship = assetManager.loadModel("Models/ship.j3o");
-        this.attachChild(ship);
-        ship.rotate(0, FastMath.PI * 1.5f, 0);
+        Spatial shipSpat = assetManager.loadModel("Models/ship.j3o");
+        shipSpat.rotate(0, FastMath.PI * 1.5f, 0);
+        ship.attachChild(shipSpat);
     }
 
     public boolean Checkloaded() {

@@ -101,10 +101,10 @@ public class Main extends SimpleApplication {
 
         CreateTrain(5);
 
-        Ship ship = new Ship(assetManager);
+        Ship ship = new Ship(assetManager, rootNode);
         ship.createShip();
-        ship.setLocalTranslation(-80, -0.5f, -20);
-        rootNode.attachChild(ship);
+        ship.ship.setLocalTranslation(-80, -0.5f, -20);
+        rootNode.attachChild(ship.ship);
 
         Barge barge = new Barge(assetManager);
         barge.createBarge();
@@ -132,7 +132,6 @@ public class Main extends SimpleApplication {
             rootNode.attachChild(truckCrane[i].craneLift);
 
             XtruckCrane -= 3;
-            System.out.println("ID= " + truckCrane[i]);
         }
         int iTruckCrane = 1;
         truckCrane[iTruckCrane].moveBase(truckCrane[iTruckCrane].craneLift.getLocalTranslation().x, truckCrane[iTruckCrane].craneLift.getLocalTranslation().y, truckCrane[iTruckCrane].craneLift.getLocalTranslation().z);
@@ -301,6 +300,9 @@ public class Main extends SimpleApplication {
          * Barge Cranes maken
          * EINDE
          */
+        
+        ContainerControl cc = new ContainerControl(assetManager, rootNode);
+        cc.loadShipCont();
     }
 
     @Override
