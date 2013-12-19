@@ -301,8 +301,34 @@ public class Main extends SimpleApplication {
          * EINDE
          */
         
-        ContainerControl cc = new ContainerControl(assetManager, rootNode);
-        cc.loadShipCont();
+        int containerAmountVar = 0;
+        int containerAmount = 1500;
+
+        List<Container> containerList = new LinkedList<Container>();
+        Container[] container = new Container[containerAmount];
+        
+        float contXdist = ship.ship.getLocalTranslation().x - 0.5f;// - 80.5f
+        float contYdist = ship.ship.getLocalTranslation().y - 1.5f; // -2f
+        float contZdist = ship.ship.getLocalTranslation().z - 10.75f; // -30.5f
+        
+        for (int contZ = 0; contZ < 20; contZ++){
+            for (int contY = 0; contY < 15; contY++){
+                for (int contX = 0; contX < 5; contX++) {
+                    container[containerAmountVar] = new Container(assetManager, rootNode);
+                    containerList.add(container[containerAmountVar]);
+
+                    container[containerAmountVar].loadContainer();
+                    container[containerAmountVar].contNode.setLocalTranslation(contXdist, contYdist, contZdist);
+                    rootNode.attachChild(container[containerAmountVar].contNode);
+                    contXdist += 0.255f;
+                    containerAmountVar++;
+                }
+                contXdist = ship.ship.getLocalTranslation().x - 0.5f;
+                contYdist +=0.265f;
+            }
+            contYdist = ship.ship.getLocalTranslation().y - 1.5f;
+            contZdist += 1.25f;
+        }
     }
 
     @Override

@@ -17,7 +17,7 @@ import javax.swing.Timer;
 class Clock {
     private final JLabel time = new JLabel();
     private final SimpleDateFormat sdf  = new SimpleDateFormat("hh:mm");
-    private int   currentSecond;
+    private int currentSecond;
     private Calendar calendar;
 
     public static void main( String [] args ) {
