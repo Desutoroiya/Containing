@@ -27,6 +27,8 @@ public class Main extends SimpleApplication {
     // Aanroepen
     Ship[] schip;
     Barge[] barge;
+    Container[] container;
+    ShipCrane[] shipCrane = new ShipCrane[10];
 
     public static void main(String[] args) {
         Main app = new Main();
@@ -52,12 +54,40 @@ public class Main extends SimpleApplication {
         loadBarges();
         
         //ALS LAATSTE IVM VERWIJZING NAAR SHIPS
-        loadContainers();
+        //loadContainers();
+        
+        List<Container> contList = new LinkedList<Container>();
+        container = new Container[10000];
+        
+        int contCount =0;
+        
+        float Xtest = 6.75f;
+        float Ytest = 0;
+        float Ztest = 16;
+        
+        for (int z = 0; z < 22; z++){
+            for (int i = 0; i < 6; i++){
+                for (int y = 0; y < 4; y++){
+                    container[contCount] = new Container(assetManager, rootNode);
+                    contList.add(container[contCount]);
+                
+                    container[contCount].loadContainer();
+                    container[contCount].contNode.setLocalTranslation(Xtest,Ytest,Ztest);
+                    rootNode.attachChild(container[contCount].contNode);
+                    Ytest += 0.255f;
+                    contCount++;
+                }
+                Ytest = 0;
+                Xtest += 0.265f;
+            }
+            Xtest = 6.75f;
+            Ztest -= 1.5f;
+        }
     }
 
     @Override
     public void simpleUpdate(float tpf) {
-        //TODO: add update code
+        //moveContainer(4,0,0);
     }
 
     @Override
@@ -223,7 +253,7 @@ public class Main extends SimpleApplication {
         float Zshipcrane = -24;
 
         List<ShipCrane> ShipCraneList = new LinkedList<ShipCrane>();
-        ShipCrane[] shipCrane = new ShipCrane[10];
+        container = new Container[containerAmount];
 
         for (int i = 0; i < 10; i++) {
             shipCrane[i] = new ShipCrane(assetManager);
@@ -267,7 +297,6 @@ public class Main extends SimpleApplication {
          */
 
         List<Container> containerList = new LinkedList<Container>();
-        Container[] container = new Container[containerAmount];
         
         //Manual i,moet uit lijst komen
         int i = 0;
@@ -341,5 +370,10 @@ public class Main extends SimpleApplication {
             barge[i].barge.setLocalTranslation(-62.5f, -1.25f, 31f);
             rootNode.attachChild(barge[i].barge);
         }
+    }
+    
+    public void moveContainer(int containerAmountVar, int i, int storageCrane){
+        container[containerAmountVar].contNode.getLocalTranslation();
+        container[containerAmountVar].contNode.setLocalTranslation(new Vector3f(shipCrane[i].shipCrane.getLocalTranslation().x, shipCrane[i].shipCrane.getLocalTranslation().y - 2, shipCrane[i].shipCrane.getLocalTranslation().z));
     }
 }
