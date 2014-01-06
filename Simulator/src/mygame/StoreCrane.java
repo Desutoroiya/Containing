@@ -68,7 +68,8 @@ public class StoreCrane extends Node {
         Spatial destoreHook = storageCrane.getChild(2);
         storeHook = new MotionPath();
         storeHook.addWayPoint(new Vector3f(Position));
-        storeHook.addWayPoint(new Vector3f(Position.x, Position.y - 0.5f, Position.z));
+        storeHook.addWayPoint(new Vector3f(Position.x, Position.y - 0.8f, Position.z));
+        //storeHook.setCycle(true);
         
         meStoreHook = new MotionEvent(destoreHook, storeHook);
         storeHook.setCurveTension(0f);
@@ -80,10 +81,11 @@ public class StoreCrane extends Node {
         Spatial destoreLift = storageCrane.getChild(0);
         storeLift = new MotionPath();
         storeLift.addWayPoint(new Vector3f(Position));
-        storeLift.addWayPoint(new Vector3f(Position.x, Position.y, Position.z + 0.75f));
         storeLift.addWayPoint(new Vector3f(Position.x, Position.y, Position.z - 0.75f));
-        storeLift.addWayPoint(new Vector3f(Position));
-
+        
+        //storeLift.addWayPoint(new Vector3f(Position.x, Position.y, Position.z - 0.70f));
+        //storeLift.setCycle(true);
+      
         meStoreLift = new MotionEvent(destoreLift, storeLift);
         storeLift.setCurveTension(0f);
         meStoreLift.setSpeed(baseSpeed);
@@ -92,10 +94,11 @@ public class StoreCrane extends Node {
         Spatial destoreHook = storageCrane.getChild(2);
         storeHook = new MotionPath();
         storeHook.addWayPoint(new Vector3f(Position));
-        storeHook.addWayPoint(new Vector3f(Position.x, Position.y, Position.z + 0.75f));
-        storeHook.addWayPoint(new Vector3f(Position.x, Position.y, Position.z - 0.75f));
-        storeHook.addWayPoint(new Vector3f(Position));
-
+        storeHook.addWayPoint(new Vector3f(Position.x, Position.y - 0.2f, Position.z - 0.75f));
+        
+        //storeHook.addWayPoint(new Vector3f(Position.x, Position.y, Position.z - 0.70f));
+        //storeHook.setCycle(true);
+        
         meStoreHook = new MotionEvent(destoreHook, storeHook);
         storeHook.setCurveTension(0f);
         meStoreHook.setSpeed(baseSpeed);
