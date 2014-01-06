@@ -215,6 +215,7 @@ public class Main extends SimpleApplication {
         trainCrane = new TrainCrane[4];
 
         for (int i = 0; i < 4; i++) {
+            //hoi iedereen
             trainCrane[i] = new TrainCrane(assetManager, trainWagon);
             TrainCraneList.add(trainCrane[i]);
 
