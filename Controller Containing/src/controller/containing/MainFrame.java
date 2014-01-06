@@ -48,6 +48,7 @@ public class MainFrame extends javax.swing.JFrame {
         jRadioButtonMenuItem2.setText("jRadioButtonMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 700));
 
         jLabel1.setText("jLabel1");
 
