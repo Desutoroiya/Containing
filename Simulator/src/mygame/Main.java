@@ -44,7 +44,7 @@ public class Main extends SimpleApplication {
         //LOAD ASSETS
         loadTerrainLight();
         loadAGV();
-        CreateTrain(5);
+        CreateTrain(50);
         loadTruckCranes();
         loadTrainCranes();
         loadStorageCranes();
@@ -96,15 +96,25 @@ public class Main extends SimpleApplication {
     }
     
     public void CreateTrain(int wagons){
+        float Xtrainwagon = - 63;
+        float Ytrainwagon = 0.1f;
+        float Ztrainwagon = -28;
+        
         Train train = new Train(assetManager);
         train.createTrain();
-        train.setLocalTranslation(-63, 0.1f, -28);
+        train.setLocalTranslation(Xtrainwagon, Ytrainwagon, Ztrainwagon);
         rootNode.attachChild(train);
-        for(int i =0;i<wagons;i++){
-            TrainWagon wagon = new TrainWagon(assetManager);
-            wagon.CreateWagon();
-            wagon.setLocalTranslation(-63+(1.43f*i), 0.1f, -28);
-            rootNode.attachChild(wagon);
+        
+        List<TrainWagon> trainWagonList = new LinkedList<TrainWagon>();
+        TrainWagon[] trainWagon = new TrainWagon[wagons];
+        
+        for (int i = 0 ; i < wagons ; i++){
+            trainWagon[i] = new TrainWagon(assetManager);
+            trainWagonList.add(trainWagon[i]);
+            
+            trainWagon[i].CreateWagon();
+            trainWagon[i].trainwagon.setLocalTranslation(Xtrainwagon+(1.43f*i), Ytrainwagon, Ztrainwagon);
+            rootNode.attachChild(trainWagon[i].trainwagon);
         }
     }
     
