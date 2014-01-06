@@ -19,7 +19,7 @@ public class Server_client
     {
         try
         {
-            Socket sock = new Socket("localhost", 9999);
+            Socket sock = new Socket("localhost", 9090);
             PrintStream pr = new PrintStream(sock.getOutputStream());
             
             System.out.print("Enter something: ");
