@@ -17,6 +17,7 @@ import java.util.List;
 public class Main extends SimpleApplication {
     //TERRAIN LIGHT
     DirectionalLight sun;
+    DirectionalLight sun2;
     AmbientLight ambLight;
     Terrain terrain;
     
@@ -29,6 +30,9 @@ public class Main extends SimpleApplication {
     Barge[] barge;
     Container[] container;
     ShipCrane[] shipCrane = new ShipCrane[10];
+    StoreCrane[] storageCrane;
+    TrainCrane[] trainCrane;
+    TrainWagon[] trainWagon;
 
     public static void main(String[] args) {
         Main app = new Main();
@@ -44,7 +48,7 @@ public class Main extends SimpleApplication {
         //LOAD ASSETS
         loadTerrainLight();
         loadAGV();
-        CreateTrain(50);
+        createTrain(50);
         loadTruckCranes();
         loadTrainCranes();
         loadStorageCranes();
@@ -67,7 +71,7 @@ public class Main extends SimpleApplication {
         
         for (int z = 0; z < 22; z++){
             for (int i = 0; i < 6; i++){
-                for (int y = 0; y < 4; y++){
+                for (int y = 0; y < 6; y++){
                     container[contCount] = new Container(assetManager, rootNode);
                     contList.add(container[contCount]);
                 
@@ -83,11 +87,12 @@ public class Main extends SimpleApplication {
             Xtest = 6.75f;
             Ztest -= 1.5f;
         }
+        storageCrane[23].moveLift();
     }
 
     @Override
     public void simpleUpdate(float tpf) {
-        //moveContainer(4,0,0);
+        //dingen
     }
 
     @Override
@@ -95,7 +100,7 @@ public class Main extends SimpleApplication {
         //TODO: add render code
     }
     
-    public void CreateTrain(int wagons){
+    public void createTrain(int wagons){
         float Xtrainwagon = - 63;
         float Ytrainwagon = 0.1f;
         float Ztrainwagon = -28;
@@ -106,7 +111,7 @@ public class Main extends SimpleApplication {
         rootNode.attachChild(train);
         
         List<TrainWagon> trainWagonList = new LinkedList<TrainWagon>();
-        TrainWagon[] trainWagon = new TrainWagon[wagons];
+        trainWagon = new TrainWagon[wagons];
         
         for (int i = 0 ; i < wagons ; i++){
             trainWagon[i] = new TrainWagon(assetManager);
@@ -123,7 +128,7 @@ public class Main extends SimpleApplication {
          * A white, directional light source
          */
         sun = new DirectionalLight();
-        sun.setDirection((new Vector3f(-0.5f, -0.5f, -0.5f)).normalizeLocal());
+        sun.setDirection((new Vector3f(-10,-10,-10)).normalizeLocal());
         sun.setColor(ColorRGBA.White);
         rootNode.addLight(sun);
 
@@ -131,7 +136,7 @@ public class Main extends SimpleApplication {
          * Ambient Lightning
          */
         ambLight = new AmbientLight();
-        ambLight.setColor(new ColorRGBA(1f, 1f, 0.8f, 0.2f));
+        ambLight.setColor(ColorRGBA.White);
         rootNode.addLight(ambLight);
 
         /*
@@ -207,10 +212,10 @@ public class Main extends SimpleApplication {
         float ZtrainCrane = -27;
 
         List<TrainCrane> TrainCraneList = new LinkedList<TrainCrane>();
-        TrainCrane[] trainCrane = new TrainCrane[4];
+        trainCrane = new TrainCrane[4];
 
         for (int i = 0; i < 4; i++) {
-            trainCrane[i] = new TrainCrane(assetManager);
+            trainCrane[i] = new TrainCrane(assetManager, trainWagon);
             TrainCraneList.add(trainCrane[i]);
 
             trainCrane[i].createTrainCrane();
@@ -232,7 +237,7 @@ public class Main extends SimpleApplication {
         float ZstorecraneTwo = 18;
 
         List<StoreCrane> StorageCraneList = new LinkedList<StoreCrane>();
-        StoreCrane[] storageCrane = new StoreCrane[46];
+        storageCrane = new StoreCrane[46];
 
         for (int i = 0; i < 23; i++) {
             storageCrane[i] = new StoreCrane(assetManager);
