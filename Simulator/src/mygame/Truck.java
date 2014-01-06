@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author Enzo van Kessel
  */
-public class Truck extends Node implements VehController {
+public class Truck extends Node  {
 
     AssetManager assetManager;
     MotionPath path;
@@ -30,9 +30,9 @@ public class Truck extends Node implements VehController {
         this.assetManager = assetManager;
     }
 
-    public void move() {
+    public void move(int plaats) {
 
-        float distanceX =  78f; /*75 - (plaats * 3);*/
+        float distanceX = 75f - (plaats * 3);
         float distanceY = 0f;
         float distanceZ = 28f;
 
