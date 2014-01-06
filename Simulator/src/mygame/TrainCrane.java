@@ -17,6 +17,7 @@ import com.jme3.scene.Spatial;
  */
 public class TrainCrane extends Node {
 
+    TrainWagon[] trainWagon;
     private Node rootNode;
     Node trainCrane = new Node();
     public AssetManager assetManager;
@@ -32,9 +33,11 @@ public class TrainCrane extends Node {
     Vector3f Position = new Vector3f(x, y, z);    
     private float baseSpeed = 1.0f;
 
-    public TrainCrane(AssetManager assetManager) {
+    public TrainCrane(AssetManager assetManager,TrainWagon[] trainWagon) {
         this.assetManager = assetManager;
         this.rootNode = rootNode;
+        this.trainWagon = trainWagon;
+        
     }
 
     public void createTrainCrane() {
@@ -47,18 +50,18 @@ public class TrainCrane extends Node {
         trainCrane.attachChild(TrainCraneHook);
     }
   
-    public void moveBase(float x, float y, float z) {
+    public void moveBase(float x) {
         
         
         trainBase = new MotionPath();
-        for (int i = 0; i < 50; i++){
-        trainBase.addWayPoint(new Vector3f(x, y, z));
-        trainBase.addWayPoint(new Vector3f(x + 7.5f, y, z));
+        
+        trainBase.addWayPoint(new Vector3f(trainCrane.getLocalTranslation()));
+        trainBase.addWayPoint(new Vector3f(x , trainCrane.getLocalTranslation().y, trainCrane.getLocalTranslation().z));
         trainBase.setCycle(true);
-        }
+        
         meTrainCrane = new MotionEvent(trainCrane, trainBase);
         trainBase.setCurveTension(0f);
-        meTrainCrane.setSpeed(baseSpeed * 0.01f);
+        meTrainCrane.setSpeed(baseSpeed);
         meTrainCrane.play();
         
     }
@@ -99,5 +102,12 @@ public class TrainCrane extends Node {
         trainHook.setCurveTension(0f);
         meTrainHook.setSpeed(baseSpeed);
         meTrainHook.play();
+    }
+    public void getContainer(int i){
+        moveBase(trainWagon[i].trainwagon.getLocalTranslation().x);
+        if(this.getLocalTranslation().x==trainWagon[i].trainwagon.getLocalTranslation().x){
+            moveLift();
+            moveHook();
+        }
     }
 }
