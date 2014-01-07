@@ -5,6 +5,7 @@ import com.jme3.light.AmbientLight;
 import com.jme3.light.DirectionalLight;
 import com.jme3.renderer.RenderManager;
 import com.jme3.math.ColorRGBA;
+import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
 import java.util.LinkedList;
 import java.util.List;
@@ -134,7 +135,8 @@ public class Main extends SimpleApplication {
             trainWagon[i].trainwagon.setLocalTranslation(Xtrainwagon+(1.43f*i), Ytrainwagon, Ztrainwagon);
             
             trainWagon[i].trainwagon.attachChild(container[test].contNode);
-            container[test].contNode.setLocalTranslation(new Vector3f(0,0,0));
+            container[test].contNode.setLocalTranslation(new Vector3f(0,0.05f,0));
+            container[test].contNode.rotate(0,FastMath.HALF_PI,0);
             
             rootNode.attachChild(trainWagon[i].trainwagon);
             test++;
