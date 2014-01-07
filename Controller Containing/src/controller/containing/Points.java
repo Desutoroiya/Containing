@@ -20,7 +20,20 @@ public class Points {
                 Vertex SF7 = new Vertex("Strorage 7 Front");
                 Vertex SF8 = new Vertex("Strorage 8 Front");
                 Vertex SF9 = new Vertex("Strorage 9 Front");
-                Vertex SF10 = new Vertex("Strorage 10 Front");            
+                Vertex SF10 = new Vertex("Strorage 10 Front");
+                Vertex SF11 = new Vertex("Strorage 11 Front");
+                Vertex SF12 = new Vertex("Strorage 12 Front");
+                Vertex SF13 = new Vertex("Strorage 13 Front");
+                Vertex SF14 = new Vertex("Strorage 14 Front");
+                Vertex SF15 = new Vertex("Strorage 15 Front");
+                Vertex SF16 = new Vertex("Strorage 16 Front");
+                Vertex SF17 = new Vertex("Strorage 17 Front");
+                Vertex SF18 = new Vertex("Strorage 18 Front");
+                Vertex SF19 = new Vertex("Strorage 19 Front");
+                Vertex SF20 = new Vertex("Strorage 20 Front");
+                Vertex SF21 = new Vertex("Strorage 21 Front");
+                Vertex SF22 = new Vertex("Strorage 22 Front");
+                Vertex SF23 = new Vertex("Strorage 23 Front");
  
                 Vertex SE1 = new Vertex("Strorage 1 End");
                 Vertex SE2 = new Vertex("Strorage 2 End");
