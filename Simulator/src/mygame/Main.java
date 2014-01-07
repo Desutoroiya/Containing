@@ -94,12 +94,12 @@ public class Main extends SimpleApplication {
             Xtest = 6.75f;
             Ztest -= 1.5f;
         }
-        storageCrane[23].moveLift();
+        storageCrane[23].moveBase(7.5f, 0, 18f - 6.5f);
         
         //trainWagon[1].trainwagon.attachChild(container[35].contNode);
         //container[35].contNode.setLocalTranslation(new Vector3f(0,0,0));
         
-        createTrain(50);
+        createTrain(72);
     }
 
     @Override
@@ -125,7 +125,8 @@ public class Main extends SimpleApplication {
         List<TrainWagon> trainWagonList = new LinkedList<TrainWagon>();
         trainWagon = new TrainWagon[wagons];
         
-        int test = 0;
+        int test = 35;
+        int stapel = 0;
         
         for (int i = 0 ; i < wagons ; i++){
             trainWagon[i] = new TrainWagon(assetManager);
@@ -139,7 +140,16 @@ public class Main extends SimpleApplication {
             container[test].contNode.rotate(0,FastMath.HALF_PI,0);
             
             rootNode.attachChild(trainWagon[i].trainwagon);
-            test++;
+            
+            if (test == 36*stapel){
+                
+            trainWagon[i].trainwagon.attachChild(container[test].contNode);
+            container[test].contNode.setLocalTranslation(new Vector3f(0,0.05f,0));
+            container[test].contNode.rotate(0,FastMath.HALF_PI,0);
+                stapel++;
+                test = 36*(stapel+1);
+            }
+            test--;
         }
     }
     
