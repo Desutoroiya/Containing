@@ -45,9 +45,9 @@ public class TrainWagon extends Node implements VehController {
         Spatial trainCart = assetManager.loadModel("Models/Train/trainCart.j3o");
         trainwagon.attachChild(trainCart);
         trainwagon.setLocalTranslation(0, 0, 0);
-        if(loaded){
-           attachContainer();
-        }
+//        if(loaded){
+//           attachContainer();
+//        }
         }
     
     public void attachContainer(){

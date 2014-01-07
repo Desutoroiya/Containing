@@ -39,8 +39,6 @@ public class Container
         Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
         mat.setColor("Color", ColorRGBA.randomColor());
         container.setMaterial(mat);
-        
-        //container.setName("hoi");
         contNode.attachChild(container);
     }
     

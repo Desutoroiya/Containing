@@ -26,12 +26,19 @@ public class Main extends SimpleApplication {
     int containerAmountVar;
     
     // Aanroepen
+    Container[] container;
+    
     Ship[] schip;
     Barge[] barge;
-    Container[] container;
-    ShipCrane[] shipCrane = new ShipCrane[10];
+    AGV[] agv;
+    Truck[] truck;
+    
+    ShipCrane[] shipCrane;
     StoreCrane[] storageCrane;
+    TruckCrane[] truckCrane;
+    BargeCrane[] bargeCrane;
     TrainCrane[] trainCrane;
+    
     TrainWagon[] trainWagon;
 
     public static void main(String[] args) {
@@ -48,7 +55,6 @@ public class Main extends SimpleApplication {
         //LOAD ASSETS
         loadTerrainLight();
         loadAGV();
-        createTrain(50);
         loadTruckCranes();
         loadTrainCranes();
         loadStorageCranes();
@@ -57,8 +63,8 @@ public class Main extends SimpleApplication {
         loadShips();
         loadBarges();
         
-        //ALS LAATSTE IVM VERWIJZING NAAR SHIPS
-        //loadContainers();
+//        ALS LAATSTE IVM VERWIJZING NAAR SHIPS
+//        loadContainers();
         
         List<Container> contList = new LinkedList<Container>();
         container = new Container[10000];
@@ -88,6 +94,11 @@ public class Main extends SimpleApplication {
             Ztest -= 1.5f;
         }
         storageCrane[23].moveLift();
+        
+        //trainWagon[1].trainwagon.attachChild(container[35].contNode);
+        //container[35].contNode.setLocalTranslation(new Vector3f(0,0,0));
+        
+        createTrain(50);
     }
 
     @Override
@@ -113,13 +124,20 @@ public class Main extends SimpleApplication {
         List<TrainWagon> trainWagonList = new LinkedList<TrainWagon>();
         trainWagon = new TrainWagon[wagons];
         
+        int test = 0;
+        
         for (int i = 0 ; i < wagons ; i++){
             trainWagon[i] = new TrainWagon(assetManager);
             trainWagonList.add(trainWagon[i]);
             
             trainWagon[i].CreateWagon();
             trainWagon[i].trainwagon.setLocalTranslation(Xtrainwagon+(1.43f*i), Ytrainwagon, Ztrainwagon);
+            
+            trainWagon[i].trainwagon.attachChild(container[test].contNode);
+            container[test].contNode.setLocalTranslation(new Vector3f(0,0,0));
+            
             rootNode.attachChild(trainWagon[i].trainwagon);
+            test++;
         }
     }
     
@@ -159,7 +177,7 @@ public class Main extends SimpleApplication {
         float Zagv = -22f;
 
         List<AGV> AGVList = new LinkedList<AGV>();
-        AGV[] agv = new AGV[100];
+        agv = new AGV[100];
 
         for (int i = 0; i < 50; i++) {
             agv[i] = new AGV(assetManager);
@@ -192,7 +210,7 @@ public class Main extends SimpleApplication {
         float ZtruckCrane = 22f;
 
         List<TruckCrane> TruckCraneList = new LinkedList<TruckCrane>();
-        TruckCrane[] truckCrane = new TruckCrane[20];
+        truckCrane = new TruckCrane[20];
 
         for (int i = 0; i < 20; i++) {
             truckCrane[i] = new TruckCrane(assetManager);
@@ -269,7 +287,7 @@ public class Main extends SimpleApplication {
         float Zshipcrane = -24;
 
         List<ShipCrane> ShipCraneList = new LinkedList<ShipCrane>();
-        container = new Container[containerAmount];
+        shipCrane = new ShipCrane[10];
 
         for (int i = 0; i < 10; i++) {
             shipCrane[i] = new ShipCrane(assetManager);
@@ -289,7 +307,7 @@ public class Main extends SimpleApplication {
         float Zbargecrane = 29;
 
         List<BargeCrane> BargeCraneList = new LinkedList<BargeCrane>();
-        BargeCrane[] bargeCrane = new BargeCrane[8];
+        bargeCrane = new BargeCrane[8];
 
         for (int i = 0; i < 8; i++) {
             bargeCrane[i] = new BargeCrane(assetManager);
@@ -304,7 +322,7 @@ public class Main extends SimpleApplication {
     
     public void loadContainers(){
         containerAmountVar = 0;
-        containerAmount = 1500;
+        containerAmount = 10000;
         
         /*
          * Vanuit de cabine is de opbouw van id's als volgt:
@@ -313,6 +331,7 @@ public class Main extends SimpleApplication {
          */
 
         List<Container> containerList = new LinkedList<Container>();
+        container = new Container[containerAmount];
         
         //Manual i,moet uit lijst komen
         int i = 0;
@@ -350,7 +369,7 @@ public class Main extends SimpleApplication {
         float truckSpawnZ = 24f;
         
         List<Truck> TruckList = new LinkedList<Truck>();
-        Truck[] truck = new Truck[10];
+        truck = new Truck[10];
         
         for (int i = 0; i < 1; i++){
             truck[i] = new Truck(assetManager);
