@@ -36,9 +36,9 @@ public class TruckCrane extends Node {
         /*
          * Creates a new cranelift for trucks
          */
-        Spatial TCraneLift = assetManager.loadModel("Models/Storagecrane/scraneLift.j3o");
-        Spatial TCraneBase = assetManager.loadModel("Models/Storagecrane/scraneBase.j3o");
-        Spatial TCraneHook = assetManager.loadModel("Models/Storagecrane/scraneHook.j3o");
+        Spatial TCraneLift = assetManager.loadModel("Models/Truckcrane/truckCraneLift.j3o");
+        Spatial TCraneBase = assetManager.loadModel("Models/Truckcrane/truckCraneBase.j3o");
+        Spatial TCraneHook = assetManager.loadModel("Models/Truckcrane/truckCraneHook.j3o");
 
         //TCraneBase.setLocalTranslation(Position);
         //TCraneLift.setLocalTranslation(new Vector3f(Position.x, Position.y - 0.25f, Position.z));
