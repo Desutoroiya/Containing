@@ -52,11 +52,11 @@ public class StoreCrane extends Node {
     public void moveBase(float x, float y, float z) {
 
         storeBase = new MotionPath();
-        for (int i = 0; i < 50; i++){
+        
         storeBase.addWayPoint(new Vector3f(x, y, z));
-        storeBase.addWayPoint(new Vector3f(x, y, z - 36));
-        storeBase.setCycle(true);
-        }
+        storeBase.addWayPoint(new Vector3f(x, y, z - 5));
+        //storeBase.setCycle(true);
+        
 
         meStoreCrane = new MotionEvent(storageCrane, storeBase);
         storeBase.setCurveTension(0f);
@@ -82,9 +82,6 @@ public class StoreCrane extends Node {
         storeLift = new MotionPath();
         storeLift.addWayPoint(new Vector3f(Position));
         storeLift.addWayPoint(new Vector3f(Position.x, Position.y, Position.z - 0.75f));
-        
-        //storeLift.addWayPoint(new Vector3f(Position.x, Position.y, Position.z - 0.70f));
-        //storeLift.setCycle(true);
       
         meStoreLift = new MotionEvent(destoreLift, storeLift);
         storeLift.setCurveTension(0f);
@@ -94,10 +91,7 @@ public class StoreCrane extends Node {
         Spatial destoreHook = storageCrane.getChild(2);
         storeHook = new MotionPath();
         storeHook.addWayPoint(new Vector3f(Position));
-        storeHook.addWayPoint(new Vector3f(Position.x, Position.y - 0.2f, Position.z - 0.75f));
-        
-        //storeHook.addWayPoint(new Vector3f(Position.x, Position.y, Position.z - 0.70f));
-        //storeHook.setCycle(true);
+        storeHook.addWayPoint(new Vector3f(Position.x, Position.y - 0.35f, Position.z - 0.75f));
         
         meStoreHook = new MotionEvent(destoreHook, storeHook);
         storeHook.setCurveTension(0f);
