@@ -15,5 +15,6 @@ public class ControllerContaining{
     public static void main(String[] args) {
         Clock c = new Clock();
         c.start();
+        Server server = new Server();
     }
 }

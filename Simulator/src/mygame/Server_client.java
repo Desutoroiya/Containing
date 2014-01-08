@@ -52,6 +52,7 @@ public class Server_client implements Runnable
             try{
                 
                new Thread(new Server_client()).start();
+               os.println("Ready");
                
                while(open){
                    
@@ -78,7 +79,7 @@ public class Server_client implements Runnable
                
                log.add(recievedMessage);
                
-               //System.out.println(log);
+               System.out.println(log);
       
             }
             
