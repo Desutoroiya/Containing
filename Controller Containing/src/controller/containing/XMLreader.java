@@ -19,8 +19,8 @@ import org.w3c.dom.NodeList;
  */
 public class XMLreader {
 
-    private ArrayList<Container> _containerList;
-    private Container _container;
+    public ArrayList<Container> _containerList;
+    public Container _container;
 
     public ArrayList<Container> getContainerList() 
     {

@@ -13,6 +13,8 @@ import java.util.List;
  */
 public class SortAlgorithm {
     Clock csort = new Clock();
+    XMLreader x = new XMLreader();
+    
     /*
      * priority = HOOG-LAAG ; 1,2,3,4
      * period = case identifier
@@ -105,17 +107,23 @@ public class SortAlgorithm {
     
     //zeeschip / binnenschip
     String soort_vervoer;
+        
     
     public void getHighest(){
-        if (soort_vervoer == "schip"){
-            int hoogste = containerHeight[4];
-            for (int y = 0; y <containerHeight.length; y++){
-                for (int x = 5; x <containerHeight.length; x++){
-                    for (int z = 5; z < containerHeight.length; z++){
-                        
-                    }
-                }
-            }
-       }
+        for (Container _container : x.getContainerList()){
+            int id = _container.getID();
+            String sID = String.valueOf(id);
+            System.out.println(sID);
+        }
+//        if (soort_vervoer == "schip"){
+//            int hoogste = containerHeight[4];
+////            for (int y = 0; y <containerHeight.length; y++){
+//////                for (int x = 5; x <containerHeight.length; x++){
+////////                    for (int z = 5; z < containerHeight.length; z++){
+////////                        
+////////                    }
+//////                }
+////            }
+//       }
     }
 }

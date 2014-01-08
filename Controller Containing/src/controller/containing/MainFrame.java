@@ -120,7 +120,11 @@ public class MainFrame extends javax.swing.JFrame {
         ArrayList<Container> Vrachtwagenslijst = new ArrayList<>();
         ArrayList<Container> Zeeschiplijst = new ArrayList<>();
         ArrayList<Container> Binnenschiplijst = new ArrayList<>();
-        ArrayList<Container> Treinlijst = new ArrayList<>();        
+        ArrayList<Container> Treinlijst = new ArrayList<>();  
+        
+        //test
+        SortAlgorithm s = new SortAlgorithm();
+        s.getHighest();
         
         for(int i = 0; i < lijstContainers.size() ; i++)
         {            

@@ -111,4 +111,8 @@ public class Container {
     public int getzLoc(){
         return this.zLoc;
     }
+    
+    public int getID(){
+        return this.id;
+    }
 }
