@@ -110,9 +110,13 @@ public class MainFrame extends javax.swing.JFrame {
 
         XMLreader xml = new XMLreader();
         xml.XMLreader();
-        
+        Container container = new Container(11, "13/12/2004", 0.00, 0.10, "zeeschip", "DijckLogisticsBV", 1, 0, 0,
+                                            "22/12/2004",0.00, 12.00, "zeeschip", "ChinaShippingAgency", "FlowersNL",
+                                            19965, 81, "nitrotolueen","gas", "brandbaar", "1496-1");
+
         ArrayList<Container> lijstContainers = xml.getContainerList();
-        
+        lijstContainers.add(container);
+
         ArrayList<Container> Vrachtwagenslijst = new ArrayList<>();
         ArrayList<Container> Zeeschiplijst = new ArrayList<>();
         ArrayList<Container> Binnenschiplijst = new ArrayList<>();
@@ -125,10 +129,11 @@ public class MainFrame extends javax.swing.JFrame {
                 Vrachtwagenslijst.add(lijstContainers.get(i));
                 System.out.println(Vrachtwagenslijst.get(i).toString());
             }
-            
+
             if("zeeschip".equals(lijstContainers.get(i).getVervoerder()))
             {
                 Zeeschiplijst.add(lijstContainers.get(i));
+                System.out.println(Zeeschiplijst.get(i).toString());
             }
             
             if("binnenschip".equals(lijstContainers.get(i).getVervoerder()))
