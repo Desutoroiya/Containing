@@ -99,7 +99,7 @@ public class Main extends SimpleApplication {
         //trainWagon[1].trainwagon.attachChild(container[35].contNode);
         //container[35].contNode.setLocalTranslation(new Vector3f(0,0,0));
         
-        createTrain(72);
+        createTrain(36);
     }
 
     @Override
@@ -143,13 +143,12 @@ public class Main extends SimpleApplication {
             
             if (test == 36*stapel){
                 
-            trainWagon[i].trainwagon.attachChild(container[test].contNode);
-            container[test].contNode.setLocalTranslation(new Vector3f(0,0.05f,0));
-            container[test].contNode.rotate(0,FastMath.HALF_PI,0);
+                trainWagon[i].trainwagon.attachChild(container[test].contNode);
+                container[test].contNode.setLocalTranslation(new Vector3f(0,0.05f,0));
                 stapel++;
-                test = 36*(stapel+1);
+                test = 36*(stapel+1);               
             }
-            test--;
+            test--;           
         }
     }
     
