@@ -41,7 +41,13 @@ public class Container
         container.setMaterial(mat);
         contNode.attachChild(container);
     }
+    public void detachContainer(Node container,Node vehicle){
+        vehicle.detachChild(container);
+    }
     
+    public void attachContainer(Node container, Node vehicle){
+        vehicle.attachChild(container);
+    }
     /*
      * Get's the container by its type including it's data.
      */
