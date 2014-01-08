@@ -65,7 +65,7 @@ public class Main extends SimpleApplication {
         loadBarges();
         
 //        ALS LAATSTE IVM VERWIJZING NAAR SHIPS
-//        loadContainers();
+        loadContainers();
         
         List<Container> contList = new LinkedList<Container>();
         container = new Container[10000];
@@ -348,30 +348,28 @@ public class Main extends SimpleApplication {
         //Manual i,moet uit lijst komen
         int i = 0;
         
-        float contXdist = schip[i].ship.getLocalTranslation().x - 0.5f;// - 80.5f
-        float contYdist = schip[i].ship.getLocalTranslation().y - 1.5f; // -2f
-        float contZdist = schip[i].ship.getLocalTranslation().z - 10.75f; // -30.5f
+        float contXdist = -0.5f;
+        float contYdist = -1.5f;
+        float contZdist = -10.75f;
         
         for (int contZ = 0; contZ < 20; contZ++){ // 20
             for (int contY = 0; contY < 15; contY++){ // 15
                 for (int contX = 0; contX < 5; contX++) { // 1
-                    container[containerAmountVar] = new Container(assetManager, rootNode);
+                    container[containerAmountVar] = new Container(assetManager, schip[i].ship);
                     containerList.add(container[containerAmountVar]);
 
                     container[containerAmountVar].loadContainer();
-                    container[containerAmountVar].contNode.setLocalTranslation(contXdist, contYdist, contZdist);
-                    rootNode.attachChild(container[containerAmountVar].contNode);
+                    container[containerAmountVar].contNode.setLocalTranslation(contXdist,contYdist,contZdist);
+                    schip[i].ship.attachChild(container[containerAmountVar].contNode);
                     contXdist += 0.255f;
                     containerAmountVar++;
                 }
-                contXdist = schip[i].ship.getLocalTranslation().x - 0.5f;
+                contXdist = -0.5f;
                 contYdist +=0.265f;
             }
-            contYdist = schip[i].ship.getLocalTranslation().y - 1.5f;
+            contYdist = -1.5f;
             contZdist += 1.25f;
         }
-        //testje van niels niet aankomen virus alles
-        //container[74].contNode.setLocalTranslation(new Vector3f(agv[0].agv.getLocalTranslation().x, agv[0].agv.getLocalTranslation().y + 1, agv[0].agv.getLocalTranslation().z));
     }
     
     public void loadTrucks(){
@@ -413,6 +411,8 @@ public class Main extends SimpleApplication {
         
         for (int i = 0; i < 1; i++){ 
             barge[i] = new Barge(assetManager);
+            BargeList.add(barge[i]);
+            
             barge[i].createBarge();
             barge[i].barge.setLocalTranslation(-62.5f, -1.25f, 31f);
             rootNode.attachChild(barge[i].barge);

@@ -99,4 +99,16 @@ public class Container {
     {
         return this.vehicleArrive;
     }
+    
+    public int getxLoc(){
+        return this.xLoc;
+    }
+    
+    public int getyLoc(){
+        return this.yLoc;
+    }
+    
+    public int getzLoc(){
+        return this.zLoc;
+    }
 }
