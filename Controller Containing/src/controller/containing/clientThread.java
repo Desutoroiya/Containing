@@ -81,11 +81,12 @@ class clientThread extends Thread {
                                 kraanID ++;
                                 
                             }
+                            os.println(kraanID);
                             
                         }
                         os.println(_container.getID());
                         os.println(_container.getVervoerder());
-                        os.println(kraanID);
+
  
                     }
 

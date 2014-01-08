@@ -79,7 +79,7 @@ public class Server_client implements Runnable
                
                log.add(recievedMessage);
                
-               System.out.println(log);
+               //System.out.println(log);
       
             }
             
