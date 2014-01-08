@@ -51,7 +51,7 @@ class clientThread extends Thread {
             is = new DataInputStream(clientSocket.getInputStream());
             os = new PrintStream(clientSocket.getOutputStream());
             
-            //os.println("Start");
+            //os.println("Are you ready?");
             int count = 0;
             int kraanID = 0;
             
@@ -83,7 +83,10 @@ class clientThread extends Thread {
                             }
                             
                         }
-                        os.println(_container.getID() + " " +  _container.getVervoerder() + " " + kraanID);
+                        os.println(_container.getID());
+                        os.println(_container.getVervoerder());
+                        os.println(kraanID);
+ 
                     }
 
                 }
