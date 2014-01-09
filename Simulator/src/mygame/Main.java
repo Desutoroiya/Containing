@@ -277,6 +277,7 @@ public class Main extends SimpleApplication {
         for (int i = 0; i < 23; i++) {
             storageCrane[i] = new StoreCrane(assetManager);
             StorageCraneList.add(storageCrane[i]);
+            
             storageCrane[i].createStoreCrane();
             storageCrane[i].storageCrane.setLocalTranslation(XstorecraneOne, YstorecraneOne, ZstorecraneOne);
 
@@ -288,6 +289,7 @@ public class Main extends SimpleApplication {
         for (int i = 23; i < 46; i++) {
             storageCrane[i] = new StoreCrane(assetManager);
             StorageCraneList.add(storageCrane[i]);
+            
             storageCrane[i].createStoreCrane();
             storageCrane[i].storageCrane.setLocalTranslation(XstorecraneTwo, YstorecraneTwo, ZstorecraneTwo);
 

@@ -18,7 +18,12 @@ import com.jme3.scene.Spatial;
 public class BargeCrane extends Node{
     
     private Node rootNode;
+    
     Node bargeCrane = new Node();
+    Node bargeCraneLift = new Node();
+    Node bargeCraneBase = new Node();
+    Node bargeCraneHook = new Node();
+    
     public AssetManager assetManager;
     private MotionPath bargeBase;
     private MotionPath bargeHook;
@@ -42,6 +47,10 @@ public class BargeCrane extends Node{
         Spatial BargeCraneBase = assetManager.loadModel("Models/Bargecrane/bargeCraneBase.j3o");
         Spatial BargeCraneHook = assetManager.loadModel("Models/Bargecrane/bargeCraneHook.j3o");
         
+        bargeCraneLift.attachChild(BargeCraneLift);
+        bargeCraneBase.attachChild(BargeCraneBase);
+        bargeCraneHook.attachChild(BargeCraneHook);
+        
         bargeCrane.attachChild(BargeCraneLift);
         bargeCrane.attachChild(BargeCraneBase);
         bargeCrane.attachChild(BargeCraneHook);
@@ -64,11 +73,11 @@ public class BargeCrane extends Node{
     public void moveHook() {
         Spatial destoreHook = bargeCrane.getChild(2);
         bargeHook = new MotionPath();
-        for (int i = 0; i < 50; i++){
+        
         bargeHook.addWayPoint(new Vector3f(Position));
         bargeHook.addWayPoint(new Vector3f(Position.x, Position.y - 0.5f, Position.z));
         bargeHook.setCycle(true);
-    }
+    
         meBargeHook = new MotionEvent(destoreHook, bargeHook);
         bargeHook.setCurveTension(0f);
         meBargeHook.setSpeed(baseSpeed * 0.01f);
@@ -78,11 +87,11 @@ public class BargeCrane extends Node{
     public void moveLift() {
         Spatial destoreLift = bargeCrane.getChild(0);
         bargeLift = new MotionPath();
-        for (int i = 0; i < 50; i++){
+        
         bargeLift.addWayPoint(new Vector3f(Position));      
         bargeLift.addWayPoint(new Vector3f(Position.x + 6f, Position.y, Position.z));   
         bargeLift.setCycle(true);
-        }
+        
         meBargeLift = new MotionEvent(destoreLift, bargeLift);
         bargeLift.setCurveTension(0f);
         meBargeLift.setSpeed(baseSpeed * 0.01f);
@@ -90,11 +99,11 @@ public class BargeCrane extends Node{
 
         Spatial destoreHook = bargeCrane.getChild(2);
         bargeHook = new MotionPath();
-        for (int i = 0; i < 50; i++){
+        
         bargeHook.addWayPoint(new Vector3f(Position));
         bargeHook.addWayPoint(new Vector3f(Position.x + 6f, Position.y, Position.z));
         bargeHook.setCycle(true);
-        }
+        
         meBargeHook = new MotionEvent(destoreHook, bargeHook);
         bargeHook.setCurveTension(0f);
         meBargeHook.setSpeed(baseSpeed * 0.01f);
