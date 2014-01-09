@@ -15,7 +15,11 @@ import com.jme3.scene.Spatial;
 public class TruckCrane extends Node {
 
     public AssetManager assetManager;
+    
     Node craneLift = new Node();
+    Node craneHook = new Node();
+    Node craneBase = new Node();
+    
     private MotionPath mpBase;
     private MotionPath mpHook;
     private MotionPath mpLift;
@@ -45,10 +49,12 @@ public class TruckCrane extends Node {
         //TCraneHook.setLocalTranslation(new Vector3f(Position.x, Position.y - 0.27f, Position.z));
 
         craneLift.attachChild(TCraneLift);
-        craneLift.attachChild(TCraneBase);
-        craneLift.attachChild(TCraneHook);
+        craneBase.attachChild(TCraneBase);
+        craneHook.attachChild(TCraneHook);
 
         craneLift.rotate(0, FastMath.PI / 2, 0);
+        craneBase.rotate(0, FastMath.PI / 2, 0);
+        craneHook.rotate(0, FastMath.PI / 2, 0);
     }
 
     public void moveBase(float X, float Y, float Z) {

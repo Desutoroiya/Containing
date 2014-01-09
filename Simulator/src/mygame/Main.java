@@ -45,6 +45,8 @@ public class Main extends SimpleApplication {
     public static void main(String[] args) {
         Main app = new Main();
         app.start();
+        app.setDisplayStatView(false);
+        app.setDisplayFps(false);
     }
 
     @Override
@@ -229,7 +231,12 @@ public class Main extends SimpleApplication {
 
             truckCrane[i].createTruckCrane();
             truckCrane[i].craneLift.setLocalTranslation(XtruckCrane, YtruckCrane, ZtruckCrane);
+            truckCrane[i].craneBase.setLocalTranslation(XtruckCrane,YtruckCrane,ZtruckCrane);
+            truckCrane[i].craneHook.setLocalTranslation(XtruckCrane,YtruckCrane,ZtruckCrane);
+            
+            rootNode.attachChild(truckCrane[i].craneBase);
             rootNode.attachChild(truckCrane[i].craneLift);
+            rootNode.attachChild(truckCrane[i].craneHook);
 
             XtruckCrane -= 3;
         }
