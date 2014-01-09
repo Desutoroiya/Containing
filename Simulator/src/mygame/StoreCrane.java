@@ -17,13 +17,14 @@ import com.jme3.scene.Spatial;
  */
 public class StoreCrane extends Node {
 
+    Spatial StoreCraneLift;
+    Spatial StoreCraneBase;
+    Spatial StoreCraneHook;
     private Node rootNode;
-    
     Node storageCrane = new Node();
     Node storageCraneLift = new Node();
     Node storageCraneBase = new Node();
     Node storageCraneHook = new Node();
-    
     public AssetManager assetManager;
     private MotionPath storeBase;
     private MotionPath storeHook;
@@ -43,17 +44,17 @@ public class StoreCrane extends Node {
     }
 
     public void createStoreCrane() {
-        Spatial StoreCraneLift = assetManager.loadModel("Models/Storagecrane/scraneLift.j3o");
-        Spatial StoreCraneBase = assetManager.loadModel("Models/Storagecrane/scraneBase.j3o");
-        Spatial StoreCraneHook = assetManager.loadModel("Models/Storagecrane/scraneHook.j3o");
+        StoreCraneLift = assetManager.loadModel("Models/Storagecrane/scraneLift.j3o");
+        StoreCraneBase = assetManager.loadModel("Models/Storagecrane/scraneBase.j3o");
+        StoreCraneHook = assetManager.loadModel("Models/Storagecrane/scraneHook.j3o");
 
         storageCraneLift.attachChild(StoreCraneLift);
         storageCraneBase.attachChild(StoreCraneBase);
         storageCraneHook.attachChild(StoreCraneHook);
-        
-        storageCrane.attachChild(StoreCraneLift);
-        storageCrane.attachChild(StoreCraneBase);
-        storageCrane.attachChild(StoreCraneHook);
+
+        storageCrane.attachChild(storageCraneLift);
+        storageCrane.attachChild(storageCraneBase);
+        storageCrane.attachChild(storageCraneHook);
 
         storageCrane.rotate(0, 1.5707f, 0);
     }
@@ -64,42 +65,39 @@ public class StoreCrane extends Node {
         storeBase.addWayPoint(new Vector3f(x, y, z - 36));
         storeBase.setCycle(true);
 
-        meStoreCrane = new MotionEvent(storageCraneBase, storeBase);
+        meStoreCrane = new MotionEvent(storageCrane, storeBase);
         storeBase.setCurveTension(0f);
-        meStoreCrane.setSpeed(baseSpeed * 0.02f);
+        meStoreCrane.setSpeed(baseSpeed * 0.2f);
         meStoreCrane.play();
     }
 
     public void moveHook() {
-        Spatial destoreHook = storageCraneHook.getChild(2);
         storeHook = new MotionPath();
         storeHook.addWayPoint(new Vector3f(Position));
         storeHook.addWayPoint(new Vector3f(Position.x, Position.y - 0.2f, Position.z));
         storeHook.setCycle(true);
 
-        meStoreHook = new MotionEvent(destoreHook, storeHook);
+        meStoreHook = new MotionEvent(StoreCraneHook, storeHook);
         storeHook.setCurveTension(0f);
         meStoreHook.setSpeed(baseSpeed);
         meStoreHook.play();
     }
 
     public void moveLift() {
-        Spatial destoreLift = storageCraneLift.getChild(0);
         storeLift = new MotionPath();
         storeLift.addWayPoint(new Vector3f(Position));
         storeLift.addWayPoint(new Vector3f(Position.x, Position.y, Position.z - 0.75f));
 
-        meStoreLift = new MotionEvent(destoreLift, storeLift);
+        meStoreLift = new MotionEvent(StoreCraneLift, storeLift);
         storeLift.setCurveTension(0f);
         meStoreLift.setSpeed(baseSpeed);
         meStoreLift.play();
 
-        Spatial destoreHook = storageCraneHook.getChild(2);
         storeHook = new MotionPath();
         storeHook.addWayPoint(new Vector3f(Position));
         storeHook.addWayPoint(new Vector3f(Position.x, Position.y, Position.z - 0.75f));
 
-        meStoreHook = new MotionEvent(destoreHook, storeHook);
+        meStoreHook = new MotionEvent(StoreCraneHook, storeHook);
         storeHook.setCurveTension(0f);
         meStoreHook.setSpeed(baseSpeed);
         meStoreHook.play();

@@ -96,14 +96,15 @@ public class Main extends SimpleApplication {
             Xtest = 6.75f;
             Ztest -= 1.5f;
         }
-        storageCrane[23].moveBase(7.5f, 0, 18f - 6.5f);
+        bargeCrane[2].moveLift();
         
         //trainWagon[1].trainwagon.attachChild(container[35].contNode);
         //container[35].contNode.setLocalTranslation(new Vector3f(0,0,0));
         
         createTrain(3);
-        truckCrane[0].craneHook.attachChild(container[34].contNode);
-        container[34].contNode.setLocalTranslation(0,0.8f,0);
+        bargeCrane[2].bargeCraneHook.attachChild(container[35].contNode);
+        container[35].contNode.setLocalTranslation(-4f,1.4f,0);
+        container[34].contNode.rotate(0, FastMath.PI / 2, 0);
     }
 
     @Override

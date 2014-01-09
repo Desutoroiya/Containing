@@ -17,13 +17,14 @@ import com.jme3.scene.Spatial;
  */
 public class ShipCrane extends Node {
 
+    Spatial ShipCraneLift;
+    Spatial ShipCraneBase;
+    Spatial ShipCraneHook;
     private Node rootNode;
-    
     Node shipCrane = new Node();
     Node shipCraneLift = new Node();
     Node shipCraneBase = new Node();
     Node shipCraneHook = new Node();
-    
     public AssetManager assetManager;
     private MotionPath mpshipBase;
     private MotionPath mpshipHook;
@@ -47,19 +48,24 @@ public class ShipCrane extends Node {
         Spatial ShipCraneBase = assetManager.loadModel("Models/Shipcrane/craneBase.j3o");
         Spatial ShipCraneHook = assetManager.loadModel("Models/Shipcrane/craneHook.j3o");
 
-        shipCrane.attachChild(ShipCraneLift);
-        shipCrane.attachChild(ShipCraneBase);
-        shipCrane.attachChild(ShipCraneHook);
+        shipCraneLift.attachChild(ShipCraneLift);
+        shipCraneBase.attachChild(ShipCraneBase);
+        shipCraneHook.attachChild(ShipCraneHook);
+
+        shipCrane.attachChild(shipCraneLift);
+        shipCrane.attachChild(shipCraneBase);
+        shipCrane.attachChild(shipCraneHook);
+
+
     }
 
     public void moveBase(float x, float y, float z) {
 
         mpshipBase = new MotionPath();
-        for (int i = 0; i < 50; i++){
         mpshipBase.addWayPoint(new Vector3f(x, y, z));
         mpshipBase.addWayPoint(new Vector3f(x, y, z + 3));
         mpshipBase.setCycle(true);
-        }
+
         meShipCrane = new MotionEvent(shipCrane, mpshipBase);
         mpshipBase.setCurveTension(0f);
         meShipCrane.setSpeed(baseSpeed * 0.005f);
@@ -67,41 +73,36 @@ public class ShipCrane extends Node {
     }
 
     public void moveHook() {
-        Spatial destoreHook = shipCrane.getChild(2);
         mpshipHook = new MotionPath();
-        for (int i = 0; i < 50; i++){
         mpshipHook.addWayPoint(new Vector3f(Position));
         mpshipHook.addWayPoint(new Vector3f(Position.x, Position.y - 0.5f, Position.z));
         mpshipHook.setCycle(true);
-        }
-        meShipHook = new MotionEvent(destoreHook, mpshipHook);
+
+        meShipHook = new MotionEvent(shipCraneHook, mpshipHook);
         mpshipHook.setCurveTension(0f);
         meShipHook.setSpeed(baseSpeed * 0.01f);
         meShipHook.play();
     }
 
     public void moveLift() {
-        Spatial destoreLift = shipCrane.getChild(0);
         mpshipLift = new MotionPath();
-        for (int i = 0; i < 50; i++){
         mpshipLift.addWayPoint(new Vector3f(Position));
         mpshipLift.addWayPoint(new Vector3f(Position.x + 6f, Position.y, Position.z));
         mpshipLift.setCycle(true);
-        }
-        meShipLift = new MotionEvent(destoreLift, mpshipLift);
+
+        meShipLift = new MotionEvent(shipCraneLift, mpshipLift);
         mpshipLift.setCurveTension(0f);
         meShipLift.setSpeed(baseSpeed * 0.01f);
         meShipLift.play();
 
-        Spatial destoreHook = shipCrane.getChild(2);
+
         mpshipHook = new MotionPath();
-        for (int i = 0; i < 50; i++){
         mpshipHook.addWayPoint(new Vector3f(Position));
         mpshipHook.addWayPoint(new Vector3f(Position.x + 6f, Position.y, Position.z));
         mpshipHook.setCycle(true);
-        }
 
-        meShipHook = new MotionEvent(destoreHook, mpshipHook);
+
+        meShipHook = new MotionEvent(shipCraneHook, mpshipHook);
         mpshipHook.setCurveTension(0f);
         meShipHook.setSpeed(baseSpeed * 0.01f);
         meShipHook.play();
