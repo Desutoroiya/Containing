@@ -16,6 +16,8 @@ public class TruckCrane extends Node {
 
     public AssetManager assetManager;
     
+    Node truckCrane = new Node();
+    
     Node craneLift = new Node();
     Node craneHook = new Node();
     Node craneBase = new Node();
@@ -51,10 +53,12 @@ public class TruckCrane extends Node {
         craneLift.attachChild(TCraneLift);
         craneBase.attachChild(TCraneBase);
         craneHook.attachChild(TCraneHook);
+        
+        truckCrane.attachChild(craneLift);
+        truckCrane.attachChild(craneBase);
+        truckCrane.attachChild(craneHook);
 
-        craneLift.rotate(0, FastMath.PI / 2, 0);
-        craneBase.rotate(0, FastMath.PI / 2, 0);
-        craneHook.rotate(0, FastMath.PI / 2, 0);
+        truckCrane.rotate(0, FastMath.PI / 2, 0);
     }
 
     public void moveBase(float X, float Y, float Z) {

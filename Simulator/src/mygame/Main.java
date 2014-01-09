@@ -101,7 +101,9 @@ public class Main extends SimpleApplication {
         //trainWagon[1].trainwagon.attachChild(container[35].contNode);
         //container[35].contNode.setLocalTranslation(new Vector3f(0,0,0));
         
-        createTrain(36);
+        createTrain(3);
+        truckCrane[0].craneHook.attachChild(container[34].contNode);
+        container[34].contNode.setLocalTranslation(0,0.8f,0);
     }
 
     @Override
@@ -230,13 +232,9 @@ public class Main extends SimpleApplication {
             TruckCraneList.add(truckCrane[i]);
 
             truckCrane[i].createTruckCrane();
-            truckCrane[i].craneLift.setLocalTranslation(XtruckCrane, YtruckCrane, ZtruckCrane);
-            truckCrane[i].craneBase.setLocalTranslation(XtruckCrane,YtruckCrane,ZtruckCrane);
-            truckCrane[i].craneHook.setLocalTranslation(XtruckCrane,YtruckCrane,ZtruckCrane);
+            truckCrane[i].truckCrane.setLocalTranslation(XtruckCrane, YtruckCrane, ZtruckCrane);
             
-            rootNode.attachChild(truckCrane[i].craneBase);
-            rootNode.attachChild(truckCrane[i].craneLift);
-            rootNode.attachChild(truckCrane[i].craneHook);
+            rootNode.attachChild(truckCrane[i].truckCrane);
 
             XtruckCrane -= 3;
         }
