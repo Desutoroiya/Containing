@@ -16,6 +16,11 @@ public class TruckCrane extends Node {
 
     public AssetManager assetManager;
     
+    
+    Spatial TCraneLift;
+    Spatial TCraneBase;
+    Spatial TCraneHook;
+    
     Node truckCrane = new Node();
     
     Node craneLift = new Node();
@@ -42,13 +47,9 @@ public class TruckCrane extends Node {
         /*
          * Creates a new cranelift for trucks
          */
-        Spatial TCraneLift = assetManager.loadModel("Models/Truckcrane/truckCraneLift.j3o");
-        Spatial TCraneBase = assetManager.loadModel("Models/Truckcrane/truckCraneBase.j3o");
-        Spatial TCraneHook = assetManager.loadModel("Models/Truckcrane/truckCraneHook.j3o");
-
-        //TCraneBase.setLocalTranslation(Position);
-        //TCraneLift.setLocalTranslation(new Vector3f(Position.x, Position.y - 0.25f, Position.z));
-        //TCraneHook.setLocalTranslation(new Vector3f(Position.x, Position.y - 0.27f, Position.z));
+        TCraneLift = assetManager.loadModel("Models/Truckcrane/truckCraneLift.j3o");
+        TCraneBase = assetManager.loadModel("Models/Truckcrane/truckCraneBase.j3o");
+        TCraneHook = assetManager.loadModel("Models/Truckcrane/truckCraneHook.j3o");
 
         craneLift.attachChild(TCraneLift);
         craneBase.attachChild(TCraneBase);
@@ -69,7 +70,7 @@ public class TruckCrane extends Node {
         mpBase.addWayPoint(new Vector3f(X, Y, Z + 2));
         mpBase.setCycle(true);
         }
-        meTCrane = new MotionEvent(craneLift, mpBase);
+        meTCrane = new MotionEvent(truckCrane, mpBase);
         mpBase.setCurveTension(0f);
         meTCrane.setSpeed(baseSpeed * 0.01f);
         meTCrane.play();
@@ -77,21 +78,19 @@ public class TruckCrane extends Node {
     }
 
     public void moveHook() {
-        Spatial deHook = craneLift.getChild(2);
         mpHook = new MotionPath();
         for (int i = 0; i < 50; i++){
         mpHook.addWayPoint(new Vector3f(Position));
         mpHook.addWayPoint(new Vector3f(Position.x, Position.y - 0.5f, Position.z));
         mpHook.setCycle(true);
         }
-        meTCHook = new MotionEvent(deHook, mpHook);
+        meTCHook = new MotionEvent(craneHook, mpHook);
         mpHook.setCurveTension(0f);
         meTCHook.setSpeed(baseSpeed * 0.01f);
         meTCHook.play();
     }
 
     public void moveLift() {
-        Spatial deLift = craneLift.getChild(0);
         mpLift = new MotionPath();
         for (int i = 0; i < 50; i++){
         mpLift.addWayPoint(new Vector3f(Position));
@@ -99,12 +98,11 @@ public class TruckCrane extends Node {
         mpLift.addWayPoint(new Vector3f(Position.x, Position.y, Position.z - 0.75f));
         mpLift.setCycle(true);
         }
-        meTCLift = new MotionEvent(deLift, mpLift);
+        meTCLift = new MotionEvent(craneLift, mpLift);
         mpLift.setCurveTension(0f);
         meTCLift.setSpeed(baseSpeed * 0.01f);
         meTCLift.play();
 
-        Spatial deHook = craneLift.getChild(2);
         mpHook = new MotionPath();
         for (int i = 0; i < 50; i++){
         mpHook.addWayPoint(new Vector3f(Position));
@@ -112,7 +110,7 @@ public class TruckCrane extends Node {
         mpHook.addWayPoint(new Vector3f(Position.x, Position.y, Position.z - 0.75f));
         mpHook.setCycle(true);
         }
-        meTCHook = new MotionEvent(deHook, mpHook);
+        meTCHook = new MotionEvent(craneHook, mpHook);
         mpHook.setCurveTension(0f);
         meTCHook.setSpeed(baseSpeed * 0.01f);
         meTCHook.play();
