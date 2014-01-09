@@ -18,6 +18,8 @@ import com.jme3.scene.Spatial;
 public class StoreCrane extends Node {
 
     private Node rootNode;
+    
+    Node storageCrane = new Node();
     Node storageCraneLift = new Node();
     Node storageCraneBase = new Node();
     Node storageCraneHook = new Node();
@@ -48,10 +50,12 @@ public class StoreCrane extends Node {
         storageCraneLift.attachChild(StoreCraneLift);
         storageCraneBase.attachChild(StoreCraneBase);
         storageCraneHook.attachChild(StoreCraneHook);
+        
+        storageCrane.attachChild(StoreCraneLift);
+        storageCrane.attachChild(StoreCraneBase);
+        storageCrane.attachChild(StoreCraneHook);
 
-        storageCraneLift.rotate(0, 1.5707f, 0);
-        storageCraneBase.rotate(0, 1.5707f, 0);
-        storageCraneHook.rotate(0, 1.5707f, 0);
+        storageCrane.rotate(0, 1.5707f, 0);
     }
 
     public void moveBase(float x, float y, float z) {
