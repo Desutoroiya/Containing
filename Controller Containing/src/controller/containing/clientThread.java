@@ -21,75 +21,45 @@ import java.util.logging.Logger;
  */
 class clientThread extends Thread {
 
-
     private DataInputStream is;
     private PrintStream os;
     private BufferedReader inputLine;
     private Socket clientSocket;
-    
-    private String clientName;
+
     private String recievedMessage;
-    private String sendMessage;
     private final clientThread[] threads;
     private boolean open = true;
+    int count = 0;
+    int kraanID = 0;
     private int connections;
 
     public clientThread(Socket clientSocket, clientThread[] threads) {
-       
+
         this.clientSocket = clientSocket;
         this.threads = threads;
         this.connections = threads.length;
-        }
-    
-    public void run(){
-        
+    }
+
+    public void run() {
+
         int connections = this.connections;
         clientThread[] threads = this.threads;
-        
-        try{
-            
+
+        try {
+
             is = new DataInputStream(clientSocket.getInputStream());
             os = new PrintStream(clientSocket.getOutputStream());
-            
+
             //os.println("Are you ready?");
-            int count = 0;
-            int kraanID = 0;
-            
-            while(true){
-                
+            while (true) {
+
                 String line = is.readLine();
-                ArrayList <String> vrachtautoParkeerplaats = new ArrayList<>();
 
-                if(line.equals("Ready")){
+
+                if (line.equals("Ready")) {
                     
-                    XMLreader xml = new XMLreader();
-                    xml.XMLreader();
-                    for(Container _container : xml._containerList){
-                        
-                        if(_container.getVervoerder().equals("vrachtauto")){
-                            
-                           
-                            count = vrachtautoParkeerplaats.indexOf("closed");
-                            if(count == -1){
-                                
-                                count = 0;
-                            }
-                            vrachtautoParkeerplaats.add(kraanID, "closed");
-                            
-                            if(count == 0){
-                                
-                                kraanID ++;
-                                
-                            }
-                            os.println(kraanID);
-                            
-                        }
-                        os.println(_container.getID());
-                        os.println(_container.getVervoerder());
-
- 
-                    }
-
+                    sendDataPackage();
+                    
                 }
 
                 recievedMessage = is.readLine();
@@ -98,21 +68,44 @@ class clientThread extends Thread {
                 //threads[0].os.println(recievedMessage);
                 //threads[1].os.println(recievedMessage);
                 //this.os.println(recievedMessage);
-            
-        }
-        
-            
-        }catch(IOException ex){
+
+            }
+
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
-        
-    }
-    
-    public void sendMessage(String sendMessage){
-        
-        this.sendMessage = sendMessage;
-        os.println(sendMessage);
-    }
-    
 
+    }
+
+    public void sendDataPackage() {
+
+        ArrayList<String> vrachtautoParkeerplaats = new ArrayList<>();
+
+        XMLreader xml = new XMLreader();
+        xml.XMLreader();
+        for (Container _container : xml._containerList) {
+
+            if (_container.getVervoerder().equals("vrachtauto")) {
+
+                count = vrachtautoParkeerplaats.indexOf("closed");
+                if (count == -1) {
+
+                    count = 0;
+                }
+                vrachtautoParkeerplaats.add(kraanID, "closed");
+
+                if (count == 0) {
+
+                    kraanID++;
+
+                }
+                os.println(kraanID);
+
+            }
+            os.println(_container.getID());
+            os.println(_container.getVervoerder());
+
+        }
+
+    }
 }

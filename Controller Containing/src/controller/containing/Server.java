@@ -65,10 +65,5 @@ public class Server {
        }
         
     }
-    public void sendMessage(String sendMessage){
-        
-        threads[1].sendMessage(sendMessage);
-        
-    }
     
 }

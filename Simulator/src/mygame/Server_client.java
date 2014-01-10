@@ -32,7 +32,7 @@ public class Server_client implements Runnable
     private static String recievedMessage;
     public static List<String> log = new ArrayList<String>();
     
-    public static void main(String[] args){
+    public static void client(){
         
         hostname = "localhost";
         port = 6060;
@@ -76,6 +76,12 @@ public class Server_client implements Runnable
                 
                recievedMessage = is.readLine();
                System.out.println(recievedMessage);
+               
+               if(recievedMessage.equals("Vrachtauto")){
+                   
+                   
+                   
+               }
                
                log.add(recievedMessage);
                
