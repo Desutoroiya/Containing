@@ -32,11 +32,23 @@ public class TruckCrane extends Node {
     private MotionEvent meTCrane;
     private MotionEvent meTCHook;
     private MotionEvent meTCLift;
+    
     public float X = 0f;
     public float Y = 0;
     public float Z = 0f;
+    
     Vector3f Position = new Vector3f(X, Y, Z);
     private float baseSpeed = 1.0f;
+    
+    private boolean busy = true;
+    
+    private boolean setBusy(){
+        return this.busy = busy;
+    }
+    
+    private boolean getBusy(){
+        return this.busy = busy;
+    }
 
     public TruckCrane(AssetManager assetManager) {
         this.assetManager = assetManager;
@@ -86,7 +98,14 @@ public class TruckCrane extends Node {
         meTCHook.play();
     }
     
-    public void unloadContainer(TruckCrane crane, Node container){        
+    public void unloadContainer(TruckCrane crane, Node container){
+        
+        while (!busy) // niet busy
+            crane.moveBase(crane.truckCrane.getLocalTranslation(), 2);
+//            crane.craneHook.attachChild(container);
+//            container.setLocalTranslation(0,0.8f,0);
+//            while (!busy)
+                
         /*
          * begin boven agv pos
          * kraan boven truck
