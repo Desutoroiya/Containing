@@ -2,7 +2,9 @@ package mygame;
 
 import com.jme3.asset.AssetManager;
 import com.jme3.cinematic.MotionPath;
+import com.jme3.cinematic.MotionPathListener;
 import com.jme3.cinematic.events.MotionEvent;
+import com.jme3.cinematic.events.MotionTrack;
 import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
@@ -12,7 +14,7 @@ import com.jme3.scene.Spatial;
  *
  * @author Johan
  */
-public class TruckCrane extends Node {
+public class TruckCrane extends Node{
 
     public AssetManager assetManager;
     
@@ -36,6 +38,8 @@ public class TruckCrane extends Node {
     public float X = 0f;
     public float Y = 0;
     public float Z = 0f;
+    
+    private int status = 0;
     
     Vector3f Position = new Vector3f(X, Y, Z);
     private float baseSpeed = 1.0f;
@@ -81,7 +85,7 @@ public class TruckCrane extends Node {
         
         meTCrane = new MotionEvent(truckCrane, mpBase);
         mpBase.setCurveTension(0f);
-        meTCrane.setSpeed(baseSpeed*20);
+        meTCrane.setSpeed(baseSpeed);
         meTCrane.play();
     }
 
@@ -98,14 +102,55 @@ public class TruckCrane extends Node {
         meTCHook.play();
     }
     
-    public void unloadContainer(TruckCrane crane, Node container){
+    public void unload(TruckCrane truckcrane){
+        final MotionPath unload = new MotionPath();
+        unload.addListener(new MotionPathListener(){
+            public void onWayPointReach(MotionPath unload, int wayPointIndex){
+                if (unload.getNbWayPoints() == wayPointIndex + 1){
+                    System.out.println("hoi");
+                }
+            }
+        });
+        MotionEvent unload1 = new MotionEvent(truckCrane, unload);
         
-        while (!busy) // niet busy
-            crane.moveBase(crane.truckCrane.getLocalTranslation(), 2);
-//            crane.craneHook.attachChild(container);
-//            container.setLocalTranslation(0,0.8f,0);
-//            while (!busy)
+        unload.addWayPoint(truckcrane.truckCrane.getLocalTranslation());
+        unload.addWayPoint(new Vector3f(truckcrane.truckCrane.getLocalTranslation().x,truckcrane.truckCrane.getLocalTranslation().y,truckcrane.truckCrane.getLocalTranslation().z + 2));
+        
+        unload.setCycle(false);
+        
+        
+        unload.setCurveTension(0f);
+        unload1.setSpeed(baseSpeed);
+        unload1.play();        
+        
+        
+        
+        
+    }
+    
+    public float z;
+    public float y;
+    
+    private int cranepos;
+    
+    public void locationInfo(TruckCrane crane){
+        z = crane.truckCrane.getLocalTranslation().z;
+        y = crane.craneHook.getLocalTranslation().y;
+        System.out.println("Z="+z);
+        System.out.println("Y="+y);
+    }
+    
+    public void update(float tpf){
+        switch (cranepos){
+            case 0:
+            //doe niks
+                break;
                 
+            case 1:
+                //doe dingen
+                break;
+        }
+    }
         /*
          * begin boven agv pos
          * kraan boven truck
@@ -117,7 +162,6 @@ public class TruckCrane extends Node {
          * detach hook, attach agv
          * hook naar boven
          */
-    }
     
     public void loadContainer(){
         
