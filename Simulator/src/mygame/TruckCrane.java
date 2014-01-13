@@ -201,17 +201,6 @@ public class TruckCrane extends Node{
                 break;
         }
     }
-        /*
-         * begin boven agv pos
-         * kraan boven truck
-         * hook naar beneden
-         * detach cont van truck, attach aan container
-         * hook naar boven
-         * kraan naar agv
-         * hook naar beneden
-         * detach hook, attach agv
-         * hook naar boven
-         */
     
     public void loadContainer(){
         
