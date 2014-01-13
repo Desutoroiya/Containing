@@ -78,7 +78,7 @@ public class ShipCrane extends Node {
 
     public void moveHook(float ymove) {
         mpshipHook = new MotionPath();
-        mpshipHook.addWayPoint(new Vector3f(position));
+        mpshipHook.addWayPoint(position);
         mpshipHook.addWayPoint(new Vector3f(position.x, position.y + ymove, position.z));
         mpshipHook.setCycle(false);
 
@@ -178,7 +178,7 @@ public class ShipCrane extends Node {
                     busy = true;
                     moveBase(-3);
                 }
-                else if (shipCranePos == 24.0f && busy != false){
+                else if (shipCranePos == -24.0f && busy != false){
                     cranepos = 5;
                     busy = false;
                 }
