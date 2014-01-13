@@ -10,6 +10,7 @@ import com.jme3.cinematic.events.MotionEvent;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+import java.math.BigDecimal;
 
 /**
  *
@@ -58,47 +59,50 @@ public class ShipCrane extends Node {
 
 
     }
+    
+    public Vector3f location = shipCrane.getLocalTranslation();
+    public Vector3f position = shipCraneHook.getLocalTranslation();
 
-    public void moveBase(float x, float y, float z) {
+    public void moveBase(float zmove) {
 
         mpshipBase = new MotionPath();
-        mpshipBase.addWayPoint(new Vector3f(x, y, z));
-        mpshipBase.addWayPoint(new Vector3f(x, y, z + 3));
-        mpshipBase.setCycle(true);
+        mpshipBase.addWayPoint(new Vector3f(location));
+        mpshipBase.addWayPoint(new Vector3f(location.x, location.y, location.z + zmove));
+        mpshipBase.setCycle(false);
 
         meShipCrane = new MotionEvent(shipCrane, mpshipBase);
         mpshipBase.setCurveTension(0f);
-        meShipCrane.setSpeed(baseSpeed * 0.005f);
+        meShipCrane.setSpeed(baseSpeed);
         meShipCrane.play();
     }
 
-    public void moveHook() {
+    public void moveHook(float ymove) {
         mpshipHook = new MotionPath();
-        mpshipHook.addWayPoint(new Vector3f(Position));
-        mpshipHook.addWayPoint(new Vector3f(Position.x, Position.y - 0.5f, Position.z));
-        mpshipHook.setCycle(true);
+        mpshipHook.addWayPoint(new Vector3f(position));
+        mpshipHook.addWayPoint(new Vector3f(position.x, position.y + ymove, position.z));
+        mpshipHook.setCycle(false);
 
         meShipHook = new MotionEvent(shipCraneHook, mpshipHook);
         mpshipHook.setCurveTension(0f);
-        meShipHook.setSpeed(baseSpeed * 0.01f);
+        meShipHook.setSpeed(baseSpeed);
         meShipHook.play();
     }
 
-    public void moveLift() {
+    public void moveLift(float xmove) {
         mpshipLift = new MotionPath();
-        mpshipLift.addWayPoint(new Vector3f(Position));
-        mpshipLift.addWayPoint(new Vector3f(Position.x + 6f, Position.y, Position.z));
+        mpshipLift.addWayPoint(new Vector3f(position));
+        mpshipLift.addWayPoint(new Vector3f(position.x + xmove, position.y, position.z));
         mpshipLift.setCycle(true);
 
         meShipLift = new MotionEvent(shipCraneLift, mpshipLift);
         mpshipLift.setCurveTension(0f);
-        meShipLift.setSpeed(baseSpeed * 0.01f);
+        meShipLift.setSpeed(baseSpeed );
         meShipLift.play();
 
 
         mpshipHook = new MotionPath();
-        mpshipHook.addWayPoint(new Vector3f(Position));
-        mpshipHook.addWayPoint(new Vector3f(Position.x + 6f, Position.y, Position.z));
+        mpshipHook.addWayPoint(new Vector3f(position));
+        mpshipHook.addWayPoint(new Vector3f(position.x + xmove, position.y, position.z));
         mpshipHook.setCycle(true);
 
 
@@ -106,5 +110,101 @@ public class ShipCrane extends Node {
         mpshipHook.setCurveTension(0f);
         meShipHook.setSpeed(baseSpeed * 0.01f);
         meShipHook.play();
+    }
+    public float Z;
+    public float Y;
+    
+    private int cranepos = 1;
+    private boolean busy = false;
+    
+    public static Float precision(int decimalPlace, Float d) {
+        BigDecimal bd = new BigDecimal(Float.toString(d));
+        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
+        return bd.floatValue();
+    }
+    
+    public void update(float tpf){
+        
+        float shipCraneF = shipCrane.getLocalTranslation().z;
+        float shipCranePos = precision(2,shipCraneF);
+        
+        float shipcraneHookF = shipCraneHook.getLocalTranslation().y;
+        float shipcraneHookPos = precision(2, shipcraneHookF);
+        
+        System.out.println("ShipCrane  "+ shipCranePos);
+        System.out.println("ShipCraneHook  " + shipcraneHookPos);
+        
+        switch (cranepos){
+            case 0:
+            //doe niks
+                break;
+                
+            case 1:
+                // MOVE NAAR TRUCK
+                if (shipCranePos == -24.0f){
+                    busy = true;
+                    moveBase(3);
+                }
+                else if (shipCranePos == -21.0f && busy != false){
+                    cranepos = 2;
+                    busy = false;
+                }
+                break;
+            case 2:
+                // MOVE HOOK DOWN
+                if (shipCranePos == -21.0f && shipcraneHookPos == 0.0f){
+                    busy = true;
+                    moveHook(-4f);
+                }
+                else if (shipcraneHookPos == -4f && busy !=false){
+                    cranepos = 3;
+                    busy = false;
+                }
+                break;
+            case 3:
+                // MOVE HOOK UP
+                if (shipCranePos == -21.0f && shipcraneHookPos == -4f){
+                    busy = true;
+                    moveHook(4f);
+                }
+                else if (shipcraneHookPos == 0.0f && busy !=false){
+                    cranepos = 4;
+                    busy = false;
+                }
+                break;
+            case 4:
+                // RIJD KRAAN
+                if (shipCranePos == -21.0f && shipcraneHookPos == 0.0f){
+                    busy = true;
+                    moveBase(-3);
+                }
+                else if (shipCranePos == 24.0f && busy != false){
+                    cranepos = 5;
+                    busy = false;
+                }
+                break;
+            case 5:
+                // MOVE HOOK DOWN
+                if (shipCranePos == -24.0f && shipcraneHookPos == 0.0f){
+                    busy = true;
+                    moveHook(-4f);
+                }
+                else if (shipcraneHookPos == -4f && busy !=false){
+                    cranepos = 6;
+                    busy = false;
+                }
+                break;
+            case 6:
+                // MOVE HOOK UP
+                if (shipCranePos == -24.0f && shipcraneHookPos == -4f){
+                    busy = true;
+                    moveHook(4f);
+                }
+                else if (shipcraneHookPos == 0.0f && busy !=false){
+                    cranepos = 0;
+                    busy = false;
+                }
+                break;
+        }
     }
 }

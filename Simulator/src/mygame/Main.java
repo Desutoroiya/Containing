@@ -35,6 +35,7 @@ public class Main extends SimpleApplication {
     Truck[] truck;
     
     ShipCrane[] shipCrane;
+    List<ShipCrane> ShipCraneList;
     StoreCrane[] storageCrane;
     List<TruckCrane> TruckCraneList;
     TruckCrane[] truckCrane;
@@ -75,13 +76,19 @@ public class Main extends SimpleApplication {
         //container[35].contNode.setLocalTranslation(new Vector3f(0,0,0));
         
         createTrain(3);
+       
     }
 
     @Override
     public void simpleUpdate(float tpf) {
-        if (truckCrane != null){
-            for (TruckCrane truckCrane : TruckCraneList){
-                truckCrane.update(tpf);
+//        if (truckCrane != null){
+//            for (TruckCrane truckCrane : TruckCraneList){
+//                truckCrane.update(tpf);
+//            }
+//        }
+        if (shipCrane != null){
+            for (ShipCrane shipCrane : ShipCraneList){
+                shipCrane.update(tpf);
             }
         }
     }
@@ -279,7 +286,7 @@ public class Main extends SimpleApplication {
         float Yshipcrane = 0;
         float Zshipcrane = -24;
 
-        List<ShipCrane> ShipCraneList = new LinkedList<ShipCrane>();
+        ShipCraneList = new LinkedList<ShipCrane>();
         shipCrane = new ShipCrane[10];
 
         for (int i = 0; i < 10; i++) {
