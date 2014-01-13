@@ -8,13 +8,17 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 
 /**
  *
  * @author Johan
  */
 public class TruckCrane extends Node{
+    
+    Truck[] truck;
+    AGV[] agv;
+    TruckCrane[] truckList;
+    Container[] container;
 
     public AssetManager assetManager;
     
@@ -140,6 +144,8 @@ public class TruckCrane extends Node{
                     moveBase(2);
                 }
                 else if (truckCranePos == 24.0f && busy != false){
+                    //Truck, crane, container
+                    truckToCrane(truck[1], truckList[1], container[2]);
                     cranepos = 2;
                     busy = false;
                 }
@@ -151,6 +157,7 @@ public class TruckCrane extends Node{
                     moveHook(-0.8f);
                 }
                 else if (craneHookPos == -0.8f && busy !=false){
+                    
                     cranepos = 3;
                     busy = false;
                 }
@@ -201,8 +208,26 @@ public class TruckCrane extends Node{
                 break;
         }
     }
+    /*
+     * From truck to crane
+     */
+    public void truckToCrane(Truck truck, TruckCrane truckCrane, Container container){
+        //truck.detachChild(container.contNode);
+        truckCrane.attachChild(container.contNode);
+    }
     
-    public void loadContainer(){
-        
+    public void craneToAgv(AGV agv, TruckCrane truckCrane, Container container){
+        truckCrane.detachChild(container.contNode);
+        agv.attachChild(container.contNode);
+    }
+    
+    public void agvToCrane(AGV agv, TruckCrane truckCrane, Container container){
+        agv.detachChild(container.contNode);
+        truckCrane.attachChild(container.contNode);
+    }
+    
+    public void craneToTruck(Truck truck, TruckCrane truckCrane, Container container){
+        truckCrane.detachChild(container.contNode);
+        truck.attachChild(container.contNode);
     }
 }
