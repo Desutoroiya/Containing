@@ -36,6 +36,7 @@ public class Main extends SimpleApplication {
     
     ShipCrane[] shipCrane;
     StoreCrane[] storageCrane;
+    List<TruckCrane> TruckCraneList;
     TruckCrane[] truckCrane;
     BargeCrane[] bargeCrane;
     TrainCrane[] trainCrane;
@@ -109,7 +110,11 @@ public class Main extends SimpleApplication {
 
     @Override
     public void simpleUpdate(float tpf) {
-        //dingen
+        if (truckCrane != null){
+            for (TruckCrane truckCrane : TruckCraneList){
+                truckCrane.update(tpf);
+            }
+        }
     }
 
     @Override
@@ -225,7 +230,7 @@ public class Main extends SimpleApplication {
         float YtruckCrane = 0;
         float ZtruckCrane = 22f;
 
-        List<TruckCrane> TruckCraneList = new LinkedList<TruckCrane>();
+        TruckCraneList = new LinkedList<TruckCrane>();
         truckCrane = new TruckCrane[20];
 
         for (int i = 0; i < 20; i++) {

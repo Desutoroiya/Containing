@@ -36,23 +36,11 @@ public class TruckCrane extends Node{
     private MotionEvent meTCLift;
     
     public float X = 0f;
-    public float Y = 0;
+    public float Y = 0f;
     public float Z = 0f;
-    
-    private int status = 0;
     
     Vector3f Position = new Vector3f(X, Y, Z);
     private float baseSpeed = 1.0f;
-    
-    private boolean busy = true;
-    
-    private boolean setBusy(){
-        return this.busy = busy;
-    }
-    
-    private boolean getBusy(){
-        return this.busy = busy;
-    }
 
     public TruckCrane(AssetManager assetManager) {
         this.assetManager = assetManager;
@@ -65,19 +53,34 @@ public class TruckCrane extends Node{
         TCraneLift = assetManager.loadModel("Models/Truckcrane/truckCraneLift.j3o");
         TCraneBase = assetManager.loadModel("Models/Truckcrane/truckCraneBase.j3o");
         TCraneHook = assetManager.loadModel("Models/Truckcrane/truckCraneHook.j3o");
+        
+        /*
+         * Create seperate nodes for each spatial
+         */
 
         craneLift.attachChild(TCraneLift);
         craneBase.attachChild(TCraneBase);
         craneHook.attachChild(TCraneHook);
         
+        /*
+         * Create one node for the entire crane
+         */
+        
         truckCrane.attachChild(craneLift);
         truckCrane.attachChild(craneBase);
         truckCrane.attachChild(craneHook);
+        
+        /*
+         * Rotate crane
+         */
 
         truckCrane.rotate(0, FastMath.PI / 2, 0);
     }
+    
+    public Vector3f location = truckCrane.getLocalTranslation();
+    public Vector3f position = craneHook.getLocalTranslation();
 
-    public void moveBase(Vector3f location, float zmove) {
+    public void moveBase(float zmove) {
         mpBase = new MotionPath();
         mpBase.addWayPoint(location);
         mpBase.addWayPoint(new Vector3f(location.x, location.y, location.z + zmove));
@@ -85,69 +88,103 @@ public class TruckCrane extends Node{
         
         meTCrane = new MotionEvent(truckCrane, mpBase);
         mpBase.setCurveTension(0f);
-        meTCrane.setSpeed(baseSpeed);
+        meTCrane.setSpeed(baseSpeed*2);
         meTCrane.play();
     }
 
     public void moveHook(float ymove) {
         mpHook = new MotionPath();
-        
-        mpHook.addWayPoint(new Vector3f(Position));
-        mpHook.addWayPoint(new Vector3f(Position.x, Position.y + ymove, Position.z));
+                
+        mpHook.addWayPoint(position);
+        mpHook.addWayPoint(new Vector3f(position.x, position.y + ymove, position.z));
         mpHook.setCycle(false);
         
         meTCHook = new MotionEvent(craneHook, mpHook);
         mpHook.setCurveTension(0f);
-        meTCHook.setSpeed(baseSpeed);
+        meTCHook.setSpeed(baseSpeed*2);
         meTCHook.play();
-    }
-    
-    public void unload(TruckCrane truckcrane){
-        final MotionPath unload = new MotionPath();
-        unload.addListener(new MotionPathListener(){
-            public void onWayPointReach(MotionPath unload, int wayPointIndex){
-                if (unload.getNbWayPoints() == wayPointIndex + 1){
-                    System.out.println("hoi");
-                }
-            }
-        });
-        MotionEvent unload1 = new MotionEvent(truckCrane, unload);
-        
-        unload.addWayPoint(truckcrane.truckCrane.getLocalTranslation());
-        unload.addWayPoint(new Vector3f(truckcrane.truckCrane.getLocalTranslation().x,truckcrane.truckCrane.getLocalTranslation().y,truckcrane.truckCrane.getLocalTranslation().z + 2));
-        
-        unload.setCycle(false);
-        
-        
-        unload.setCurveTension(0f);
-        unload1.setSpeed(baseSpeed);
-        unload1.play();        
-        
-        
-        
-        
     }
     
     public float z;
     public float y;
     
-    private int cranepos;
-    
-    public void locationInfo(TruckCrane crane){
-        z = crane.truckCrane.getLocalTranslation().z;
-        y = crane.craneHook.getLocalTranslation().y;
-        System.out.println("Z="+z);
-        System.out.println("Y="+y);
-    }
+    private int cranepos = 1;
+    private boolean busy = false;
     
     public void update(float tpf){
+        float truckCranePos = truckCrane.getLocalTranslation().z;
+        float craneHookPos = craneHook.getLocalTranslation().y;
+        
         switch (cranepos){
             case 0:
             //doe niks
                 break;
                 
             case 1:
-                //doe dingen
+                // MOVE NAAR TRUCK
+                if (truckCranePos == 22.0f){
+                    busy = true;
+                    moveBase(2);
+                }
+                else if (truckCranePos > 23.9f && busy != false){
+                    cranepos = 2;
+                    busy = false;
+                }
+                break;
+            case 2:
+                // MOVE HOOK DOWN
+                if (truckCranePos == 24.0f && craneHookPos == 0.0f){
+                    busy = true;
+                    moveHook(-0.8f);
+                }
+                else if (craneHookPos < -0.79f && busy !=false){
+                    cranepos = 3;
+                    busy = false;
+                }
+                break;
+            case 3:
+                // MOVE HOOK UP
+                if (truckCranePos == 24.0f && craneHookPos < -0.79f){
+                    busy = true;
+                    moveHook(0.8f);
+                }
+                else if (craneHookPos > -0.01f && busy !=false){
+                    cranepos = 4;
+                    busy = false;
+                }
+                break;
+            case 4:
+                // RIJD KRAAN
+                if (truckCranePos == 24.0f && craneHookPos > -0.01f){
+                    busy = true;
+                    moveBase(-2);
+                }
+                else if (truckCranePos > 21.9f && busy != false){
+                    cranepos = 5;
+                    busy = false;
+                }
+                break;
+            case 5:
+                // MOVE HOOK DOWN
+                if (truckCranePos > 21.9f && craneHookPos > -0.01f){
+                    busy = true;
+                    moveHook(-0.8f);
+                }
+                else if (craneHookPos < -0.79f && busy !=false){
+                    cranepos = 6;
+                    busy = false;
+                }
+                break;
+            case 6:
+                // MOVE HOOK UP
+                if (truckCranePos == 22.0f && craneHookPos < -0.79f){
+                    busy = true;
+                    moveHook(0.8f);
+                }
+                else if (craneHookPos > -0.01f && busy !=false){
+                    cranepos = 0;
+                    busy = false;
+                }
                 break;
         }
     }
