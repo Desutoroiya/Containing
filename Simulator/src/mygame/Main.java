@@ -69,43 +69,12 @@ public class Main extends SimpleApplication {
         
 //        ALS LAATSTE IVM VERWIJZING NAAR SHIPS
         loadContainers();
-        
-        List<Container> contList = new LinkedList<Container>();
-        container = new Container[10000];
-        
-        int contCount =0;
-        
-        float Xtest = 6.75f;
-        float Ytest = 0;
-        float Ztest = 16;
-        
-        for (int z = 0; z < 22; z++){
-            for (int i = 0; i < 6; i++){
-                for (int y = 0; y < 6; y++){
-                    container[contCount] = new Container(assetManager, rootNode);
-                    contList.add(container[contCount]);
-                
-                    container[contCount].loadContainer();
-                    container[contCount].contNode.setLocalTranslation(Xtest,Ytest,Ztest);
-                    rootNode.attachChild(container[contCount].contNode);
-                    Ytest += 0.255f;
-                    contCount++;
-                }
-                Ytest = 0;
-                Xtest += 0.265f;
-            }
-            Xtest = 6.75f;
-            Ztest -= 1.5f;
-        }
         bargeCrane[2].moveLift();
         
         //trainWagon[1].trainwagon.attachChild(container[35].contNode);
         //container[35].contNode.setLocalTranslation(new Vector3f(0,0,0));
         
         createTrain(3);
-        bargeCrane[2].bargeCraneHook.attachChild(container[35].contNode);
-        container[35].contNode.setLocalTranslation(-4f,1.4f,0);
-        container[34].contNode.rotate(0, FastMath.PI / 2, 0);
     }
 
     @Override

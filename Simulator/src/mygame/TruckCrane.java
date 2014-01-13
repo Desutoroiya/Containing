@@ -2,13 +2,13 @@ package mygame;
 
 import com.jme3.asset.AssetManager;
 import com.jme3.cinematic.MotionPath;
-import com.jme3.cinematic.MotionPathListener;
 import com.jme3.cinematic.events.MotionEvent;
-import com.jme3.cinematic.events.MotionTrack;
 import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -101,7 +101,7 @@ public class TruckCrane extends Node{
         
         meTCHook = new MotionEvent(craneHook, mpHook);
         mpHook.setCurveTension(0f);
-        meTCHook.setSpeed(baseSpeed*2);
+        meTCHook.setSpeed(baseSpeed*20);
         meTCHook.play();
     }
     
@@ -111,9 +111,22 @@ public class TruckCrane extends Node{
     private int cranepos = 1;
     private boolean busy = false;
     
+    public static Float precision(int decimalPlace, Float d) {
+        BigDecimal bd = new BigDecimal(Float.toString(d));
+        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
+        return bd.floatValue();
+    }
+    
     public void update(float tpf){
-        float truckCranePos = truckCrane.getLocalTranslation().z;
-        float craneHookPos = craneHook.getLocalTranslation().y;
+        
+        float truckCraneF = truckCrane.getLocalTranslation().z;
+        float truckCranePos = precision(2,truckCraneF);
+        
+        float craneHookF = craneHook.getLocalTranslation().y;
+        float craneHookPos = precision(2, craneHookF);
+        
+        System.out.println("TruckCrane  "+ truckCranePos);
+        System.out.println("CraneHook  " + craneHookPos);
         
         switch (cranepos){
             case 0:
@@ -126,7 +139,7 @@ public class TruckCrane extends Node{
                     busy = true;
                     moveBase(2);
                 }
-                else if (truckCranePos > 23.9f && busy != false){
+                else if (truckCranePos == 24.0f && busy != false){
                     cranepos = 2;
                     busy = false;
                 }
@@ -137,51 +150,51 @@ public class TruckCrane extends Node{
                     busy = true;
                     moveHook(-0.8f);
                 }
-                else if (craneHookPos < -0.79f && busy !=false){
+                else if (craneHookPos == -0.8f && busy !=false){
                     cranepos = 3;
                     busy = false;
                 }
                 break;
             case 3:
                 // MOVE HOOK UP
-                if (truckCranePos == 24.0f && craneHookPos < -0.79f){
+                if (truckCranePos == 24.0f && craneHookPos == -0.8f){
                     busy = true;
                     moveHook(0.8f);
                 }
-                else if (craneHookPos > -0.01f && busy !=false){
+                else if (craneHookPos == 0.0f && busy !=false){
                     cranepos = 4;
                     busy = false;
                 }
                 break;
             case 4:
                 // RIJD KRAAN
-                if (truckCranePos == 24.0f && craneHookPos > -0.01f){
+                if (truckCranePos == 24.0f && craneHookPos == 0.0f){
                     busy = true;
                     moveBase(-2);
                 }
-                else if (truckCranePos > 21.9f && busy != false){
+                else if (truckCranePos == 22.0f && busy != false){
                     cranepos = 5;
                     busy = false;
                 }
                 break;
             case 5:
                 // MOVE HOOK DOWN
-                if (truckCranePos > 21.9f && craneHookPos > -0.01f){
+                if (truckCranePos == 22.0f && craneHookPos == 0.0f){
                     busy = true;
                     moveHook(-0.8f);
                 }
-                else if (craneHookPos < -0.79f && busy !=false){
+                else if (craneHookPos == -0.8f && busy !=false){
                     cranepos = 6;
                     busy = false;
                 }
                 break;
             case 6:
                 // MOVE HOOK UP
-                if (truckCranePos == 22.0f && craneHookPos < -0.79f){
+                if (truckCranePos == 22.0f && craneHookPos == -0.8f){
                     busy = true;
                     moveHook(0.8f);
                 }
-                else if (craneHookPos > -0.01f && busy !=false){
+                else if (craneHookPos == 0.0f && busy !=false){
                     cranepos = 0;
                     busy = false;
                 }
