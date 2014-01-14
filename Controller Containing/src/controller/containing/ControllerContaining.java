@@ -12,9 +12,13 @@ public class ControllerContaining{
     /**
      * @param args the command line arguments
      */
+    static MainFrame frame;
+    
     public static void main(String[] args) {
-        Clock c = new Clock();
-        c.start();
+        
+        frame = new MainFrame();
+        frame.setVisible(true);
         Server server = new Server();
+        
     }
 }

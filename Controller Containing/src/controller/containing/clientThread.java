@@ -32,6 +32,7 @@ class clientThread extends Thread {
     int count = 0;
     int kraanID = 0;
     private int connections;
+    XMLreader xml = new XMLreader();
 
     public clientThread(Socket clientSocket, clientThread[] threads) {
 
@@ -81,7 +82,6 @@ class clientThread extends Thread {
 
         ArrayList<String> vrachtautoParkeerplaats = new ArrayList<>();
 
-        XMLreader xml = new XMLreader();
         xml.XMLreader();
         for (Container _container : xml._containerList) {
 
@@ -100,6 +100,7 @@ class clientThread extends Thread {
 
                 }
                 os.println(kraanID);
+                
 
             }
             os.println(_container.getID());

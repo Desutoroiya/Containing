@@ -55,6 +55,7 @@ public class Server {
                    os.println("All Applications are already Connected.");
                    os.close();
                    clientSocket.close();
+                   threads[0].sendDataPackage();
                    
                }
                

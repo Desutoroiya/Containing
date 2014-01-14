@@ -31,6 +31,8 @@ public class MainFrame extends javax.swing.JFrame {
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -48,9 +50,16 @@ public class MainFrame extends javax.swing.JFrame {
         jRadioButtonMenuItem2.setText("jRadioButtonMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 700));
+        setTitle("Containing Controller");
+        setResizable(false);
 
         jLabel1.setText("jLabel1");
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setAutoscrolls(false);
+        jScrollPane1.setViewportView(jTextArea1);
 
         jMenu1.setText("Project");
 
@@ -89,11 +98,11 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 281, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
         );
 
         pack();
@@ -108,51 +117,51 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
 
-        XMLreader xml = new XMLreader();
-        xml.XMLreader();
-        Container container = new Container(11, "13/12/2004", 0.00, 0.10, "zeeschip", "DijckLogisticsBV", 1, 0, 0,
-                                            "22/12/2004",0.00, 12.00, "zeeschip", "ChinaShippingAgency", "FlowersNL",
-                                            19965, 81, "nitrotolueen","gas", "brandbaar", "1496-1");
-
-        ArrayList<Container> lijstContainers = xml.getContainerList();
-        lijstContainers.add(container);
-
-        ArrayList<Container> Vrachtwagenslijst = new ArrayList<>();
-        ArrayList<Container> Zeeschiplijst = new ArrayList<>();
-        ArrayList<Container> Binnenschiplijst = new ArrayList<>();
-        ArrayList<Container> Treinlijst = new ArrayList<>();  
-        
-        //test
-        SortAlgorithm s = new SortAlgorithm();
-        s.getHighest();
-        
-        for(int i = 0; i < lijstContainers.size() ; i++)
-        {            
-            if("vrachtauto".equals(lijstContainers.get(i).getVervoerder()))
-            {
-                Vrachtwagenslijst.add(lijstContainers.get(i));
-                System.out.println(Vrachtwagenslijst.get(i).toString());
-            }
-
-            if("zeeschip".equals(lijstContainers.get(i).getVervoerder()))
-            {
-                Zeeschiplijst.add(lijstContainers.get(i));
-                System.out.println(Zeeschiplijst.get(i).toString());
-            }
-            
-            if("binnenschip".equals(lijstContainers.get(i).getVervoerder()))
-            {
-                Binnenschiplijst.add(lijstContainers.get(i));
-            }
-                                   
-            if("trein".equals(lijstContainers.get(i).getVervoerder()))
-            {
-                Treinlijst.add(lijstContainers.get(i));
-            }
-            
-            
-            
-        }
+//        XMLreader xml = new XMLreader();
+//        xml.XMLreader();
+//        Container container = new Container(11, "13/12/2004", 0.00, 0.10, "zeeschip", "DijckLogisticsBV", 1, 0, 0,
+//                                            "22/12/2004",0.00, 12.00, "zeeschip", "ChinaShippingAgency", "FlowersNL",
+//                                            19965, 81, "nitrotolueen","gas", "brandbaar", "1496-1");
+//
+//        ArrayList<Container> lijstContainers = xml.getContainerList();
+//        lijstContainers.add(container);
+//
+//        ArrayList<Container> Vrachtwagenslijst = new ArrayList<>();
+//        ArrayList<Container> Zeeschiplijst = new ArrayList<>();
+//        ArrayList<Container> Binnenschiplijst = new ArrayList<>();
+//        ArrayList<Container> Treinlijst = new ArrayList<>();  
+//        
+//        //test
+//        SortAlgorithm s = new SortAlgorithm();
+//        s.getHighest();
+//        
+//        for(int i = 0; i < lijstContainers.size() ; i++)
+//        {            
+//            if("vrachtauto".equals(lijstContainers.get(i).getVervoerder()))
+//            {
+//                Vrachtwagenslijst.add(lijstContainers.get(i));
+//                System.out.println(Vrachtwagenslijst.get(i).toString());
+//            }
+//
+//            if("zeeschip".equals(lijstContainers.get(i).getVervoerder()))
+//            {
+//                Zeeschiplijst.add(lijstContainers.get(i));
+//                System.out.println(Zeeschiplijst.get(i).toString());
+//            }
+//            
+//            if("binnenschip".equals(lijstContainers.get(i).getVervoerder()))
+//            {
+//                Binnenschiplijst.add(lijstContainers.get(i));
+//            }
+//                                   
+//            if("trein".equals(lijstContainers.get(i).getVervoerder()))
+//            {
+//                Treinlijst.add(lijstContainers.get(i));
+//            }
+//            
+//            
+//            
+//        }
 
 
         /* Set the Nimbus look and feel */
@@ -192,6 +201,21 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
     }
+    public void fillWindow(String xml){
+        
+        if(jTextArea1.getText().equals("")){
+            
+           jTextArea1.setText(xml); 
+            
+        }else{
+            
+            jTextArea1.setText(jTextArea1.getText()+ "\n" + xml);
+            
+        }
+        
+        
+        
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
@@ -205,5 +229,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }

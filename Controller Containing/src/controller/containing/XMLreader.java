@@ -17,11 +17,11 @@ import org.w3c.dom.NodeList;
  *
  * @author Enzo
  */
-public class XMLreader {
+public class XMLreader extends ControllerContaining{
 
     public ArrayList<Container> _containerList;
     public Container _container;
-
+    
     public ArrayList<Container> getContainerList() 
     {
         return this._containerList;
@@ -33,7 +33,7 @@ public class XMLreader {
          */
         SortAlgorithm s = new SortAlgorithm();
         DijkstraAlgorithm z = new DijkstraAlgorithm();
-
+        
 
         _containerList = new ArrayList<>();
 
@@ -42,7 +42,7 @@ public class XMLreader {
          */
         try
         {
-            File ContainerList = new File("xml1.xml");
+            File ContainerList = new File("xml3.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(ContainerList);
@@ -84,12 +84,12 @@ public class XMLreader {
        
         for (int i = 0; i < _containerList.size(); i++)
         {
-            System.out.println("--------------------------");
-            System.out.println(_containerList.get(i));
-            System.out.println("period aankomst " + s.periodArrive);
-            System.out.println("prio " + s.priorityArrive);
-            System.out.println("period vertrek " + s.periodDept);
-            System.out.println("prio " + s.priorityDept);
+            frame.fillWindow(" " + "--------------------------");
+            frame.fillWindow(" " + _containerList.get(i).toString());
+            frame.fillWindow(" " + "period aankomst " + s.periodArrive);
+            frame.fillWindow(" " + "prio " + s.priorityArrive);
+            frame.fillWindow(" " + "period vertrek " + s.periodDept);
+            frame.fillWindow(" " + "prio " + s.priorityDept);
         }
     }
 
