@@ -41,6 +41,7 @@ public class Main extends SimpleApplication {
     TruckCrane[] truckCrane;
     BargeCrane[] bargeCrane;
     TrainCrane[] trainCrane;
+    List<Container> containerList;
     
     TrainWagon[] trainWagon;
 
@@ -54,11 +55,12 @@ public class Main extends SimpleApplication {
     @Override
     public void simpleInitApp() {
         //SET LOCATION FOR CAMERA + SPEED
-        cam.setLocation(new Vector3f(0, 10, 10));
+        cam.setLocation(new Vector3f(60, 5, 30));
         flyCam.setMoveSpeed(25);
         
         //LOAD ASSETS
         loadTerrainLight();
+        loadTrucks();
         loadAGV();
         loadTruckCranes();
         loadTrainCranes();
@@ -75,22 +77,27 @@ public class Main extends SimpleApplication {
         //trainWagon[1].trainwagon.attachChild(container[35].contNode);
         //container[35].contNode.setLocalTranslation(new Vector3f(0,0,0));
         
-        createTrain(3);
-       
+        //createTrain(3);
+//        truck[0].truck.attachChild(container[34].contNode);
+        
+//        truckCrane[0].craneHook.attachChild(container[35].contNode);
+//        truck[0].truck.attachChild(container[74].contNode);
+//        container[74].contNode.setLocalTranslation(0.3f,0.25f,0);
+//        container[74].contNode.rotate(0,FastMath.HALF_PI,0);
     }
 
     @Override
     public void simpleUpdate(float tpf) {
-//        if (truckCrane != null){
-//            for (TruckCrane truckCrane : TruckCraneList){
-//                truckCrane.update(tpf);
-//            }
-//        }
-        if (shipCrane != null){
-            for (ShipCrane shipCrane : ShipCraneList){
-                shipCrane.update(tpf);
+        if (truckCrane != null){
+            for (TruckCrane truckCrane : TruckCraneList){
+                    truckCrane.update(tpf);
             }
         }
+//        if (shipCrane != null){
+//            for (ShipCrane shipCrane : ShipCraneList){
+//                shipCrane.update(tpf);
+//            }
+//        }
     }
 
     @Override
@@ -214,9 +221,9 @@ public class Main extends SimpleApplication {
             TruckCraneList.add(truckCrane[i]);
 
             truckCrane[i].createTruckCrane();
-            truckCrane[i].truckCrane.setLocalTranslation(XtruckCrane, YtruckCrane, ZtruckCrane);
+            truckCrane[i].truckCraneNode.setLocalTranslation(XtruckCrane, YtruckCrane, ZtruckCrane);
             
-            rootNode.attachChild(truckCrane[i].truckCrane);
+            rootNode.attachChild(truckCrane[i].truckCraneNode);
 
             XtruckCrane -= 3;
         }
@@ -330,7 +337,7 @@ public class Main extends SimpleApplication {
          * Linksonder = 74
          */
 
-        List<Container> containerList = new LinkedList<Container>();
+        containerList = new LinkedList<Container>();
         container = new Container[containerAmount];
         
         //Manual i,moet uit lijst komen
@@ -362,14 +369,14 @@ public class Main extends SimpleApplication {
     
     public void loadTrucks(){
         
-        float truckSpawnX = 69.5f;
+        float truckSpawnX = 69f;
         float truckSpawnY = 0;
-        float truckSpawnZ = 24f;
+        float truckSpawnZ = 24.25f;
         
         List<Truck> TruckList = new LinkedList<Truck>();
         truck = new Truck[10];
         
-        for (int i = 0; i < 1; i++){
+        for (int i = 0; i < 4; i++){
             truck[i] = new Truck(assetManager);
             TruckList.add(truck[i]);
             

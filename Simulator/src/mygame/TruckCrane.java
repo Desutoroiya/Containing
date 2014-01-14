@@ -11,22 +11,23 @@ import java.math.BigDecimal;
 
 /**
  *
- * @author Johan
+ * @author Niels
  */
 public class TruckCrane extends Node{
     
+    public AssetManager assetManager;
+    
     Truck[] truck;
     AGV[] agv;
-    TruckCrane[] truckList;
+    TruckCrane[] truckCrane;
     Container[] container;
 
-    public AssetManager assetManager;
     
     Spatial TCraneLift;
     Spatial TCraneBase;
     Spatial TCraneHook;
     
-    Node truckCrane = new Node();
+    Node truckCraneNode = new Node();
     
     Node craneLift = new Node();
     Node craneHook = new Node();
@@ -39,11 +40,9 @@ public class TruckCrane extends Node{
     private MotionEvent meTCHook;
     private MotionEvent meTCLift;
     
-    public float X = 0f;
-    public float Y = 0f;
-    public float Z = 0f;
+    public Vector3f craneLoc = truckCraneNode.getLocalTranslation();
+    public Vector3f hookLoc = craneHook.getLocalTranslation();
     
-    Vector3f Position = new Vector3f(X, Y, Z);
     private float baseSpeed = 1.0f;
 
     public TruckCrane(AssetManager assetManager) {
@@ -70,27 +69,24 @@ public class TruckCrane extends Node{
          * Create one node for the entire crane
          */
         
-        truckCrane.attachChild(craneLift);
-        truckCrane.attachChild(craneBase);
-        truckCrane.attachChild(craneHook);
+        truckCraneNode.attachChild(craneLift);
+        truckCraneNode.attachChild(craneBase);
+        truckCraneNode.attachChild(craneHook);
         
         /*
          * Rotate crane
          */
 
-        truckCrane.rotate(0, FastMath.PI / 2, 0);
+        truckCraneNode.rotate(0, FastMath.PI / 2, 0);
     }
-    
-    public Vector3f location = truckCrane.getLocalTranslation();
-    public Vector3f position = craneHook.getLocalTranslation();
 
     public void moveBase(float zmove) {
         mpBase = new MotionPath();
-        mpBase.addWayPoint(location);
-        mpBase.addWayPoint(new Vector3f(location.x, location.y, location.z + zmove));
+        mpBase.addWayPoint(craneLoc);
+        mpBase.addWayPoint(new Vector3f(craneLoc.x, craneLoc.y, craneLoc.z + zmove));
         mpBase.setCycle(false);
         
-        meTCrane = new MotionEvent(truckCrane, mpBase);
+        meTCrane = new MotionEvent(truckCraneNode, mpBase);
         mpBase.setCurveTension(0f);
         meTCrane.setSpeed(baseSpeed*2);
         meTCrane.play();
@@ -99,8 +95,8 @@ public class TruckCrane extends Node{
     public void moveHook(float ymove) {
         mpHook = new MotionPath();
                 
-        mpHook.addWayPoint(position);
-        mpHook.addWayPoint(new Vector3f(position.x, position.y + ymove, position.z));
+        mpHook.addWayPoint(hookLoc);
+        mpHook.addWayPoint(new Vector3f(hookLoc.x, hookLoc.y + ymove, hookLoc.z));
         mpHook.setCycle(false);
         
         meTCHook = new MotionEvent(craneHook, mpHook);
@@ -109,10 +105,7 @@ public class TruckCrane extends Node{
         meTCHook.play();
     }
     
-    public float z;
-    public float y;
-    
-    private int cranepos = 1;
+    private int cranepos = 0;
     private boolean busy = false;
     
     public static Float precision(int decimalPlace, Float d) {
@@ -123,14 +116,13 @@ public class TruckCrane extends Node{
     
     public void update(float tpf){
         
-        float truckCraneF = truckCrane.getLocalTranslation().z;
-        float truckCranePos = precision(2,truckCraneF);
+        boolean loaded = false;
+                
+        float craneHookPos = precision(2, craneHook.getLocalTranslation().y);
+        float truckCranePos = precision(2, truckCraneNode.getLocalTranslation().z);
         
-        float craneHookF = craneHook.getLocalTranslation().y;
-        float craneHookPos = precision(2, craneHookF);
-        
-        System.out.println("TruckCrane  "+ truckCranePos);
-        System.out.println("CraneHook  " + craneHookPos);
+//        System.out.println("TruckCrane  "+ truckCranePos);
+//        System.out.println("CraneHook  " + craneHookPos);
         
         switch (cranepos){
             case 0:
@@ -145,7 +137,6 @@ public class TruckCrane extends Node{
                 }
                 else if (truckCranePos == 24.0f && busy != false){
                     //Truck, crane, container
-                    truckToCrane(truck[1], truckList[1], container[2]);
                     cranepos = 2;
                     busy = false;
                 }
@@ -157,7 +148,6 @@ public class TruckCrane extends Node{
                     moveHook(-0.8f);
                 }
                 else if (craneHookPos == -0.8f && busy !=false){
-                    
                     cranepos = 3;
                     busy = false;
                 }
@@ -211,9 +201,10 @@ public class TruckCrane extends Node{
     /*
      * From truck to crane
      */
-    public void truckToCrane(Truck truck, TruckCrane truckCrane, Container container){
-        //truck.detachChild(container.contNode);
-        truckCrane.attachChild(container.contNode);
+    
+    public void truckToCrane(Truck truck, TruckCrane crane, Container container){
+        truck.truck.detachChild(container.contNode);
+        crane.craneHook.attachChild(container.contNode);
     }
     
     public void craneToAgv(AGV agv, TruckCrane truckCrane, Container container){

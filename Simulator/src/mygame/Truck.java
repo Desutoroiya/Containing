@@ -62,5 +62,6 @@ public class Truck extends Node  {
         truck.attachChild(Truck);
         
         truck.setLocalTranslation(0, 0, 0);
+        truck.rotate(0,FastMath.HALF_PI,0);
     }
 }
