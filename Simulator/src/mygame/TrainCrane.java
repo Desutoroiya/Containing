@@ -95,7 +95,7 @@ public class TrainCrane extends Node {
 
         meTrainHook = new MotionEvent(traincraneHook, trainHook);
         trainHook.setCurveTension(0f);
-        meTrainHook.setSpeed(baseSpeed);
+        meTrainHook.setSpeed(baseSpeed*5);
         meTrainHook.play();
     }
 
@@ -106,7 +106,7 @@ public class TrainCrane extends Node {
 
         meTrainLift = new MotionEvent(traincraneLift, trainLift);
         trainLift.setCurveTension(0f);
-        meTrainLift.setSpeed(baseSpeed);
+        meTrainLift.setSpeed(baseSpeed*5);
         meTrainLift.play();
 
         trainHook = new MotionPath();
@@ -115,7 +115,7 @@ public class TrainCrane extends Node {
 
         meTrainHook = new MotionEvent(traincraneHook, trainHook);
         trainHook.setCurveTension(0f);
-        meTrainHook.setSpeed(baseSpeed);
+        meTrainHook.setSpeed(baseSpeed*5);
         meTrainHook.play();
     }
     public float Z;
@@ -141,7 +141,7 @@ public class TrainCrane extends Node {
         float traincraneLiftF = traincraneLift.getLocalTranslation().z;
         float traincraneLiftpos = precision(2, traincraneLiftF);
         
-        System.out.println("TrainCrane  "+ trainCranePos);
+        System.out.println("TrainCrane  " + trainCranePos);
         System.out.println("TrainCraneHook  " + traincraneHookPos);
         System.out.println("TrainCraneLift  " + traincraneLiftpos);
         
@@ -151,7 +151,7 @@ public class TrainCrane extends Node {
                 break;
                 
             case 1:
-                // MOVE NAAR TRUCK
+                // MOVE NAAR TRAINWAGON
                 if (trainCranePos == -63.0f){
                     busy = true;
                     moveBase(9);
@@ -164,57 +164,90 @@ public class TrainCrane extends Node {
                 }
                 break;
             case 2:
-                // MOVE HOOK DOWN
-                if (trainCranePos == -54.0f && traincraneHookPos == 0.0f){
+                // MOVE LIFT TO TRAIN
+                if (trainCranePos == -54.0f && traincraneLiftpos == 0.0f){
                     busy = true;
-                    moveHook(-0.8f);
+                    moveLift(-1);
                 }
-                else if (traincraneHookPos == -0.8f && busy !=false){
-                    
+                else if(traincraneLiftpos == -1.0f){
                     cranepos = 3;
                     busy = false;
                 }
                 break;
             case 3:
+                // MOVE HOOK DOWN
+                if (trainCranePos == -54.0f && traincraneHookPos == 0.0f && traincraneLiftpos == -1.0f){
+                    busy = true;
+                    moveHook(-0.8f);
+                }
+                else if (traincraneHookPos == -0.8f && busy !=false){
+                    
+                    cranepos = 4;
+                    busy = false;
+                }
+                break;                  
+            case 4:
                 // MOVE HOOK UP
-                if (trainCranePos == -54.0f && traincraneHookPos == -0.8f){
+                if (trainCranePos == -54.0f && traincraneHookPos == -0.8f && traincraneLiftpos == -1.0f){
                     busy = true;
                     moveHook(0.8f);
                 }
                 else if (traincraneHookPos == 0.0f && busy !=false){
-                    cranepos = 4;
+                    cranepos = 5;
                     busy = false;
                 }
                 break;
-            case 4:
+            case 5:
+                // MOVE LIFT TO AGV
+                if (trainCranePos == -54.0f && traincraneHookPos == 0.0f && traincraneLiftpos == -1.0f){
+                    busy = true;
+                    moveLift(2.5f);                   
+                }
+                else if (traincraneLiftpos == 1.5f && busy !=false){
+                    cranepos = 6;
+                    busy = false;
+                }
+                break;
+            case 6:
                 // RIJD KRAAN
                 if (trainCranePos == -54.0f && traincraneHookPos == 0.0f){
                     busy = true;
                     moveBase(-9);
                 }
                 else if (trainCranePos == -63.0f && busy != false){
-                    cranepos = 5;
+                    cranepos = 7;
                     busy = false;
                 }
                 break;
-            case 5:
+            case 7:
                 // MOVE HOOK DOWN
                 if (trainCranePos == -63.0f && traincraneHookPos == 0.0f){
                     busy = true;
                     moveHook(-0.8f);
                 }
                 else if (traincraneHookPos == -0.8f && busy !=false){
-                    cranepos = 6;
+                    cranepos = 8;
                     busy = false;
                 }
                 break;
-            case 6:
+            case 8:
                 // MOVE HOOK UP
                 if (trainCranePos == -63.0f && traincraneHookPos == -0.8f){
                     busy = true;
                     moveHook(0.8f);
                 }
                 else if (traincraneHookPos == 0.0f && busy !=false){
+                    cranepos = 9;
+                    busy = false;
+                }
+                break;
+            case 9:
+                // MOVE TO START POSITION
+                if (trainCranePos == -63.0f && traincraneHookPos == 0.0f && traincraneLiftpos == 1.5f){
+                    busy = true;
+                    moveLift(-1.5f);
+                }
+                else if (traincraneLiftpos == 0.0f && busy != false){
                     cranepos = 0;
                     busy = false;
                 }
