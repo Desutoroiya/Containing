@@ -17,81 +17,84 @@ import java.util.List;
  *
  * @author Fons
  */
-public class Server_client implements Runnable
-{
-    
+public class Server_client implements Runnable {
+
     private static Socket clientSocket;
     private static PrintStream os;
     private static DataInputStream is;
     private static BufferedReader inputLine;
-    
+    private Main main;
     private static boolean open = true;
     private static String hostname;
     private static int port;
     private static String sendMessage;
     private static String recievedMessage;
     public static List<String> log = new ArrayList<String>();
-    
-    public static void client(){
-        
+
+    public static void main(String[] args) {
+
+
         hostname = "localhost";
         port = 6060;
         try {
-            
+
+            System.out.println("check 1");
             clientSocket = new Socket(hostname, port);
             inputLine = new BufferedReader(new InputStreamReader(System.in));
             os = new PrintStream(clientSocket.getOutputStream());
             is = new DataInputStream(clientSocket.getInputStream());
-            
+            Main app = new Main();
+            app.start();
+            app.setDisplayStatView(false);
+            app.setDisplayFps(false);
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        
-        if(clientSocket != null && os != null && is != null){
-            
-            try{
-                
-               new Thread(new Server_client()).start();
-               os.println("Ready");
-               
-               while(open){
-                   
-                   os.println(inputLine.readLine());
-                   
-               }
-              os.close();
-              is.close();
-              clientSocket.close();
-            }catch(IOException ex){
+
+        if (clientSocket != null && os != null && is != null) {
+
+            try {
+                System.out.println("check 2");
+                new Thread(new Server_client()).start();
+                os.println("Ready");
+
+                while (open) {
+                    System.out.println("check 3");
+                    os.println(inputLine.readLine());
+
+                }
+                os.close();
+                is.close();
+                clientSocket.close();
+            } catch (IOException ex) {
                 ex.printStackTrace();
             }
         }
     }
-    
-    public void run(){
-        
-        try{
+
+    public void run() {
+
+        try {
             
-            while(true){
+            while (true) {
+
+                System.out.println("check 4");
+                recievedMessage = is.readLine();
+                System.out.println(recievedMessage);
+
+                if (recievedMessage.equals("Vrachtauto")) {
+                }
+
+                log.add(recievedMessage);
+
                 
-               recievedMessage = is.readLine();
-               System.out.println(recievedMessage);
-               
-               if(recievedMessage.equals("Vrachtauto")){
-                   
-                   
-                   
-               }
-               
-               log.add(recievedMessage);
-               
-               //System.out.println(log);
-      
+
             }
-            
-        }catch(IOException ex){
+
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
-        
+
     }
 }

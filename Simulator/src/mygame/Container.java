@@ -20,10 +20,6 @@ public class Container
     Node rootNode;
     Node contNode = new Node();
     
-    public static void main(String[] args){   
-    } 
-
-    
     public Container(AssetManager assetManager, Node rootNode)
     {
         this.assetManager = assetManager;   

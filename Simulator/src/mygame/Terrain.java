@@ -18,10 +18,7 @@ public class Terrain
 {       
     private AssetManager assetManager;
     private Node rootNode;
-    
-    public static void main(String[] args){        
-    } 
-    
+
     public Terrain(AssetManager assetManager, Node rootNode)
     {
         this.assetManager = assetManager;   
