@@ -7,9 +7,12 @@ package mygame;
 import com.jme3.asset.AssetManager;
 import com.jme3.cinematic.MotionPath;
 import com.jme3.cinematic.events.MotionEvent;
+import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 
 /**
  *
@@ -32,11 +35,9 @@ public class StoreCrane extends Node {
     private MotionEvent meStoreCrane;
     private MotionEvent meStoreHook;
     private MotionEvent meStoreLift;
-    public float x = 0f;
-    public float y = 0;
-    public float z = 0f;
-    Vector3f Position = new Vector3f(x, y, z);
     private float baseSpeed = 1.0f;
+    private ArrayList<Boolean> avgBuffer = new ArrayList<Boolean>();
+    
 
     public StoreCrane(AssetManager assetManager) {
         this.assetManager = assetManager;
@@ -56,50 +57,186 @@ public class StoreCrane extends Node {
         storageCrane.attachChild(storageCraneBase);
         storageCrane.attachChild(storageCraneHook);
 
-        storageCrane.rotate(0, 1.5707f, 0);
+        storageCrane.rotate(0, FastMath.PI / 2, 0);
+        avgBuffer.add(true);
+        avgBuffer.add(false);
+        avgBuffer.add(false);
+        avgBuffer.add(false);
+        System.out.println(avgBuffer);
+        
     }
 
-    public void moveBase(float x, float y, float z) {
+    public Vector3f locationBase = storageCrane.getLocalTranslation();
+    public Vector3f locationLift = storageCraneLift.getLocalTranslation();  
+    public Vector3f locationHook = storageCraneHook.getLocalTranslation();
+    
+    public void moveBase(float zmove) {
         storeBase = new MotionPath();
-        storeBase.addWayPoint(new Vector3f(x, y, z));
-        storeBase.addWayPoint(new Vector3f(x, y, z - 36));
-        storeBase.setCycle(true);
+        storeBase.addWayPoint(locationBase);
+        storeBase.addWayPoint(new Vector3f(locationBase.x, locationBase.y, locationBase.z + zmove));
+        storeBase.setCycle(false);
 
         meStoreCrane = new MotionEvent(storageCrane, storeBase);
         storeBase.setCurveTension(0f);
-        meStoreCrane.setSpeed(baseSpeed * 0.2f);
+        meStoreCrane.setSpeed(baseSpeed);
         meStoreCrane.play();
     }
 
-    public void moveHook() {
+    public void moveHook(float ymove) {
         storeHook = new MotionPath();
-        storeHook.addWayPoint(new Vector3f(Position));
-        storeHook.addWayPoint(new Vector3f(Position.x, Position.y - 0.2f, Position.z));
-        storeHook.setCycle(true);
+        storeHook.addWayPoint(new Vector3f(locationHook));
+        storeHook.addWayPoint(new Vector3f(locationHook.x, locationHook.y + ymove, locationHook.z));
+        storeHook.setCycle(false);
 
-        meStoreHook = new MotionEvent(StoreCraneHook, storeHook);
+        meStoreHook = new MotionEvent(storageCraneHook, storeHook);
         storeHook.setCurveTension(0f);
         meStoreHook.setSpeed(baseSpeed);
         meStoreHook.play();
     }
 
-    public void moveLift() {
+    public void moveLift(float xmove) {
         storeLift = new MotionPath();
-        storeLift.addWayPoint(new Vector3f(Position));
-        storeLift.addWayPoint(new Vector3f(Position.x, Position.y, Position.z - 0.75f));
+        storeLift.addWayPoint(locationLift);
+        storeLift.addWayPoint(new Vector3f(locationLift.x, locationLift.y, locationLift.z + xmove));
 
-        meStoreLift = new MotionEvent(StoreCraneLift, storeLift);
+        meStoreLift = new MotionEvent(storageCraneLift, storeLift);
         storeLift.setCurveTension(0f);
         meStoreLift.setSpeed(baseSpeed);
         meStoreLift.play();
 
         storeHook = new MotionPath();
-        storeHook.addWayPoint(new Vector3f(Position));
-        storeHook.addWayPoint(new Vector3f(Position.x, Position.y, Position.z - 0.75f));
+        storeHook.addWayPoint(locationLift);
+        storeHook.addWayPoint(new Vector3f(locationLift.x , locationLift.y, locationLift.z + xmove));
 
-        meStoreHook = new MotionEvent(StoreCraneHook, storeHook);
+        meStoreHook = new MotionEvent(storageCraneHook, storeHook);
         storeHook.setCurveTension(0f);
         meStoreHook.setSpeed(baseSpeed);
         meStoreHook.play();
     }
+
+    private int cranepos = 1;
+    private boolean busy = false;
+    
+    public static Float precision(int decimalPlace, Float d) {
+        BigDecimal bd = new BigDecimal(Float.toString(d));
+        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
+        return bd.floatValue();
+    }
+    
+    public void update(float tpf){
+        
+        float craneBasePos = precision(2, storageCrane.getLocalTranslation().z);
+        float craneLiftPos = precision(2, storageCraneLift.getLocalTranslation().z);
+        float craneHookPos = precision(2, storageCraneHook.getLocalTranslation().y);
+        System.out.println("LiftPosition:   " + craneLiftPos);
+        System.out.println("BasePosition:   " + craneBasePos);
+        System.out.println("HookPosition:   " + craneHookPos);
+        
+        switch (cranepos){
+            //Default state van storagecrane boven parkeerplaatsen
+            case 0:
+            //doe niks
+                break;
+                
+            //Checken of er een agv, waar deze staat, move lift en hook.
+            case 1:
+                if (craneLiftPos == 0.0f)
+                {
+                    busy = true;
+                    moveLift(-0.75f);
+                    //moveHook(0.75f);
+                }
+                else if (craneLiftPos == -0.75f && busy != false)
+                {
+                    cranepos = 2;
+                    busy = false;
+                }
+                
+                break;
+                
+            //Hook omlaag
+            case 2:
+                if (craneHookPos == 0.0f)
+                {
+                    busy = true;
+                    moveHook(-1.6f);
+                }
+                else if (craneHookPos == -1.6f && busy != false)
+                {
+                    cranepos = 3;
+                    busy = false;
+                }
+                break;
+              
+            //hook omhoog
+            case 3:
+                if (craneHookPos == -1.6f)
+                {
+                    busy = true;
+                    moveHook(+1.6f);
+                }
+                else if (craneHookPos == 0.0f && busy != false)
+                {
+                    cranepos = 4;
+                    busy = false;
+                }                
+                break;
+                
+            //Base verplaatsen boven opslagpositie
+            case 4:
+                if (craneBasePos == 18.0f)
+                {
+                    busy = true;
+                    moveBase(-2);
+                }
+                else if (craneBasePos == 16.0f && busy != false)
+                {
+                    cranepos = 5;
+                    busy = false;
+                }
+                break;
+                
+            //Hook naar beneden
+            case 5:
+                if (craneHookPos == 0.0f)
+                {
+                    busy = true;
+                    moveHook(-1.6f);
+                }
+                else if (craneHookPos == -1.6f && busy != false)
+                {
+                    cranepos = 6;
+                    busy = false;
+                }
+                break;
+                
+            // hook omhoog en lift naar center position
+            case 6:
+                 if (craneHookPos == -1.6f)
+                {
+                    busy = true;
+                    moveHook(+1.6f);
+                }
+                else if (craneHookPos == 0.0f && busy != false)
+                {
+                    cranepos = 7;
+                    busy = false;
+                }
+                break;
+            //Base verplaatsen naar standaar positie
+            case 7:
+                 if (craneBasePos == 16.0f && craneLiftPos == -0.75)
+                {
+                    busy = true;
+                    moveBase(+2);
+                    moveLift(+0.75f);
+                }
+                else if (craneBasePos == 18.0f && craneLiftPos == 0.0f && busy != false)
+                {
+                    cranepos = 1;
+                    busy = false;
+                }
+                break;
+        }
+    }  
 }
