@@ -45,9 +45,9 @@ public class ShipCrane extends Node {
     }
 
     public void createShipCrane() {
-        Spatial ShipCraneLift = assetManager.loadModel("Models/Shipcrane/craneLift.j3o");
-        Spatial ShipCraneBase = assetManager.loadModel("Models/Shipcrane/craneBase.j3o");
-        Spatial ShipCraneHook = assetManager.loadModel("Models/Shipcrane/craneHook.j3o");
+        ShipCraneLift = assetManager.loadModel("Models/Shipcrane/craneLift.j3o");
+        ShipCraneBase = assetManager.loadModel("Models/Shipcrane/craneBase.j3o");
+        ShipCraneHook = assetManager.loadModel("Models/Shipcrane/craneHook.j3o");
 
         shipCraneLift.attachChild(ShipCraneLift);
         shipCraneBase.attachChild(ShipCraneBase);

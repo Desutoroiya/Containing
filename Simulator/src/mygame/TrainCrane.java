@@ -10,6 +10,7 @@ import com.jme3.cinematic.events.MotionEvent;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+import java.math.BigDecimal;
 
 /**
  *
@@ -18,96 +19,223 @@ import com.jme3.scene.Spatial;
 public class TrainCrane extends Node {
 
     TrainWagon[] trainWagon;
+    Train[] train;
+    AGV[] agv;
+    TrainCrane[] trainList;
+    Container[] container;
+    
+    Spatial TrainCraneLift;
+    Spatial TrainCraneBase;
+    Spatial TrainCraneHook;
+    
     private Node rootNode;
     Node trainCrane = new Node();
+    Node traincraneLift = new Node();
+    Node traincraneBase = new Node();
+    Node traincraneHook = new Node();
+    
     public AssetManager assetManager;
+    
     private MotionPath trainBase;
     private MotionPath trainHook;
     private MotionPath trainLift;
+    
     private MotionEvent meTrainCrane;
     private MotionEvent meTrainHook;
     private MotionEvent meTrainLift;
+    
     public float x = 0f;
     public float y = 0;
     public float z = 0f;
-    Vector3f Position = new Vector3f(x, y, z);    
+    
+    //Vector3f Position = new Vector3f(x, y, z);    
     private float baseSpeed = 1.0f;
 
-    public TrainCrane(AssetManager assetManager,TrainWagon[] trainWagon) {
-        this.assetManager = assetManager;
-        this.rootNode = rootNode;
+    public TrainCrane(AssetManager assetManager, TrainWagon[] trainWagon) {
+        this.assetManager = assetManager; 
         this.trainWagon = trainWagon;
-        
+        this.rootNode = rootNode;
     }
-
+    
     public void createTrainCrane() {
-        Spatial TrainCraneLift = assetManager.loadModel("Models/Traincrane/trainCraneLift.j3o");
-        Spatial TrainCraneBase = assetManager.loadModel("Models/Traincrane/trainCraneBase.j3o");
-        Spatial TrainCraneHook = assetManager.loadModel("Models/Traincrane/trainCraneHook.j3o");
+        TrainCraneLift = assetManager.loadModel("Models/Traincrane/trainCraneLift.j3o");
+        TrainCraneBase = assetManager.loadModel("Models/Traincrane/trainCraneBase.j3o");
+        TrainCraneHook = assetManager.loadModel("Models/Traincrane/trainCraneHook.j3o");
         
-        trainCrane.attachChild(TrainCraneLift);
-        trainCrane.attachChild(TrainCraneBase);
-        trainCrane.attachChild(TrainCraneHook);
+        traincraneLift.attachChild(TrainCraneLift);
+        traincraneBase.attachChild(TrainCraneBase);
+        traincraneHook.attachChild(TrainCraneHook);
+        
+        trainCrane.attachChild(traincraneLift);
+        trainCrane.attachChild(traincraneBase);
+        trainCrane.attachChild(traincraneHook);
+
     }
+    public Vector3f locationBase = trainCrane.getLocalTranslation();
+    public Vector3f positionHook = traincraneHook.getLocalTranslation();
+    public Vector3f positionLift = traincraneLift.getLocalTranslation();
   
-    public void moveBase(float x) {
-        
-        
+    public void moveBase(float xmove) {
         trainBase = new MotionPath();
         
-        trainBase.addWayPoint(new Vector3f(trainCrane.getLocalTranslation()));
-        trainBase.addWayPoint(new Vector3f(x , trainCrane.getLocalTranslation().y, trainCrane.getLocalTranslation().z));
-        trainBase.setCycle(true);
+        trainBase.addWayPoint(locationBase);
+        trainBase.addWayPoint(new Vector3f(locationBase.x + xmove, locationBase.y, locationBase.z ));
+        trainBase.setCycle(false);
         
         meTrainCrane = new MotionEvent(trainCrane, trainBase);
         trainBase.setCurveTension(0f);
         meTrainCrane.setSpeed(baseSpeed);
         meTrainCrane.play();
-        
     }
 
-    public void moveHook() {
-        Spatial detrainHook = trainCrane.getChild(2);
+    public void moveHook(float ymove) {
         trainHook = new MotionPath();
-        trainHook.addWayPoint(new Vector3f(Position));
-        trainHook.addWayPoint(new Vector3f(Position.x, Position.y - 0.5f, Position.z));
+        trainHook.addWayPoint(new Vector3f(positionHook));
+        trainHook.addWayPoint(new Vector3f(positionHook.x, positionHook.y + ymove, positionHook.z));
 
-        meTrainHook = new MotionEvent(detrainHook, trainHook);
+        meTrainHook = new MotionEvent(traincraneHook, trainHook);
         trainHook.setCurveTension(0f);
         meTrainHook.setSpeed(baseSpeed);
         meTrainHook.play();
     }
 
-    public void moveLift() {
-        Spatial detrainLift = trainCrane.getChild(0);
+    public void moveLift(float zmove) {
         trainLift = new MotionPath();
-        trainLift.addWayPoint(new Vector3f(Position));
-        trainLift.addWayPoint(new Vector3f(Position.x, Position.y, Position.z + 2f));
-        trainLift.addWayPoint(new Vector3f(Position.x, Position.y, Position.z - 2f));
-        trainLift.addWayPoint(new Vector3f(Position));
+        trainLift.addWayPoint(new Vector3f(positionLift));
+        trainLift.addWayPoint(new Vector3f(positionLift.x, positionLift.y, positionLift.z + zmove));
 
-        meTrainLift = new MotionEvent(detrainLift, trainLift);
+        meTrainLift = new MotionEvent(traincraneLift, trainLift);
         trainLift.setCurveTension(0f);
         meTrainLift.setSpeed(baseSpeed);
         meTrainLift.play();
 
-        Spatial detrainHook = trainCrane.getChild(2);
         trainHook = new MotionPath();
-        trainHook.addWayPoint(new Vector3f(Position));
-        trainHook.addWayPoint(new Vector3f(Position.x, Position.y, Position.z + 2f));
-        trainHook.addWayPoint(new Vector3f(Position.x, Position.y, Position.z - 2f));
-        trainHook.addWayPoint(new Vector3f(Position));
+        trainHook.addWayPoint(new Vector3f(positionLift));
+        trainHook.addWayPoint(new Vector3f(positionLift.x, positionLift.y, positionLift.z + zmove));
 
-        meTrainHook = new MotionEvent(detrainHook, trainHook);
+        meTrainHook = new MotionEvent(traincraneHook, trainHook);
         trainHook.setCurveTension(0f);
         meTrainHook.setSpeed(baseSpeed);
         meTrainHook.play();
     }
-    public void getContainer(int i){
-        moveBase(trainWagon[i].trainwagon.getLocalTranslation().x);
-        if(this.getLocalTranslation().x==trainWagon[i].trainwagon.getLocalTranslation().x){
-            moveLift();
-            moveHook();
+    public float Z;
+    public float Y;
+    
+    private int cranepos = 1;
+    private boolean busy = false;
+    
+    public static Float precision(int decimalPlace, Float d) {
+        BigDecimal bd = new BigDecimal(Float.toString(d));
+        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
+        return bd.floatValue();
+    }
+    
+    public void update(float tpf){
+        
+        float trainCraneF = trainCrane.getLocalTranslation().x;
+        float trainCranePos = precision(2,trainCraneF);
+        
+        float traincraneHookF = traincraneHook.getLocalTranslation().y;
+        float traincraneHookPos = precision(2, traincraneHookF);
+        
+        float traincraneLiftF = traincraneLift.getLocalTranslation().z;
+        float traincraneLiftpos = precision(2, traincraneLiftF);
+        
+        System.out.println("TrainCrane  "+ trainCranePos);
+        System.out.println("TrainCraneHook  " + traincraneHookPos);
+        System.out.println("TrainCraneLift  " + traincraneLiftpos);
+        
+        switch (cranepos){
+            case 0:
+            //doe niks
+                break;
+                
+            case 1:
+                // MOVE NAAR TRUCK
+                if (trainCranePos == -63.0f){
+                    busy = true;
+                    moveBase(9);
+                }
+                else if (trainCranePos == -54.0f && busy != false){
+                    //Train, crane, container
+                    //trainToCrane(train[1], trainList[1], container[2]);
+                    cranepos = 2;
+                    busy = false;
+                }
+                break;
+            case 2:
+                // MOVE HOOK DOWN
+                if (trainCranePos == -54.0f && traincraneHookPos == 0.0f){
+                    busy = true;
+                    moveHook(-0.8f);
+                }
+                else if (traincraneHookPos == -0.8f && busy !=false){
+                    
+                    cranepos = 3;
+                    busy = false;
+                }
+                break;
+            case 3:
+                // MOVE HOOK UP
+                if (trainCranePos == -54.0f && traincraneHookPos == -0.8f){
+                    busy = true;
+                    moveHook(0.8f);
+                }
+                else if (traincraneHookPos == 0.0f && busy !=false){
+                    cranepos = 4;
+                    busy = false;
+                }
+                break;
+            case 4:
+                // RIJD KRAAN
+                if (trainCranePos == -54.0f && traincraneHookPos == 0.0f){
+                    busy = true;
+                    moveBase(-9);
+                }
+                else if (trainCranePos == -63.0f && busy != false){
+                    cranepos = 5;
+                    busy = false;
+                }
+                break;
+            case 5:
+                // MOVE HOOK DOWN
+                if (trainCranePos == -63.0f && traincraneHookPos == 0.0f){
+                    busy = true;
+                    moveHook(-0.8f);
+                }
+                else if (traincraneHookPos == -0.8f && busy !=false){
+                    cranepos = 6;
+                    busy = false;
+                }
+                break;
+            case 6:
+                // MOVE HOOK UP
+                if (trainCranePos == -63.0f && traincraneHookPos == -0.8f){
+                    busy = true;
+                    moveHook(0.8f);
+                }
+                else if (traincraneHookPos == 0.0f && busy !=false){
+                    cranepos = 0;
+                    busy = false;
+                }
+                break;
         }
     }
+//        public void trainToCrane(Train train, TrainCrane trainCrane, Container container){
+//        //train.detachChild(container.contNode);
+//        trainCrane.attachChild(container.contNode);
+//    }
+//        public void craneToTrain(Train train, TrainCrane trainCrane, Container container){
+//        trainCrane.detachChild(container.contNode);
+//        train.attachChild(container.contNode);
+//    }
+    
+//    
+//    public void getContainer(int i){
+//        moveBase(trainWagon[i].trainwagon.getLocalTranslation().x);
+//        if(this.getLocalTranslation().x ==trainWagon[i].trainwagon.getLocalTranslation().x){
+//            moveLift();
+//            moveHook();
+//        }
+//    }
 }
