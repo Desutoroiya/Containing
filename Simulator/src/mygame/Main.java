@@ -26,24 +26,50 @@ public class Main extends SimpleApplication {
     int containerAmount;
     int containerAmountVar;
     
-    // Aanroepen
-    Container[] container;
+    //variabelen voor trucks
+    float truckSpawnX = 69;
+    int truckcount = 0;
     
-    Ship[] schip;
-    Barge[] barge;
-    AGV[] agv;
-    Truck[] truck;
-    
-    ShipCrane[] shipCrane;
-    List<ShipCrane> ShipCraneList;
-    StoreCrane[] storageCrane;
-    List<TruckCrane> TruckCraneList;
-    TruckCrane[] truckCrane;
-    BargeCrane[] bargeCrane;
-    TrainCrane[] trainCrane;
+    // DE LISTS
+    public static Container[] container;
     List<Container> containerList;
     
+    public static Ship[] schip;
+    List<Ship> ShipList;
+    
+    public static Barge[] barge;
+    List<Barge> BargeList;
+    
+    public static AGV[] agv;
+    List<AGV> AGVList;
+    
+    public static Truck[] truck;
+    List<Truck> TruckList;
+    
+    public static ShipCrane[] shipCrane;
+    List<ShipCrane> ShipCraneList;
+    
+    public static StoreCrane[] storageCrane;
+    List<StoreCrane> StorageCraneList;
+    
+    public static TruckCrane[] truckCrane;
+    List<TruckCrane> TruckCraneList;
+    
+    public static BargeCrane[] bargeCrane;
+    List<BargeCrane> BargeCraneList;
+    
+    public static TrainCrane[] trainCrane;
+    List<TrainCrane> TrainCraneList;
+    
     TrainWagon[] trainWagon;
+    List<TrainWagon> trainWagonList;
+    
+    public static void main(String[] args){
+        Main app = new Main();
+        app.start();
+        app.setDisplayStatView(false);
+        app.setDisplayFps(false);
+    }
 
     @Override
     public void simpleInitApp() {
@@ -68,16 +94,6 @@ public class Main extends SimpleApplication {
         bargeCrane[2].moveLift();
         
         readHandler();
-        //trainWagon[1].trainwagon.attachChild(container[35].contNode);
-        //container[35].contNode.setLocalTranslation(new Vector3f(0,0,0));
-        
-        //createTrain(3);
-//        truck[0].truck.attachChild(container[34].contNode);
-        
-//        truckCrane[0].craneHook.attachChild(container[35].contNode);
-//        truck[0].truck.attachChild(container[74].contNode);
-//        container[74].contNode.setLocalTranslation(0.3f,0.25f,0);
-//        container[74].contNode.rotate(0,FastMath.HALF_PI,0);
     }
 
     @Override
@@ -87,11 +103,16 @@ public class Main extends SimpleApplication {
                     truckCrane.update(tpf);
             }
         }
-//        if (shipCrane != null){
-//            for (ShipCrane shipCrane : ShipCraneList){
-//                shipCrane.update(tpf);
-//            }
-//        }
+        if (shipCrane != null){
+            for (ShipCrane shipCrane : ShipCraneList){
+                shipCrane.update(tpf);
+            }
+        }
+        if (trainCrane != null){
+            for (TrainCrane trainCrane : TrainCraneList){
+                trainCrane.update(tpf);
+            }
+        }
     }
 
     @Override
@@ -99,23 +120,15 @@ public class Main extends SimpleApplication {
         //TODO: add render code
     }
     public void readHandler(){
-        
         int i = 0;
         
         for (String message : Server_client.log) {
-        
-            
             if(Server_client.log.get(i).equals("vrachtauto")){
                 
                 loadTrucks();
+//                truck[i].truck.attachChild(container[i].contNode);
                 System.out.println("check " + i);
-                
-                
-                //Server_client.log.get(i-1)
             }
-            
-            
-            
             i ++;
         }
     }
@@ -130,7 +143,7 @@ public class Main extends SimpleApplication {
         train.setLocalTranslation(Xtrainwagon, Ytrainwagon, Ztrainwagon);
         rootNode.attachChild(train);
         
-        List<TrainWagon> trainWagonList = new LinkedList<TrainWagon>();
+        trainWagonList = new LinkedList<TrainWagon>();
         trainWagon = new TrainWagon[wagons];
         
         int test = 35;
@@ -195,7 +208,7 @@ public class Main extends SimpleApplication {
         float Yagv = 0;
         float Zagv = -22f;
 
-        List<AGV> AGVList = new LinkedList<AGV>();
+        AGVList = new LinkedList<AGV>();
         agv = new AGV[100];
 
         for (int i = 0; i < 50; i++) {
@@ -249,7 +262,7 @@ public class Main extends SimpleApplication {
         float YtrainCrane = 0;
         float ZtrainCrane = -27;
 
-        List<TrainCrane> TrainCraneList = new LinkedList<TrainCrane>();
+        TrainCraneList = new LinkedList<TrainCrane>();
         trainCrane = new TrainCrane[4];
 
         for (int i = 0; i < 4; i++) {
@@ -275,7 +288,7 @@ public class Main extends SimpleApplication {
         float YstorecraneTwo = 0;
         float ZstorecraneTwo = 18;
 
-        List<StoreCrane> StorageCraneList = new LinkedList<StoreCrane>();
+        StorageCraneList = new LinkedList<StoreCrane>();
         storageCrane = new StoreCrane[46];
 
         for (int i = 0; i < 23; i++) {
@@ -328,7 +341,7 @@ public class Main extends SimpleApplication {
         float Ybargecrane = 0;
         float Zbargecrane = 29;
 
-        List<BargeCrane> BargeCraneList = new LinkedList<BargeCrane>();
+        BargeCraneList = new LinkedList<BargeCrane>();
         bargeCrane = new BargeCrane[8];
 
         for (int i = 0; i < 8; i++) {
@@ -382,17 +395,12 @@ public class Main extends SimpleApplication {
         }
     }
     
-    
-    float truckSpawnX = 69;
-    
-    int truckcount = 0;
-    
     public void loadTrucks(){
         
         float truckSpawnY = 0;
         float truckSpawnZ = 24.25f;
         
-        List<Truck> TruckList = new LinkedList<Truck>();
+        TruckList = new LinkedList<Truck>();
         truck = new Truck[10];
         
         for (int i = 0; i < 1; i++){
@@ -408,7 +416,7 @@ public class Main extends SimpleApplication {
     }
     
     public void loadShips(){
-        List<Ship> ShipList = new LinkedList<Ship>();
+        ShipList = new LinkedList<Ship>();
         schip = new Ship[2];
         
         for (int i = 0; i < 1; i++){
@@ -422,7 +430,7 @@ public class Main extends SimpleApplication {
     }
     
     public void loadBarges(){
-        List<Barge> BargeList = new LinkedList<Barge>();
+        BargeList = new LinkedList<Barge>();
         barge = new Barge[2];
         
         for (int i = 0; i < 1; i++){ 

@@ -147,7 +147,6 @@ public class TruckCrane extends Node{
                     moveHook(-0.6f);
                 }
                 else if (craneHookPos == -0.6f && busy !=false){
-//                    Main.truckCrane[0].craneHook.attachChild(Main.container[74].contNode);
                     truckToCrane(Main.truck[0], Main.truckCrane[0], Main.container[74]);
                     cranepos = 3;
                     busy = false;
