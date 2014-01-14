@@ -30,9 +30,11 @@ public class Truck extends Node  {
         this.assetManager = assetManager;
     }
 
-    public void move(int plaats) {
+    public void move(String plaats) {
+        
+        int Parking = Integer.parseInt(plaats);
 
-        float distanceX = 75f - (plaats * 3);
+        float distanceX = 75f - (Parking * 3);
         float distanceY = 0f;
         float distanceZ = 28f;
 

@@ -45,13 +45,6 @@ public class Main extends SimpleApplication {
     
     TrainWagon[] trainWagon;
 
-    public static void main(String[] args) {
-        Main app = new Main();
-        app.start();
-        app.setDisplayStatView(false);
-        app.setDisplayFps(false);
-    }
-
     @Override
     public void simpleInitApp() {
         //SET LOCATION FOR CAMERA + SPEED
@@ -60,7 +53,7 @@ public class Main extends SimpleApplication {
         
         //LOAD ASSETS
         loadTerrainLight();
-        loadTrucks();
+        //loadTrucks();
         loadAGV();
         loadTruckCranes();
         loadTrainCranes();
@@ -74,6 +67,7 @@ public class Main extends SimpleApplication {
         loadContainers();
         bargeCrane[2].moveLift();
         
+        readHandler();
         //trainWagon[1].trainwagon.attachChild(container[35].contNode);
         //container[35].contNode.setLocalTranslation(new Vector3f(0,0,0));
         
@@ -103,6 +97,27 @@ public class Main extends SimpleApplication {
     @Override
     public void simpleRender(RenderManager rm) {
         //TODO: add render code
+    }
+    public void readHandler(){
+        
+        int i = 0;
+        
+        for (String message : Server_client.log) {
+        
+            
+            if(Server_client.log.get(i).equals("vrachtauto")){
+                
+                loadTrucks();
+                System.out.println("check " + i);
+                
+                
+                //Server_client.log.get(i-1)
+            }
+            
+            
+            
+            i ++;
+        }
     }
     
     public void createTrain(int wagons){
@@ -367,22 +382,28 @@ public class Main extends SimpleApplication {
         }
     }
     
+    
+    float truckSpawnX = 69;
+    
+    int truckcount = 0;
+    
     public void loadTrucks(){
         
-        float truckSpawnX = 69f;
         float truckSpawnY = 0;
         float truckSpawnZ = 24.25f;
         
         List<Truck> TruckList = new LinkedList<Truck>();
         truck = new Truck[10];
         
-        for (int i = 0; i < 4; i++){
-            truck[i] = new Truck(assetManager);
+        for (int i = 0; i < 1; i++){
+            truck[truckcount] = new Truck(assetManager);
             TruckList.add(truck[i]);
             
-            truck[i].createTruck();
-            truck[i].truck.setLocalTranslation(truckSpawnX, truckSpawnY, truckSpawnZ);
-            rootNode.attachChild(truck[i].truck);
+            truck[truckcount].createTruck();
+            truck[truckcount].truck.setLocalTranslation(truckSpawnX, truckSpawnY, truckSpawnZ);
+            rootNode.attachChild(truck[truckcount].truck);
+            truckcount++;
+            truckSpawnX -= 3;
         }
     }
     

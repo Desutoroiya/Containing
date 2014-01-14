@@ -38,7 +38,7 @@ public class Server_client implements Runnable {
         port = 6060;
         try {
 
-            System.out.println("check 1");
+            
             clientSocket = new Socket(hostname, port);
             inputLine = new BufferedReader(new InputStreamReader(System.in));
             os = new PrintStream(clientSocket.getOutputStream());
@@ -55,12 +55,12 @@ public class Server_client implements Runnable {
         if (clientSocket != null && os != null && is != null) {
 
             try {
-                System.out.println("check 2");
+                
                 new Thread(new Server_client()).start();
                 os.println("Ready");
 
                 while (open) {
-                    System.out.println("check 3");
+                    
                     os.println(inputLine.readLine());
 
                 }
@@ -79,7 +79,7 @@ public class Server_client implements Runnable {
             
             while (true) {
 
-                System.out.println("check 4");
+                
                 recievedMessage = is.readLine();
                 System.out.println(recievedMessage);
 
