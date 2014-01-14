@@ -19,8 +19,7 @@ public class TruckCrane extends Node{
     
     Truck[] truck;
     AGV[] agv;
-    TruckCrane[] truckCrane;
-    Container[] container;
+
 
     
     Spatial TCraneLift;
@@ -101,11 +100,11 @@ public class TruckCrane extends Node{
         
         meTCHook = new MotionEvent(craneHook, mpHook);
         mpHook.setCurveTension(0f);
-        meTCHook.setSpeed(baseSpeed*20);
+        meTCHook.setSpeed(baseSpeed*10);
         meTCHook.play();
     }
     
-    private int cranepos = 0;
+    private int cranepos = 1;
     private boolean busy = false;
     
     public static Float precision(int decimalPlace, Float d) {
@@ -145,18 +144,20 @@ public class TruckCrane extends Node{
                 // MOVE HOOK DOWN
                 if (truckCranePos == 24.0f && craneHookPos == 0.0f){
                     busy = true;
-                    moveHook(-0.8f);
+                    moveHook(-0.6f);
                 }
-                else if (craneHookPos == -0.8f && busy !=false){
+                else if (craneHookPos == -0.6f && busy !=false){
+//                    Main.truckCrane[0].craneHook.attachChild(Main.container[74].contNode);
+                    truckToCrane(Main.truck[0], Main.truckCrane[0], Main.container[74]);
                     cranepos = 3;
                     busy = false;
                 }
                 break;
             case 3:
                 // MOVE HOOK UP
-                if (truckCranePos == 24.0f && craneHookPos == -0.8f){
+                if (truckCranePos == 24.0f && craneHookPos == -0.6f){
                     busy = true;
-                    moveHook(0.8f);
+                    moveHook(0.6f);
                 }
                 else if (craneHookPos == 0.0f && busy !=false){
                     cranepos = 4;
@@ -178,18 +179,19 @@ public class TruckCrane extends Node{
                 // MOVE HOOK DOWN
                 if (truckCranePos == 22.0f && craneHookPos == 0.0f){
                     busy = true;
-                    moveHook(-0.8f);
+                    moveHook(-0.6f);
                 }
-                else if (craneHookPos == -0.8f && busy !=false){
+                else if (craneHookPos == -0.6f && busy !=false){
+                    craneToAgv(Main.agv[0], Main.truckCrane[0], Main.container[74]);
                     cranepos = 6;
                     busy = false;
                 }
                 break;
             case 6:
                 // MOVE HOOK UP
-                if (truckCranePos == 22.0f && craneHookPos == -0.8f){
+                if (truckCranePos == 22.0f && craneHookPos == -0.6f){
                     busy = true;
-                    moveHook(0.8f);
+                    moveHook(0.6f);
                 }
                 else if (craneHookPos == 0.0f && busy !=false){
                     cranepos = 0;
@@ -205,20 +207,24 @@ public class TruckCrane extends Node{
     public void truckToCrane(Truck truck, TruckCrane crane, Container container){
         truck.truck.detachChild(container.contNode);
         crane.craneHook.attachChild(container.contNode);
+        container.contNode.setLocalTranslation(0, 0.8f, 0);
     }
     
     public void craneToAgv(AGV agv, TruckCrane truckCrane, Container container){
-        truckCrane.detachChild(container.contNode);
-        agv.attachChild(container.contNode);
+        truckCrane.craneHook.detachChild(container.contNode);
+        agv.agv.attachChild(container.contNode);
+        container.contNode.setLocalTranslation(0,0.4f,0);
     }
     
     public void agvToCrane(AGV agv, TruckCrane truckCrane, Container container){
-        agv.detachChild(container.contNode);
-        truckCrane.attachChild(container.contNode);
+        agv.agv.detachChild(container.contNode);
+        truckCrane.craneHook.attachChild(container.contNode);
+        container.contNode.setLocalTranslation(0,0.4f,0);
     }
     
     public void craneToTruck(Truck truck, TruckCrane truckCrane, Container container){
-        truckCrane.detachChild(container.contNode);
-        truck.attachChild(container.contNode);
+        truckCrane.craneHook.detachChild(container.contNode);
+        truck.truck.attachChild(container.contNode);
+        container.contNode.setLocalTranslation(0,0.4f,0);
     }
 }
