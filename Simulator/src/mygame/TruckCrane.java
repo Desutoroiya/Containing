@@ -20,7 +20,7 @@ public class TruckCrane extends Node{
     Truck[] truck;
     AGV[] agv;
 
-
+    public int cranepos = 0;
     
     Spatial TCraneLift;
     Spatial TCraneBase;
@@ -104,7 +104,6 @@ public class TruckCrane extends Node{
         meTCHook.play();
     }
     
-    private int cranepos = 1;
     private boolean busy = false;
     
     public static Float precision(int decimalPlace, Float d) {
@@ -112,11 +111,11 @@ public class TruckCrane extends Node{
         bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
         return bd.floatValue();
     }
+    public static boolean loaded = false;
+    public static int yolo = 0;
     
     public void update(float tpf){
         
-        boolean loaded = false;
-                
         float craneHookPos = precision(2, craneHook.getLocalTranslation().y);
         float truckCranePos = precision(2, truckCraneNode.getLocalTranslation().z);
         
@@ -147,7 +146,11 @@ public class TruckCrane extends Node{
                     moveHook(-0.6f);
                 }
                 else if (craneHookPos == -0.6f && busy !=false){
-                    truckToCrane(Main.truck[0], Main.truckCrane[0], Main.container[74]);
+                     truckToCrane(Main.truck[yolo], Main.truckCrane[yolo], Main.container[yolo]);
+//                      yolo++;
+                      
+//                    truckToCrane(Main.truck[Main.truckID-1], Main.truckCrane[Main.truckID-1], Main.container[Main.truckID-1]);
+                    
                     cranepos = 3;
                     busy = false;
                 }
@@ -181,7 +184,7 @@ public class TruckCrane extends Node{
                     moveHook(-0.6f);
                 }
                 else if (craneHookPos == -0.6f && busy !=false){
-                    craneToAgv(Main.agv[0], Main.truckCrane[0], Main.container[74]);
+//                    craneToAgv(Main.agv[0], Main.truckCrane[0], Main.container[74]);
                     cranepos = 6;
                     busy = false;
                 }

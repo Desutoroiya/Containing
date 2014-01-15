@@ -31,47 +31,47 @@ public class Server_client implements Runnable {
     private static String recievedMessage;
     public static List<String> log = new ArrayList<String>();
 
-//    public static void main(String[] args) {
-//
-//
-//        hostname = "localhost";
-//        port = 6060;
-//        try {
-//
-//            
-//            clientSocket = new Socket(hostname, port);
-//            inputLine = new BufferedReader(new InputStreamReader(System.in));
-//            os = new PrintStream(clientSocket.getOutputStream());
-//            is = new DataInputStream(clientSocket.getInputStream());
-//            Main app = new Main();
-//            app.start();
-//            app.setDisplayStatView(false);
-//            app.setDisplayFps(false);
-//
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        }
-//
-//        if (clientSocket != null && os != null && is != null) {
-//
-//            try {
-//                
-//                new Thread(new Server_client()).start();
-//                os.println("Ready");
-//
-//                while (open) {
-//                    
-//                    os.println(inputLine.readLine());
-//
-//                }
-//                os.close();
-//                is.close();
-//                clientSocket.close();
-//            } catch (IOException ex) {
-//                ex.printStackTrace();
-//            }
-//        }
-//    }
+    public static void main(String[] args) {
+
+
+        hostname = "localhost";
+        port = 6060;
+        try {
+
+            
+            clientSocket = new Socket(hostname, port);
+            inputLine = new BufferedReader(new InputStreamReader(System.in));
+            os = new PrintStream(clientSocket.getOutputStream());
+            is = new DataInputStream(clientSocket.getInputStream());
+            Main app = new Main();
+            app.start();
+            app.setDisplayStatView(false);
+            app.setDisplayFps(false);
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        if (clientSocket != null && os != null && is != null) {
+
+            try {
+                
+                new Thread(new Server_client()).start();
+                os.println("Ready");
+
+                while (open) {
+                    
+                    os.println(inputLine.readLine());
+
+                }
+                os.close();
+                is.close();
+                clientSocket.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
 
     public void run() {
 

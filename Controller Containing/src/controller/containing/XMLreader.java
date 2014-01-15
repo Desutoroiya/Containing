@@ -42,7 +42,7 @@ public class XMLreader extends ControllerContaining{
          */
         try
         {
-            File ContainerList = new File("xml3.xml");
+            File ContainerList = new File("xml1.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(ContainerList);
@@ -86,10 +86,13 @@ public class XMLreader extends ControllerContaining{
         {
             frame.fillWindow(" " + "--------------------------");
             frame.fillWindow(" " + _containerList.get(i).toString());
-            frame.fillWindow(" " + "period aankomst " + s.periodArrive);
-            frame.fillWindow(" " + "prio " + s.priorityArrive);
-            frame.fillWindow(" " + "period vertrek " + s.periodDept);
-            frame.fillWindow(" " + "prio " + s.priorityDept);
+            frame.fillWindow(" " + _containerList.get(i).getVervoerder());
+            frame.fillWindow(" " + _containerList.get(i).getID());
+            
+//            frame.fillWindow(" " + "period aankomst " + s.periodArrive);
+//            frame.fillWindow(" " + "prio " + s.priorityArrive);
+//            frame.fillWindow(" " + "period vertrek " + s.periodDept);
+//            frame.fillWindow(" " + "prio " + s.priorityDept);
         }
     }
 

@@ -28,7 +28,7 @@ public class Main extends SimpleApplication {
     
     //variabelen voor trucks
     float truckSpawnX = 69;
-    int truckcount = 0;
+    public static int truckcount = 0;
     
     // DE LISTS
     public static Container[] container;
@@ -64,12 +64,12 @@ public class Main extends SimpleApplication {
     TrainWagon[] trainWagon;
     List<TrainWagon> trainWagonList;
     
-    public static void main(String[] args){
-        Main app = new Main();
-        app.start();
-        app.setDisplayStatView(false);
-        app.setDisplayFps(false);
-    }
+//    public static void main(String[] args){
+//        Main app = new Main();
+//        app.start();
+//        app.setDisplayStatView(false);
+//        app.setDisplayFps(false);
+//    }
 
     @Override
     public void simpleInitApp() {
@@ -79,7 +79,6 @@ public class Main extends SimpleApplication {
         
         //LOAD ASSETS
         loadTerrainLight();
-        //loadTrucks();
         loadAGV();
         loadTruckCranes();
         loadTrainCranes();
@@ -91,8 +90,8 @@ public class Main extends SimpleApplication {
         
 //        ALS LAATSTE IVM VERWIJZING NAAR SHIPS
         loadContainers();
-        bargeCrane[2].moveLift();
-        
+//        bargeCrane[2].moveLift();
+//        System.out.println("CHECKDIT = " + truckCrane.length);
         readHandler();
     }
 
@@ -119,17 +118,24 @@ public class Main extends SimpleApplication {
     public void simpleRender(RenderManager rm) {
         //TODO: add render code
     }
+    
+    int readi = 0;
+    public static int truckID = 0;
+    
     public void readHandler(){
-        int i = 0;
         
         for (String message : Server_client.log) {
-            if(Server_client.log.get(i).equals("vrachtauto")){
+            if(Server_client.log.get(readi).equals("vrachtauto")){
+                TruckCrane.yolo = truckID;
+                loadTrucks(truckID);
                 
-                loadTrucks();
-//                truck[i].truck.attachChild(container[i].contNode);
-                System.out.println("check " + i);
+                System.out.println("check " + truckID);
+                
+                truckCrane[truckID].cranepos = 1;
+                
+                truckID++;
             }
-            i ++;
+            readi++;
         }
     }
     
@@ -237,8 +243,8 @@ public class Main extends SimpleApplication {
     }
     
     public void loadTruckCranes(){
-        float XtruckCrane = 69;
-        float YtruckCrane = 0;
+        float XtruckCrane = 69f;
+        float YtruckCrane = 0f;
         float ZtruckCrane = 22f;
 
         TruckCraneList = new LinkedList<TruckCrane>();
@@ -395,7 +401,7 @@ public class Main extends SimpleApplication {
         }
     }
     
-    public void loadTrucks(){
+    public void loadTrucks(int u){
         
         float truckSpawnY = 0;
         float truckSpawnZ = 24.25f;
@@ -403,16 +409,18 @@ public class Main extends SimpleApplication {
         TruckList = new LinkedList<Truck>();
         truck = new Truck[10];
         
-        for (int i = 0; i < 1; i++){
-            truck[truckcount] = new Truck(assetManager);
-            TruckList.add(truck[i]);
-            
-            truck[truckcount].createTruck();
-            truck[truckcount].truck.setLocalTranslation(truckSpawnX, truckSpawnY, truckSpawnZ);
-            rootNode.attachChild(truck[truckcount].truck);
-            truckcount++;
-            truckSpawnX -= 3;
-        }
+        truck[truckcount] = new Truck(assetManager);
+        TruckList.add(truck[truckcount]);
+
+        truck[truckcount].createTruck();
+        truck[truckcount].truck.setLocalTranslation(truckSpawnX, truckSpawnY, truckSpawnZ);
+        rootNode.attachChild(truck[truckcount].truck);
+        truck[truckcount].truck.attachChild(container[u].contNode);
+        container[u].contNode.setLocalTranslation(0.32f,0.2f,0);
+        container[u].contNode.rotate(0, FastMath.HALF_PI, 0);
+        
+        truckcount++;
+        truckSpawnX -= 3;
     }
     
     public void loadShips(){
@@ -447,4 +455,5 @@ public class Main extends SimpleApplication {
         container[containerAmountVar].contNode.getLocalTranslation();
         container[containerAmountVar].contNode.setLocalTranslation(new Vector3f(shipCrane[i].shipCrane.getLocalTranslation().x, shipCrane[i].shipCrane.getLocalTranslation().y - 2, shipCrane[i].shipCrane.getLocalTranslation().z));
     }
+    
 }

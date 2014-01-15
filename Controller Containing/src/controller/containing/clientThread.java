@@ -103,8 +103,8 @@ class clientThread extends Thread {
                 
 
             }
-            os.println(_container.getID());
             os.println(_container.getVervoerder());
+            os.println(_container.getID());
 
         }
 
