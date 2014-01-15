@@ -9,6 +9,8 @@ import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Main CONTROL SIM 
@@ -93,6 +95,7 @@ public class Main extends SimpleApplication {
 //        bargeCrane[2].moveLift();
 //        System.out.println("CHECKDIT = " + truckCrane.length);
         readHandler();
+        agv[0].moveToCrane();
     }
 
     @Override
@@ -104,6 +107,7 @@ public class Main extends SimpleApplication {
 //        }
         truckCrane[9].update(tpf);
         truckCrane[8].update(tpf);
+        
         if (shipCrane != null){
             for (ShipCrane shipCrane : ShipCraneList){
                 shipCrane.update(tpf);

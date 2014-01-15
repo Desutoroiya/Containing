@@ -104,7 +104,8 @@ public class TruckCrane extends Node{
         meTCHook.play();
     }
     
-    public boolean busy = false;
+    public static boolean busy = false;
+    public static boolean loaded = false;
     
     public static Float precision(int decimalPlace, Float d) {
         BigDecimal bd = new BigDecimal(Float.toString(d));
@@ -149,6 +150,7 @@ public class TruckCrane extends Node{
                     truckToCrane(Main.truck[yolo], Main.truckCrane[yolo], Main.container[yolo]);
                     cranepos = 3;
                     busy = false;
+                    loaded = true;
                 }
                 break;
             case 3:

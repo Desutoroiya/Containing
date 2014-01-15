@@ -39,25 +39,23 @@ public class AGV extends Node {
         }
         return speed;
     }
-    public void move(){
-        
+    
         float agvX = this.getLocalTranslation().x;
         float agvY = this.getLocalTranslation().y;
         float agvZ = this.getLocalTranslation().z;
         
-        Vector3f position = new Vector3f(agvX,agvY,agvZ);
+    public void moveToCrane(){
         
         path = new MotionPath();
         
-        path.addWayPoint(new Vector3f(agvX,agvY,agvZ));
-        path.addWayPoint(new Vector3f(agvX,agvY,agvZ + 2));
-        path.addWayPoint(new Vector3f(agvX-2,agvY,agvZ));
-        path.addWayPoint(new Vector3f(agvX,agvY,agvZ+40));
-        path.addWayPoint(new Vector3f(agvX+38,agvY,agvZ));
-        path.addWayPoint(new Vector3f(agvX,agvY,agvZ+2));
-        
-        
-        
+        path.addWayPoint(new Vector3f(6f,agvY,-22f));
+        path.addWayPoint(new Vector3f(6f,agvY,-19f));
+        path.addWayPoint(new Vector3f(4.5f,agvY,-19f));
+        path.addWayPoint(new Vector3f(4.5f,agvY,20f));
+        path.addWayPoint(new Vector3f(42,agvY,20f));
+        path.addWayPoint(new Vector3f(42,agvY,22f));
+//        path.addWayPoint(new Vector3f(42,agvY,20f));
+
         motionControl = new MotionEvent(agv,path);
         path.setCurveTension(0f);
         motionControl.setDirectionType(MotionEvent.Direction.PathAndRotation);
@@ -65,6 +63,7 @@ public class AGV extends Node {
         motionControl.setSpeed(Speed(false));
         motionControl.play();
     }
+    
     public void pickUpContainer(){
         loaded = true;
         
