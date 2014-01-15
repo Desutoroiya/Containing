@@ -104,15 +104,15 @@ public class TruckCrane extends Node{
         meTCHook.play();
     }
     
-    private boolean busy = false;
+    public boolean busy = false;
     
     public static Float precision(int decimalPlace, Float d) {
         BigDecimal bd = new BigDecimal(Float.toString(d));
         bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
         return bd.floatValue();
     }
-    public static boolean loaded = false;
     public static int yolo = 0;
+    public static int craneID = 0;
     
     public void update(float tpf){
         
@@ -136,21 +136,17 @@ public class TruckCrane extends Node{
                 else if (truckCranePos == 24.0f && busy != false){
                     //Truck, crane, container
                     cranepos = 2;
-                    busy = false;
+//                    busy = false;
                 }
                 break;
             case 2:
                 // MOVE HOOK DOWN
                 if (truckCranePos == 24.0f && craneHookPos == 0.0f){
-                    busy = true;
+//                    busy = true;
                     moveHook(-0.6f);
                 }
                 else if (craneHookPos == -0.6f && busy !=false){
-                     truckToCrane(Main.truck[yolo], Main.truckCrane[yolo], Main.container[yolo]);
-//                      yolo++;
-                      
-//                    truckToCrane(Main.truck[Main.truckID-1], Main.truckCrane[Main.truckID-1], Main.container[Main.truckID-1]);
-                    
+                    truckToCrane(Main.truck[yolo], Main.truckCrane[yolo], Main.container[yolo]);
                     cranepos = 3;
                     busy = false;
                 }

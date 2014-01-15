@@ -97,11 +97,13 @@ public class Main extends SimpleApplication {
 
     @Override
     public void simpleUpdate(float tpf) {
-        if (truckCrane != null){
-            for (TruckCrane truckCrane : TruckCraneList){
-                    truckCrane.update(tpf);
-            }
-        }
+//        if (truckCrane != null){
+//            for (TruckCrane truckCrane : TruckCraneList){
+//                    truckCrane.update(tpf);
+//            }
+//        }
+        truckCrane[9].update(tpf);
+        truckCrane[8].update(tpf);
         if (shipCrane != null){
             for (ShipCrane shipCrane : ShipCraneList){
                 shipCrane.update(tpf);
@@ -121,17 +123,18 @@ public class Main extends SimpleApplication {
     
     int readi = 0;
     public static int truckID = 0;
-    
+        
     public void readHandler(){
         
         for (String message : Server_client.log) {
-            if(Server_client.log.get(readi).equals("vrachtauto")){
+            if(Server_client.log.get(readi).equals("vrachtauto") && truckCrane[truckID].busy == false){
                 TruckCrane.yolo = truckID;
-                loadTrucks(truckID);
+                loadTrucks();
                 
                 System.out.println("check " + truckID);
                 
                 truckCrane[truckID].cranepos = 1;
+//                truckCrane[truckID].busy = true;
                 
                 truckID++;
             }
@@ -401,7 +404,7 @@ public class Main extends SimpleApplication {
         }
     }
     
-    public void loadTrucks(int u){
+    public void loadTrucks(){
         
         float truckSpawnY = 0;
         float truckSpawnZ = 24.25f;
@@ -409,15 +412,15 @@ public class Main extends SimpleApplication {
         TruckList = new LinkedList<Truck>();
         truck = new Truck[10];
         
-        truck[truckcount] = new Truck(assetManager);
-        TruckList.add(truck[truckcount]);
+        truck[truckID] = new Truck(assetManager);
+        TruckList.add(truck[truckID]);
 
-        truck[truckcount].createTruck();
-        truck[truckcount].truck.setLocalTranslation(truckSpawnX, truckSpawnY, truckSpawnZ);
-        rootNode.attachChild(truck[truckcount].truck);
-        truck[truckcount].truck.attachChild(container[u].contNode);
-        container[u].contNode.setLocalTranslation(0.32f,0.2f,0);
-        container[u].contNode.rotate(0, FastMath.HALF_PI, 0);
+        truck[truckID].createTruck();
+        truck[truckID].truck.setLocalTranslation(truckSpawnX, truckSpawnY, truckSpawnZ);
+        rootNode.attachChild(truck[truckID].truck);
+        truck[truckID].truck.attachChild(container[truckID].contNode);
+        container[truckID].contNode.setLocalTranslation(0.32f,0.2f,0);
+        container[truckID].contNode.rotate(0, FastMath.HALF_PI, 0);
         
         truckcount++;
         truckSpawnX -= 3;
