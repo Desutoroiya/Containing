@@ -49,17 +49,12 @@ public class AGV extends Node {
         
         path = new MotionPath();
         
-        path.addWayPoint(position);
-        agvZ =+ 2;
-        path.addWayPoint(position);
-        agvX = -2;
-        path.addWayPoint(position);
-        agvZ = + 40;
-        path.addWayPoint(position);
-        agvX = + 38;
-        path.addWayPoint(position);
-        agvZ = + 2;
-        path.addWayPoint(position);
+        path.addWayPoint(new Vector3f(agvX,agvY,agvZ));
+        path.addWayPoint(new Vector3f(agvX,agvY,agvZ + 2));
+        path.addWayPoint(new Vector3f(agvX-2,agvY,agvZ));
+        path.addWayPoint(new Vector3f(agvX,agvY,agvZ+40));
+        path.addWayPoint(new Vector3f(agvX+38,agvY,agvZ));
+        path.addWayPoint(new Vector3f(agvX,agvY,agvZ+2));
         
         
         
