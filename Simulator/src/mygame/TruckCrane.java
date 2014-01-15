@@ -184,7 +184,7 @@ public class TruckCrane extends Node{
                     moveHook(-0.6f);
                 }
                 else if (craneHookPos == -0.6f && busy !=false){
-//                    craneToAgv(Main.agv[0], Main.truckCrane[0], Main.container[74]);
+                    craneToAgv(Main.agv[0], Main.truckCrane[yolo], Main.container[yolo]);
                     cranepos = 6;
                     busy = false;
                 }
@@ -215,7 +215,7 @@ public class TruckCrane extends Node{
     public void craneToAgv(AGV agv, TruckCrane truckCrane, Container container){
         truckCrane.craneHook.detachChild(container.contNode);
         agv.agv.attachChild(container.contNode);
-        container.contNode.setLocalTranslation(0,0.4f,0);
+        container.contNode.setLocalTranslation(0,0.35f,0);
     }
     
     public void agvToCrane(AGV agv, TruckCrane truckCrane, Container container){
