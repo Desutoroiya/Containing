@@ -39,12 +39,29 @@ public class AGV extends Node {
         }
         return speed;
     }
-    public void move(Vector3f pos, Vector3f pos2){
+    public void move(){
+        
+        float agvX = this.getLocalTranslation().x;
+        float agvY = this.getLocalTranslation().y;
+        float agvZ = this.getLocalTranslation().z;
+        
+        Vector3f position = new Vector3f(agvX,agvY,agvZ);
+        
         path = new MotionPath();
-        path.addWayPoint(pos);
-        path.addWayPoint(pos2);
-        //path.addWayPoint(new Vector3f(4.6f,-0.1f,-19.5f));
-        //path.addWayPoint(new Vector3f(-67.2f,-0.1f,-19.5f));
+        
+        path.addWayPoint(position);
+        agvZ =+ 2;
+        path.addWayPoint(position);
+        agvX = -2;
+        path.addWayPoint(position);
+        agvZ = + 40;
+        path.addWayPoint(position);
+        agvX = + 38;
+        path.addWayPoint(position);
+        agvZ = + 2;
+        path.addWayPoint(position);
+        
+        
         
         motionControl = new MotionEvent(agv,path);
         path.setCurveTension(0f);
