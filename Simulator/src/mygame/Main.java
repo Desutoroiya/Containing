@@ -117,6 +117,11 @@ public class Main extends SimpleApplication {
             for (TrainCrane trainCrane : TrainCraneList){
                 trainCrane.update(tpf);
             }
+        }      
+        if (bargeCrane != null){
+            for (BargeCrane bargeCrane : BargeCraneList){
+                bargeCrane.update(tpf);
+            }
         }
     }
 
@@ -271,7 +276,7 @@ public class Main extends SimpleApplication {
     }
     
     public void loadTrainCranes(){
-        float XtrainCrane = -62.5f;
+        float XtrainCrane = -63f;
         float YtrainCrane = 0;
         float ZtrainCrane = -27;
 

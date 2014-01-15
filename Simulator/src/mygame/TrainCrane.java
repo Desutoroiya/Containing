@@ -19,10 +19,6 @@ import java.math.BigDecimal;
 public class TrainCrane extends Node {
 
     TrainWagon[] trainWagon;
-    Train[] train;
-    AGV[] agv;
-    TrainCrane[] trainList;
-    Container[] container;
     
     Spatial TrainCraneLift;
     Spatial TrainCraneBase;
@@ -84,7 +80,7 @@ public class TrainCrane extends Node {
         
         meTrainCrane = new MotionEvent(trainCrane, trainBase);
         trainBase.setCurveTension(0f);
-        meTrainCrane.setSpeed(baseSpeed);
+        meTrainCrane.setSpeed(baseSpeed*0.2f);
         meTrainCrane.play();
     }
 
@@ -95,7 +91,7 @@ public class TrainCrane extends Node {
 
         meTrainHook = new MotionEvent(traincraneHook, trainHook);
         trainHook.setCurveTension(0f);
-        meTrainHook.setSpeed(baseSpeed*5);
+        meTrainHook.setSpeed(baseSpeed*0.2f);
         meTrainHook.play();
     }
 
@@ -106,7 +102,7 @@ public class TrainCrane extends Node {
 
         meTrainLift = new MotionEvent(traincraneLift, trainLift);
         trainLift.setCurveTension(0f);
-        meTrainLift.setSpeed(baseSpeed*5);
+        meTrainLift.setSpeed(baseSpeed*0.2f);
         meTrainLift.play();
 
         trainHook = new MotionPath();
@@ -115,11 +111,9 @@ public class TrainCrane extends Node {
 
         meTrainHook = new MotionEvent(traincraneHook, trainHook);
         trainHook.setCurveTension(0f);
-        meTrainHook.setSpeed(baseSpeed*5);
+        meTrainHook.setSpeed(baseSpeed*0.2f);
         meTrainHook.play();
     }
-    public float Z;
-    public float Y;
     
     private int cranepos = 1;
     private boolean busy = false;
@@ -141,9 +135,9 @@ public class TrainCrane extends Node {
         float traincraneLiftF = traincraneLift.getLocalTranslation().z;
         float traincraneLiftpos = precision(2, traincraneLiftF);
         
-        System.out.println("TrainCrane  " + trainCranePos);
-        System.out.println("TrainCraneHook  " + traincraneHookPos);
-        System.out.println("TrainCraneLift  " + traincraneLiftpos);
+        //System.out.println("TrainCrane  " + trainCranePos);
+        //System.out.println("TrainCraneHook  " + traincraneHookPos);
+        //System.out.println("TrainCraneLift  " + traincraneLiftpos);
         
         switch (cranepos){
             case 0:

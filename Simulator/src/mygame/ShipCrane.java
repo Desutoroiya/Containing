@@ -72,7 +72,7 @@ public class ShipCrane extends Node {
 
         meShipCrane = new MotionEvent(shipCrane, mpshipBase);
         mpshipBase.setCurveTension(0f);
-        meShipCrane.setSpeed(baseSpeed);
+        meShipCrane.setSpeed(baseSpeed*0.2f);
         meShipCrane.play();
     }
 
@@ -84,7 +84,7 @@ public class ShipCrane extends Node {
 
         meShipHook = new MotionEvent(shipCraneHook, mpshipHook);
         mpshipHook.setCurveTension(0f);
-        meShipHook.setSpeed(baseSpeed);
+        meShipHook.setSpeed(baseSpeed* 0.2f);
         meShipHook.play();
     }
 
@@ -96,7 +96,7 @@ public class ShipCrane extends Node {
 
         meShipLift = new MotionEvent(shipCraneLift, mpshipLift);
         mpshipLift.setCurveTension(0f);
-        meShipLift.setSpeed(baseSpeed );
+        meShipLift.setSpeed(baseSpeed * 0.2f);
         meShipLift.play();
 
 
@@ -108,7 +108,7 @@ public class ShipCrane extends Node {
 
         meShipHook = new MotionEvent(shipCraneHook, mpshipHook);
         mpshipHook.setCurveTension(0f);
-        meShipHook.setSpeed(baseSpeed * 0.01f);
+        meShipHook.setSpeed(baseSpeed * 0.2f);
         meShipHook.play();
     }
     public float Z;
@@ -131,8 +131,8 @@ public class ShipCrane extends Node {
         float shipcraneHookF = shipCraneHook.getLocalTranslation().y;
         float shipcraneHookPos = precision(2, shipcraneHookF);
         
-        System.out.println("ShipCrane  "+ shipCranePos);
-        System.out.println("ShipCraneHook  " + shipcraneHookPos);
+        //System.out.println("ShipCrane  "+ shipCranePos);
+        //System.out.println("ShipCraneHook  " + shipcraneHookPos);
         
         switch (cranepos){
             case 0:
