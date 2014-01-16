@@ -12,7 +12,6 @@ import java.util.List;
  * @author Niels
  */
 public class SortAlgorithm {
-    Clock csort = new Clock();
     XMLreader x = new XMLreader();
     
     /*

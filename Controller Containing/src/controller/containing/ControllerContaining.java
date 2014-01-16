@@ -6,7 +6,7 @@ package controller.containing;
 
 /**
  *
- * @author Ivar
+ * @author Johan
  */
 public class ControllerContaining{
     /**

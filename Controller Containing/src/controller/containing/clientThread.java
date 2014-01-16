@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller.containing;
 
 import java.io.BufferedReader;
@@ -47,15 +42,22 @@ class clientThread extends Thread {
         clientThread[] threads = this.threads;
 
         try {
+            
+            /*
+            Creates in input and output stream, so messages can be send and recieved.
+            */
 
             is = new DataInputStream(clientSocket.getInputStream());
             os = new PrintStream(clientSocket.getOutputStream());
 
-            //os.println("Are you ready?");
+            
             while (true) {
 
                 String line = is.readLine();
-
+                
+                /*
+                A client recieves Ready from the server, and can start sending data.
+                */
 
                 if (line.equals("Ready")) {
                     
@@ -65,10 +67,6 @@ class clientThread extends Thread {
 
                 recievedMessage = is.readLine();
                 System.out.println(recievedMessage);
-                //os.println("hallo");
-                //threads[0].os.println(recievedMessage);
-                //threads[1].os.println(recievedMessage);
-                //this.os.println(recievedMessage);
 
             }
 
@@ -79,6 +77,12 @@ class clientThread extends Thread {
     }
 
     public void sendDataPackage() {
+        
+        /*
+        This reads the list of created containers and if the vehicle is a truck it wil give a crane ID.
+        If it's not a truck it wil only give the vehicle and container id.
+        This information is then send to the simulation.
+        */
 
         ArrayList<String> vrachtautoParkeerplaats = new ArrayList<>();
 

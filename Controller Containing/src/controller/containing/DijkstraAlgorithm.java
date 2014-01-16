@@ -11,7 +11,7 @@ import java.util.PriorityQueue;
  */
 public class DijkstraAlgorithm 
   {
-    /**
+    /*
      * 
      * @param source 
      * 
@@ -24,14 +24,14 @@ public class DijkstraAlgorithm
           PriorityQueue<Vertex> vertexQueue = new PriorityQueue<Vertex>();
   	vertexQueue.add(source);
         
-        /**
+        /*
          * While the priority queue isn't empty, the head of the queue gets placed in Vertex u.
          */
   
   	while (!vertexQueue.isEmpty()) {
  	    Vertex u = vertexQueue.poll();
 
-             /**
+             /*
               * Visit each edge connected to Vertex u.
               * your target edge gets placed in Vertex v 
               * and your target weight gets placed in double weight.
@@ -41,7 +41,7 @@ public class DijkstraAlgorithm
                  Vertex v = e.target;
                   double weight = e.weight;
                   double distanceThroughU = u.minDistance + weight;
-                  /**
+                  /*
                    * If distanceThroughU is less than your target distance,
                    * the target gets removed from the queue.
                    * the target minDistance becomes the previous minDistance, 
@@ -61,7 +61,7 @@ public class DijkstraAlgorithm
               }
          }
      }
-      /**
+      /*
        * 
        * @param target
        * @return 
@@ -82,7 +82,7 @@ public class DijkstraAlgorithm
     public DijkstraAlgorithm(){
         
     }
-    /**
+    /*
      * 
      * @param a 
      * 
@@ -93,7 +93,7 @@ public class DijkstraAlgorithm
         
         Points p = new Points(); 
         
-        /**
+        /*
          * If the string equals one of the four vehicle it will create a path.
          * The starting point is where the AGV is standing and the end point is
          * the first crane for the chosen vehicle.

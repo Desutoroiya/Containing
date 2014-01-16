@@ -6,7 +6,7 @@ package controller.containing;
  */
 public class Points {
     
-    /**
+    /*
      * This class has all the Vertexes used to make the graph used in the Dijkstra class.
      * Each vehicle crane, storage crane and way point has it's own Vertex.
      */
@@ -117,7 +117,7 @@ public class Points {
                 Vertex WP13 = new Vertex("Middle Bottom Dock Way");
                 Vertex WP14 = new Vertex("Right Bottom Dock Way");
                 
-                /**
+                /*
                  * The constructor creates the actual graph. 
                  * Each Vertex is linked to other Vertexes. 
                  * There is also given a weight to each point, 

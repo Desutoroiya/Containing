@@ -20,6 +20,10 @@ public class Server {
     private int port;
     
     public Server(){
+       
+       /*
+        connects to a socket with a given port.
+        */ 
         
        port = 6060;
        
@@ -32,6 +36,11 @@ public class Server {
            ex.printStackTrace();
        }
        
+       /*
+       Creates a new thread if a client connects and the amount connections is lower than 2.
+       If 2 clients are already connected, a third will fail to connect
+       We chose 2 so we have one for the simulation and the andriod application.
+       */
        while(true){
            
            try{

@@ -89,10 +89,6 @@ public class XMLreader extends ControllerContaining{
             frame.fillWindow(" " + _containerList.get(i).getVervoerder());
             frame.fillWindow(" " + _containerList.get(i).getID());
             
-//            frame.fillWindow(" " + "period aankomst " + s.periodArrive);
-//            frame.fillWindow(" " + "prio " + s.priorityArrive);
-//            frame.fillWindow(" " + "period vertrek " + s.periodDept);
-//            frame.fillWindow(" " + "prio " + s.priorityDept);
         }
     }
 

@@ -3,7 +3,9 @@ package controller.containing;
 /**
  *
  * @author Johan
- * 
+ * /
+ 
+ /*
  * This class is used in the calculation of the shortest path, 
  * it doesn't actually calculate but the elements in this class are needed in the DijkstraAlgorithm class. 
  * The name String is the name given to a Vertex in the points class.
