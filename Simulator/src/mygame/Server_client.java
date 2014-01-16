@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * class.Server_client
  * @author Fons
  */
 public class Server_client implements Runnable {
@@ -31,12 +31,15 @@ public class Server_client implements Runnable {
     private static int port;
     private static String sendMessage;
     private static String recievedMessage;
-    public static List<String> log = new ArrayList<String>();
-
-    /*
-     * Main, which is the start of the application
+    /**
+     * log is the info received from the controller
      */
+    public static List<String> log = new ArrayList<String>();
     
+    /**
+     * Main, start of the application
+     * @param args
+     */
     public static void main(String[] args) {
         hostname = "localhost";
         port = 6060;

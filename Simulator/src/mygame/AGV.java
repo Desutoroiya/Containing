@@ -14,20 +14,27 @@ import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 
 /**
- *
+ * class.AGV
  * @author Enzo van Kessel
  */
 public class AGV extends Node {
+    /**
+     * assetmanager
+     */
     public AssetManager assetManager;
     Node agv = new Node();
     private MotionPath path;
     private MotionEvent motionControl;
+    /**
+     * bool to check if AGV is loaded
+     */
     public boolean loaded = false;
+    /**
+     *  AGV
+     * @param assetManager
+     */
     public AGV(AssetManager assetManager){
         this.assetManager = assetManager;
-        
-        
-        
     }
     
     /*
@@ -50,10 +57,9 @@ public class AGV extends Node {
         float agvX = this.getLocalTranslation().x;
         float agvY = this.getLocalTranslation().y;
         float agvZ = this.getLocalTranslation().z;
-        
-        /*
-         * This method sends the AGV to the crane
-         */
+    /**
+     * This sends the AGV to the crane
+     */
     public void moveToCrane(){
         
         path = new MotionPath();
@@ -73,16 +79,22 @@ public class AGV extends Node {
         motionControl.play();
     }
     
+    /**
+     * picks up the container and sets bool loaded to true
+     */
     public void pickUpContainer(){
         loaded = true;
-        
     }
+    /**
+     * drops container and sets bool loaded to false
+     */
     public void dropContainer(){
         loaded = false;
     }
     
-    /*
+    /**
      * Creates an AGV
+     * @return
      */
     public Spatial CreateAGV(){
          Spatial AGV = assetManager.loadModel("Models/agv.j3o");

@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
- *
+ * class.StoreCrane
  * @author Ivar
  */
 public class StoreCrane extends Node {
@@ -34,6 +34,9 @@ public class StoreCrane extends Node {
     Node storageCraneBase = new Node();
     Node storageCraneHook = new Node();
     
+    /**
+     * assetmanager
+     */
     public AssetManager assetManager;
     
     private MotionPath storeBase;
@@ -49,15 +52,18 @@ public class StoreCrane extends Node {
     private ArrayList<Boolean> avgBuffer = new ArrayList<Boolean>();
     
 
+    /**
+     * StoreCrane
+     * @param assetManager
+     */
     public StoreCrane(AssetManager assetManager) {
         this.assetManager = assetManager;
         this.rootNode = rootNode;
     }
     
-    /*
+    /**
      * Create a storecrane
      */
-
     public void createStoreCrane() {
         StoreCraneLift = assetManager.loadModel("Models/Storagecrane/scraneLift.j3o");
         StoreCraneBase = assetManager.loadModel("Models/Storagecrane/scraneBase.j3o");
@@ -80,18 +86,25 @@ public class StoreCrane extends Node {
         
     }
     
-    /*
+    
+    /**
      * LocalTranslations for the nodes of the storageCrane
      */
-
     public Vector3f locationBase = storageCrane.getLocalTranslation();
+    /**
+     * LocalTranslations for the nodes of the storageCrane
+     */
     public Vector3f locationLift = storageCraneLift.getLocalTranslation();  
+    /**
+     * LocalTranslations for the nodes of the storageCrane
+     */
     public Vector3f locationHook = storageCraneHook.getLocalTranslation();
     
+    /**
+     * Moves the base on the z axis by value zmove
+     * @param zmove
+     */
     public void moveBase(float zmove) {
-        /*
-         * Moves the base on the z axis by value zmove
-         */
         storeBase = new MotionPath();
         storeBase.addWayPoint(locationBase);
         storeBase.addWayPoint(new Vector3f(locationBase.x, locationBase.y, locationBase.z + zmove));
@@ -103,10 +116,11 @@ public class StoreCrane extends Node {
         meStoreCrane.play();
     }
 
+    /**
+     * Moves the hook on the y axis by value ymove
+     * @param ymove
+     */
     public void moveHook(float ymove) {
-        /*
-         * Moves the hook on the y axis by value ymove
-         */
         storeHook = new MotionPath();
         storeHook.addWayPoint(new Vector3f(locationHook));
         storeHook.addWayPoint(new Vector3f(locationHook.x, locationHook.y + ymove, locationHook.z));
@@ -118,10 +132,11 @@ public class StoreCrane extends Node {
         meStoreHook.play();
     }
 
+    /**
+     * Move the lift on the z axis by value xmove
+     * @param zmove
+     */
     public void moveLift(float zmove) {
-        /*
-         * Move the lift on the z axis by value xmove
-         */
         storeLift = new MotionPath();
         storeLift.addWayPoint(locationLift);
         storeLift.addWayPoint(new Vector3f(locationLift.x, locationLift.y, locationLift.z + zmove));
@@ -143,21 +158,23 @@ public class StoreCrane extends Node {
 
     private int cranepos = 1;
     private boolean busy = false;
-    
-    /*
+        
+    /**
      * Method precision to round floats to two decimals to eliminate misstakes
+     * @param decimalPlace
+     * @param d
+     * @return
      */
-    
     public static Float precision(int decimalPlace, Float d) {
         BigDecimal bd = new BigDecimal(Float.toString(d));
         bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
         return bd.floatValue();
     }
-    
-    /*
+        
+    /**
      * Update function that moves the cranes in the right sequence
+     * @param tpf
      */
-    
     public void update(float tpf){
         
         float craneBasePos = precision(2, storageCrane.getLocalTranslation().z);

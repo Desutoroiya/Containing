@@ -1,7 +1,7 @@
 package controller.containing;
 
 /**
- *
+ * class.Vertex
  * @author Johan
  * /
  
@@ -16,10 +16,26 @@ package controller.containing;
  */
 public class Vertex implements Comparable<Vertex> {
         
+    /**
+     *
+     */
     public final String name;
+    /**
+     *
+     */
     public Edge[] adjacencies;
+    /**
+     *
+     */
     public double minDistance = Double.POSITIVE_INFINITY;
+    /**
+     *
+     */
     public Vertex previous;
+    /**
+     * checks if vertexes are the same
+     * @param argName
+     */
     public Vertex(String argName) { name = argName; }
     public String toString() { return name; }
     public int compareTo(Vertex other)

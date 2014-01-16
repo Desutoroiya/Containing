@@ -33,45 +33,75 @@ public class Main extends SimpleApplication {
     
     //variabelen voor trucks
     float truckSpawnX = 69;
+    /**
+     * holds count of trucks
+     */
     public static int truckcount = 0;
     
-    /*
-     * Lists for containers, vehicles and cranes
+    /**
+     * List for containers
      */
     public static Container[] container;
     List<Container> containerList;
     
+    /**
+     * List for ships
+     */
     public static Ship[] schip;
     List<Ship> ShipList;
     
+    /**
+     * List for barges
+     */
     public static Barge[] barge;
     List<Barge> BargeList;
     
+    /**
+     * List for AGV's
+     */
     public static AGV[] agv;
     List<AGV> AGVList;
     
+    /**
+     * List for trucks
+     */
     public static Truck[] truck;
     List<Truck> TruckList;
     
+    /**
+     * List for shipcranes
+     */
     public static ShipCrane[] shipCrane;
     List<ShipCrane> ShipCraneList;
     
+    /**
+     * List for storagecranes
+     */
     public static StoreCrane[] storageCrane;
     List<StoreCrane> StorageCraneList;
     
+    /**
+     * List for truckcranes
+     */
     public static TruckCrane[] truckCrane;
     List<TruckCrane> TruckCraneList;
     
+    /** 
+     * List for bargecranes
+     */
     public static BargeCrane[] bargeCrane;
     List<BargeCrane> BargeCraneList;
     
+    /**
+     * List for traincranes
+     */
     public static TrainCrane[] trainCrane;
     List<TrainCrane> TrainCraneList;
     
     TrainWagon[] trainWagon;
     List<TrainWagon> trainWagonList;
     
-    /*
+    /**
      * Initializes the application includes cranes, scene and other assets which are required.
      */
     @Override
@@ -97,8 +127,9 @@ public class Main extends SimpleApplication {
         agv[0].moveToCrane();
     }
 
-    /*
+    /**
      * Update function, here all things that should be updated go:
+     * @param tpf
      */
     @Override
     public void simpleUpdate(float tpf) {
@@ -127,6 +158,10 @@ public class Main extends SimpleApplication {
         }
     }
 
+    /**
+     * Render, this is not used
+     * @param rm
+     */
     @Override
     public void simpleRender(RenderManager rm) {
         //TODO: add render code
@@ -135,15 +170,16 @@ public class Main extends SimpleApplication {
     /*
      * Variables for the readhandler
      * readi = index for input from controller
-     * truckID = id given to truck from controller
      */
     int readi = 0;
+    /**
+     * truckID = id given to truck from controller
+     */
     public static int truckID = 0;
-    
-    /*
+            
+    /**
      * Readhandler, this reads the input from the controller and creates trucks and containers
      */
-        
     public void readHandler(){
         
         for (String message : Server_client.log) {
@@ -162,10 +198,11 @@ public class Main extends SimpleApplication {
     }
     
     
-    public void createTrain(int wagons){
-    /*
-     * Method for initializing the train including wagons
+    /**
+     * creates train with the amount of wagons specified in the parameter
+     * @param wagons
      */
+    public void createTrain(int wagons){
         float Xtrainwagon = - 63;
         float Ytrainwagon = 0.1f;
         float Ztrainwagon = -28;
@@ -205,11 +242,10 @@ public class Main extends SimpleApplication {
         }
     }
     
+    /**
+     * Method to create terrain and light
+     */
     public void loadTerrainLight(){
-        /*
-         * Method to create terrain and light
-         */
-        
         /**
          * A white, directional light source
          */
@@ -234,11 +270,10 @@ public class Main extends SimpleApplication {
         viewPort.setBackgroundColor(backgroundColor);
     }
     
+    /**
+     * Method to load 100 AGVs to the scene at the correct location
+     */
     public void loadAGV(){
-        /*
-         * Method to load 100 AGVs to the scene at the correct location
-         */
-
         float Xagv = 6f;
         float Yagv = 0;
         float Zagv = -22f;
@@ -271,10 +306,10 @@ public class Main extends SimpleApplication {
         }
     }
     
+    /**
+     * Load truckcranes
+     */
     public void loadTruckCranes(){
-        /*
-         * Load truckcranes
-         */
         float XtruckCrane = 69f;
         float YtruckCrane = 0f;
         float ZtruckCrane = 22f;
@@ -295,10 +330,10 @@ public class Main extends SimpleApplication {
         }
     }
     
+    /**
+     * Load traincranes
+     */
     public void loadTrainCranes(){
-        /*
-         * Load traincranes
-         */
         float XtrainCrane = -63f;
         float YtrainCrane = 0;
         float ZtrainCrane = -27;
@@ -319,10 +354,10 @@ public class Main extends SimpleApplication {
         }
     }
     
+    /**
+     * Load storagecranes
+     */
     public void loadStorageCranes(){
-        /*
-         * Load storagecranes
-         */
         float XstorecraneOne = -64.5f;
         float YstorecraneOne = 0;
         float ZstorecraneOne = 18;
@@ -359,10 +394,10 @@ public class Main extends SimpleApplication {
         }
     }
     
+    /**
+     * Load shipcranes
+     */
     public void loadShipCranes(){
-        /*
-         * Load shipcranes (big ships)
-         */
         float Xshipcrane = -77;
         float Yshipcrane = 0;
         float Zshipcrane = -24;
@@ -382,10 +417,10 @@ public class Main extends SimpleApplication {
         }
     }
     
+    /**
+     * Load bargecranes
+     */
     public void loadBargeCranes(){
-        /*
-         * Load bargecranes (small ships)
-         */
         float Xbargecrane = -64;
         float Ybargecrane = 0;
         float Zbargecrane = 29;
@@ -404,10 +439,10 @@ public class Main extends SimpleApplication {
         }
     }
     
+    /**
+     * Fills the boat with containers
+     */
     public void loadContainers(){
-        /*
-         * Method to fill the boat with containers
-         */
         containerAmountVar = 0;
         containerAmount = 10000;
         
@@ -447,10 +482,10 @@ public class Main extends SimpleApplication {
         }
     }
     
+    /**
+     * Load trucks
+     */
     public void loadTrucks(){
-        /*
-         * Load trucks
-         */
         float truckSpawnY = 0;
         float truckSpawnZ = 24.25f;
         
@@ -471,10 +506,10 @@ public class Main extends SimpleApplication {
         truckSpawnX -= 3;
     }
     
+    /**
+     * Load ships
+     */
     public void loadShips(){
-        /*
-         * Load ships (big ships)
-         */
         ShipList = new LinkedList<Ship>();
         schip = new Ship[2];
         
@@ -488,10 +523,10 @@ public class Main extends SimpleApplication {
         }
     }
     
+    /**
+     * Load barges
+     */
     public void loadBarges(){
-        /*
-         * Load barges (big ships)
-         */
         BargeList = new LinkedList<Barge>();
         barge = new Barge[2];
         

@@ -10,18 +10,22 @@ import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 
 /**
- *
+ * class.Barge
  * @author Enzo van Kessel
  */
 public class Barge extends Node implements VehController{
     AssetManager assetManager;
     Node barge = new Node();
 
+    /**
+     * Barge
+     * @param assetManager
+     */
     public Barge(AssetManager assetManager){
         this.assetManager = assetManager;
     }
     
-    /*
+    /**
      * Creates/loads a bargeship
      */
     public void createBarge(){
@@ -31,14 +35,15 @@ public class Barge extends Node implements VehController{
         
     }
     
-    /*
-     * chekc if bargeship is loaded
+    /**
+     * check if bargeship is loaded
+     * @return
      */
     public boolean Checkloaded() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    /*
+    /**
      * moves bargeship to a certain location
      */
     public void move() {

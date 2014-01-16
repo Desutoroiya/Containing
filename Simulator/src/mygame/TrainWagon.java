@@ -13,7 +13,7 @@ import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 
 /**
- *
+ * class.TrainWagon
  * @author Enzo van Kessel
  */
 public class TrainWagon extends Node implements VehController {
@@ -28,33 +28,50 @@ public class TrainWagon extends Node implements VehController {
     private Spatial container;
    
     
+    /**
+     * TrainWagon
+     * @param assetManager
+     */
     public TrainWagon(AssetManager assetManager) {
         this.assetManager = assetManager;
         
     }
     
+    /**
+     * checks if train is loaded, returns bool loaded
+     * @return
+     */
     public boolean Checkloaded() {
         return loaded;
     }
 
+    /**
+     * moves the train
+     */
     public void move() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
+    /**
+     * gets the position of the train
+     * @return
+     */
     public Vector3f getPosition(){
         return this.getLocalTranslation();
     }
-    
-    /*
-     * Creates a trainWagon
+        
+    /**
+     * Creates a trainwagon
      */
-    
     public void CreateWagon(){
         Spatial trainCart = assetManager.loadModel("Models/Train/trainCart.j3o");
         trainwagon.attachChild(trainCart);
         trainwagon.setLocalTranslation(0, 0, 0);
     }
     
+    /**
+     * attaches container to trainwagon
+     */
     public void attachContainer(){
         container = assetManager.loadModel("Models/container.j3o");
         trainwagon.attachChild(container);
@@ -65,6 +82,9 @@ public class TrainWagon extends Node implements VehController {
         container.setMaterial(mat);
     }
     
+    /**
+     * detaches container
+     */
     public void detachContainer(){
          container.removeFromParent();
     }

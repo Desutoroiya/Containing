@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * class.clientThread
  * @author Johan
  */
 class clientThread extends Thread {

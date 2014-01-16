@@ -13,7 +13,7 @@ import com.jme3.scene.Spatial;
 import java.math.BigDecimal;
 
 /**
- *
+ * class.TrainCrane
  * @author Ivar
  */
 public class TrainCrane extends Node {
@@ -35,6 +35,9 @@ public class TrainCrane extends Node {
     Node traincraneBase = new Node();
     Node traincraneHook = new Node();
     
+    /**
+     * assetmanager
+     */
     public AssetManager assetManager;
     
     private MotionPath trainBase;
@@ -47,13 +50,18 @@ public class TrainCrane extends Node {
            
     private float baseSpeed = 1.0f;
 
+    /**
+     * TrainCrane
+     * @param assetManager
+     * @param trainWagon
+     */
     public TrainCrane(AssetManager assetManager, TrainWagon[] trainWagon) {
         this.assetManager = assetManager; 
         this.trainWagon = trainWagon;
         this.rootNode = rootNode;
     }
     
-    /*
+    /**
      * Creates a trainCrane
      */
     
@@ -72,17 +80,24 @@ public class TrainCrane extends Node {
 
     }
     
-    /*
+    /**
      * LocalTranslations for the nodes of the traincrane
      */
     public Vector3f locationBase = trainCrane.getLocalTranslation();
+    /**
+     * LocalTranslations for the nodes of the traincrane
+     */
     public Vector3f positionHook = traincraneHook.getLocalTranslation();
+    /**
+     * LocalTranslations for the nodes of the traincrane
+     */
     public Vector3f positionLift = traincraneLift.getLocalTranslation();
   
+    /**
+     * Moves the base on the x axis by value xmove
+     * @param xmove
+     */
     public void moveBase(float xmove) {
-        /*
-         * Moves the base on the x axis by value xmove
-         */
         trainBase = new MotionPath();
         
         trainBase.addWayPoint(locationBase);
@@ -95,10 +110,11 @@ public class TrainCrane extends Node {
         meTrainCrane.play();
     }
 
+    /**
+     * Moves the hook on the y axis by value ymove
+     * @param ymove
+     */
     public void moveHook(float ymove) {
-        /*
-         * Moves the hook on the y axis by value ymove
-         */
         trainHook = new MotionPath();
         trainHook.addWayPoint(new Vector3f(positionHook));
         trainHook.addWayPoint(new Vector3f(positionHook.x, positionHook.y + ymove, positionHook.z));
@@ -109,10 +125,11 @@ public class TrainCrane extends Node {
         meTrainHook.play();
     }
 
+    /**
+     * Moves the lift on the z axis by value zmove
+     * @param zmove
+     */
     public void moveLift(float zmove) {
-        /*
-         * Moves the lift on the z axis by value zmove
-         */
         trainLift = new MotionPath();
         trainLift.addWayPoint(new Vector3f(positionLift));
         trainLift.addWayPoint(new Vector3f(positionLift.x, positionLift.y, positionLift.z + zmove));
@@ -135,21 +152,22 @@ public class TrainCrane extends Node {
     private int cranepos = 1;
     private boolean busy = false;
     
-    /*
+    /**
      * Method precision to round floats to two decimals to eliminate misstakes
+     * @param decimalPlace
+     * @param d
+     * @return
      */
-    
     public static Float precision(int decimalPlace, Float d) {
         BigDecimal bd = new BigDecimal(Float.toString(d));
         bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
         return bd.floatValue();
     }
     
-    
-    /*
+    /**
      * Update function that moves the cranes in the right sequence
+     * @param tpf
      */
-    
     public void update(float tpf){
         
         float trainCranePos = precision(2,trainCrane.getLocalTranslation().x);

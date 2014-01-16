@@ -1,7 +1,7 @@
 package controller.containing;
 
 /**
- *
+ * class.Edge
  * @author Johan
  * /
  
@@ -12,8 +12,19 @@ package controller.containing;
  */
 public class Edge {
     
-     public final Vertex target;
+     /**
+     * Target vertex
+     */
+    public final Vertex target;
+    /**
+     * Weight (=length)
+     */
     public final double weight;
+    /**
+     *
+     * @param argTarget
+     * @param argWeight
+     */
     public Edge(Vertex argTarget, double argWeight)
     { target = argTarget; weight = argWeight; }
     

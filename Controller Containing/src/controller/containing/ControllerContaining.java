@@ -5,7 +5,7 @@
 package controller.containing;
 
 /**
- *
+ * class.ControllerContaining
  * @author Johan
  */
 public class ControllerContaining{
@@ -14,6 +14,10 @@ public class ControllerContaining{
      */
     static MainFrame frame;
     
+    /**
+     * main entry for the application
+     * @param args
+     */
     public static void main(String[] args) {
         
         frame = new MainFrame();

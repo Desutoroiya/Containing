@@ -13,7 +13,7 @@ import com.jme3.scene.Spatial;
 import java.math.BigDecimal;
 
 /**
- *
+ * class.ShipCrane
  * @author Ivar
  */
 public class ShipCrane extends Node {
@@ -33,6 +33,9 @@ public class ShipCrane extends Node {
     Node shipCraneBase = new Node();
     Node shipCraneHook = new Node();
     
+    /**
+     * assetmanager
+     */
     public AssetManager assetManager;
     
     private MotionPath mpshipBase;
@@ -43,22 +46,20 @@ public class ShipCrane extends Node {
     private MotionEvent meShipHook;
     private MotionEvent meShipLift;
     
-    public float x = 0f;
-    public float y = 0;
-    public float z = 0f;
-    
-    Vector3f Position = new Vector3f(x, y, z);
     private float baseSpeed = 1.0f;
 
+    /**
+     * ShipCrane
+     * @param assetManager
+     */
     public ShipCrane(AssetManager assetManager) {
         this.assetManager = assetManager;
         this.rootNode = rootNode;
     }
-
-    /*
+    
+    /**
      * Create shipcrane
      */
-    
     public void createShipCrane() {
         ShipCraneLift = assetManager.loadModel("Models/Shipcrane/craneLift.j3o");
         ShipCraneBase = assetManager.loadModel("Models/Shipcrane/craneBase.j3o");
@@ -76,17 +77,23 @@ public class ShipCrane extends Node {
     }
     
     /*
-     * LocalTranslations for the nodes of the storageCrane
+     * 
      */
     
+    /**
+     * LocalTranslations for the nodes of the storageCrane
+     */
     public Vector3f location = shipCrane.getLocalTranslation();
+    /** 
+     * LocalTranslations for the nodes of the storageCrane
+     */
     public Vector3f position = shipCraneHook.getLocalTranslation();
 
+    /**
+     * moves the base on the z axis by value zmove
+     * @param zmove
+     */
     public void moveBase(float zmove) {
-        /*
-         * Moves the base on the z axis by value zmove
-         */
-
         mpshipBase = new MotionPath();
         mpshipBase.addWayPoint(new Vector3f(location));
         mpshipBase.addWayPoint(new Vector3f(location.x, location.y, location.z + zmove));
@@ -98,10 +105,11 @@ public class ShipCrane extends Node {
         meShipCrane.play();
     }
 
+    /**
+     * moves the hook on the y axis by value ymove
+     * @param ymove
+     */
     public void moveHook(float ymove) {
-        /*
-         * Move the hook on the y move by value ymove
-         */
         mpshipHook = new MotionPath();
         mpshipHook.addWayPoint(position);
         mpshipHook.addWayPoint(new Vector3f(position.x, position.y + ymove, position.z));
@@ -113,10 +121,11 @@ public class ShipCrane extends Node {
         meShipHook.play();
     }
 
+    /**
+     * moves the lift on the x axis by value xmove
+     * @param xmove
+     */
     public void moveLift(float xmove) {
-        /*
-         * Moves the lift on the x axis by value xmove
-         */
         mpshipLift = new MotionPath();
         mpshipLift.addWayPoint(new Vector3f(position));
         mpshipLift.addWayPoint(new Vector3f(position.x + xmove, position.y, position.z));
@@ -139,26 +148,26 @@ public class ShipCrane extends Node {
         meShipHook.setSpeed(baseSpeed * 0.2f);
         meShipHook.play();
     }
-    public float Z;
-    public float Y;
     
     private int cranepos = 1;
     private boolean busy = false;
-    
-    /*
+        
+    /**
      * Method precision to round floats to two decimals to eliminate misstakes
+     * @param decimalPlace
+     * @param d
+     * @return
      */
-    
     public static Float precision(int decimalPlace, Float d) {
         BigDecimal bd = new BigDecimal(Float.toString(d));
         bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
         return bd.floatValue();
     }
-    
-    /*
+        
+    /**
      * Update function that moves the cranes in the right sequence
+     * @param tpf
      */
-    
     public void update(float tpf){
         
         float shipCranePos = precision(2,shipCrane.getLocalTranslation().z);

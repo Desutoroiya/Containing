@@ -13,7 +13,7 @@ import com.jme3.scene.Spatial;
 import java.math.BigDecimal;
 
 /**
- *
+ * class.BargeCrane
  * @author Ivar
  */
 public class BargeCrane extends Node {
@@ -26,6 +26,9 @@ public class BargeCrane extends Node {
     Node bargeCraneLift = new Node();
     Node bargeCraneBase = new Node();
     Node bargeCraneHook = new Node();
+    /**
+     * assetmanager
+     */
     public AssetManager assetManager;
     private MotionPath bargeBase;
     private MotionPath bargeHook;
@@ -33,18 +36,31 @@ public class BargeCrane extends Node {
     private MotionEvent meBargeCrane;
     private MotionEvent meBargeHook;
     private MotionEvent meBargeLift;
+    /**
+     * variable x for vector3f position
+     */
     public float x = 0f;
+    /**
+     * variable y for vector3f position
+     */
     public float y = 0;
+    /**
+     * variable z for vector3f position
+     */
     public float z = 0f;
     Vector3f Position = new Vector3f(x, y, z);
     private float baseSpeed = 1.0f;
 
+    /**
+     * Bargecrane
+     * @param assetManager
+     */
     public BargeCrane(AssetManager assetManager) {
         this.assetManager = assetManager;
         this.rootNode = rootNode;
     }
 
-    /*
+    /**
      * creates/loads a bargecrane
      */
     public void createBargeCrane() {
@@ -62,18 +78,31 @@ public class BargeCrane extends Node {
 
         bargeCrane.rotate(0, 1.5707f, 0);
     }
+    /**
+     * gets location of the bargecrane
+     */
     public Vector3f locationBase = bargeCrane.getLocalTranslation();
+    /**
+     * gets location of the hook
+     */
     public Vector3f positionHook = bargeCraneHook.getLocalTranslation();
+    /**
+     * gets location of the lift
+     */
     public Vector3f positionLift = bargeCraneLift.getLocalTranslation();
 
     /*
      * Move the base of a bargecrane to a given location
      */
-    public void moveBase(float zmove) {
+    /**
+     * Move the base of the bargecrane on the x axis by value xmove
+     * @param xmove 
+     */
+    public void moveBase(float xmove) {
 
         bargeBase = new MotionPath();
         bargeBase.addWayPoint(new Vector3f(locationBase));
-        bargeBase.addWayPoint(new Vector3f(locationBase.x + zmove, locationBase.y, locationBase.z));
+        bargeBase.addWayPoint(new Vector3f(locationBase.x + xmove, locationBase.y, locationBase.z));
 
         meBargeCrane = new MotionEvent(bargeCrane, bargeBase);
         bargeBase.setCurveTension(0f);
@@ -81,8 +110,9 @@ public class BargeCrane extends Node {
         meBargeCrane.play();
     }
 
-    /*
-     * moves the hook of the batrgecrane to a given location
+    /**
+     * moves the hook of the bargecrane on the y axis by value ymove
+     * @param ymove
      */
     public void moveHook(float ymove) {
         bargeHook = new MotionPath();
@@ -97,8 +127,9 @@ public class BargeCrane extends Node {
         meBargeHook.play();
     }
     
-    /*
-     * moves the Lift of the batrgecrane to a given location
+    /**
+     * moves the lift and hook on the x axis by value xmove
+     * @param xmove
      */
     public void moveLift(float xmove) {
         bargeLift = new MotionPath();
@@ -121,13 +152,15 @@ public class BargeCrane extends Node {
         meBargeHook.setSpeed(baseSpeed * 0.2f);
         meBargeHook.play();
     }
-    public float Z;
-    public float Y;
+    
     private int cranepos = 1;
     private boolean busy = false;
 
-    /*
-     * method which rounds of floats 
+    /**
+     * method which rounds floats to two decimals
+     * @param decimalPlace
+     * @param d
+     * @return
      */
     public static Float precision(int decimalPlace, Float d) {
         BigDecimal bd = new BigDecimal(Float.toString(d));
@@ -135,8 +168,9 @@ public class BargeCrane extends Node {
         return bd.floatValue();
     }
 
-    /*
-     * updates the position of each element of the crane
+    /**
+     * updates position of each element of the crane
+     * @param tpf
      */
     public void update(float tpf) {
         float bargeCranePos = precision(2, bargeCrane.getLocalTranslation().x);

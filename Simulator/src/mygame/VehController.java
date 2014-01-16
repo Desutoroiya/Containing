@@ -13,6 +13,13 @@ package mygame;
  * Interface for vehicles
  */
 public interface  VehController {
+    /**
+     * checks if vehicle is loaded
+     * @return
+     */
     public boolean Checkloaded();
+    /**
+     * moves vehicle
+     */
     public void move();
 }

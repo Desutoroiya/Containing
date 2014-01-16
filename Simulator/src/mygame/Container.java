@@ -11,7 +11,7 @@ import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 
 /**
- *
+ * class.Container
  * @author Fons
  */
 public class Container 
@@ -23,13 +23,18 @@ public class Container
     Node rootNode;
     Node contNode = new Node();
     
+    /**
+     * Container
+     * @param assetManager
+     * @param rootNode
+     */
     public Container(AssetManager assetManager, Node rootNode)
     {
         this.assetManager = assetManager;   
         this.rootNode = rootNode;
     }
     
-    /*
+    /**
      * Creates a container, with Material mat and Color : Random
      */
     public void loadContainer()
@@ -40,10 +45,20 @@ public class Container
         container.setMaterial(mat);
         contNode.attachChild(container);
     }
+    /**
+     * detaches container from vehicle
+     * @param container
+     * @param vehicle
+     */
     public void detachContainer(Node container,Node vehicle){
         vehicle.detachChild(container);
     }
     
+    /**
+     * attaches container to vehicle
+     * @param container
+     * @param vehicle
+     */
     public void attachContainer(Node container, Node vehicle){
         vehicle.attachChild(container);
     }

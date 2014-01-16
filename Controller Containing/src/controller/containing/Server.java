@@ -6,7 +6,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
- *
+ * class.Server
  * @author Johan
  */
 public class Server {
@@ -19,6 +19,9 @@ public class Server {
     private final clientThread[] threads = new clientThread[connections];
     private int port;
     
+    /**
+     * sets up the server
+     */
     public Server(){
        
        /*

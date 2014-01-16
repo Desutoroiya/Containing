@@ -1,7 +1,7 @@
 package controller.containing;
 
 /**
- *
+ * class.Points
  * @author Johan
  */
 public class Points {
@@ -124,7 +124,10 @@ public class Points {
                  * this is the amount it will cost to reach this point from your current one.
                  */
                 
-                public Points(){
+     /**
+     * all available points
+     */
+    public Points(){
                     
                    WP1.adjacencies = new Edge[]{ new Edge(WP3,  80),
  	                             new Edge(CSC1, 26) };

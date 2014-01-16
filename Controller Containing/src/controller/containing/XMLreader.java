@@ -14,19 +14,32 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- *
+ * class.XMLreader
  * @author Enzo
  */
 public class XMLreader extends ControllerContaining{
 
+    /**
+     * arraylist where containers are stored
+     */
     public ArrayList<Container> _containerList;
+    /**
+     * container
+     */
     public Container _container;
     
+    /**
+     * returns containerlist
+     * @return
+     */
     public ArrayList<Container> getContainerList() 
     {
         return this._containerList;
     }
 
+    /**
+     * reads the xml file
+     */
     public void XMLreader() {
         /*
          *  instance sortAlgorithm and Dijkstra creates container lists

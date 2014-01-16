@@ -6,17 +6,15 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 /**
- *
+ * class.Dijkstra
  * @author Johan
  */
 public class DijkstraAlgorithm 
   {
-    /*
-     * 
-     * @param source 
-     * 
+    /**
      * Method that computes the shortest path based on 
      * the weight that is given to each Vertex.
+     * @param source
      */
     public static void computePaths(Vertex source)
       {
@@ -61,16 +59,14 @@ public class DijkstraAlgorithm
               }
          }
      }
-      /*
-       * 
-       * @param target
-       * @return 
-       * 
+      /**
        * The list that is used to save all the points in the path.
        * At the end the path is reversed to secure that it's in the right order,
        * after that the list path is returned.
-       */
-      public static List<Vertex> getShortestPathTo(Vertex target)
+     * @param target
+     * @return
+     */
+    public static List<Vertex> getShortestPathTo(Vertex target)
       {
           List<Vertex> path = new ArrayList<Vertex>();
          for (Vertex vertex = target; vertex != null; vertex = vertex.previous)
@@ -79,15 +75,15 @@ public class DijkstraAlgorithm
          Collections.reverse(path);
           return path;
     }
+    /**
+     *
+     */
     public DijkstraAlgorithm(){
         
     }
-    /*
-     * 
-     * @param a 
-     * 
+    /**
      * Method that gives a path based on the vehicle it gets from the xml-reader.
-     * 
+     * @param a
      */
     public void makePath(String a){
         
@@ -126,8 +122,6 @@ public class DijkstraAlgorithm
                 System.out.println("Path: " + path);
             
         }
-
-        
     }
     
  }

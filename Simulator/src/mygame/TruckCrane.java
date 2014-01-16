@@ -10,7 +10,7 @@ import com.jme3.scene.Spatial;
 import java.math.BigDecimal;
 
 /**
- *
+ * class.TruckCrane
  * @author Niels
  */
 public class TruckCrane extends Node{
@@ -19,11 +19,17 @@ public class TruckCrane extends Node{
      * Declaring values needed in TruckCrane
      */
     
+    /**
+     * assetmanager
+     */
     public AssetManager assetManager;
     
     Truck[] truck;
     AGV[] agv;
 
+    /**
+     * cranepos, used in switchcase to determine location (and case)
+     */
     public int cranepos = 0;
     
     Spatial TCraneLift;
@@ -38,24 +44,32 @@ public class TruckCrane extends Node{
     
     private MotionPath mpBase;
     private MotionPath mpHook;
-    private MotionPath mpLift;
     private MotionEvent meTCrane;
     private MotionEvent meTCHook;
-    private MotionEvent meTCLift;
     
+    /**
+     * gets the localtranslation for the truckcrane
+     */
     public Vector3f craneLoc = truckCraneNode.getLocalTranslation();
+    /**
+     * gets the localtranslation for the hook of the truckcrane
+     */
     public Vector3f hookLoc = craneHook.getLocalTranslation();
     
     private float baseSpeed = 1.0f;
 
+    /**
+     * TruckCrane
+     * @param assetManager
+     */
     public TruckCrane(AssetManager assetManager) {
         this.assetManager = assetManager;
     }
 
+    /**
+     * Creates a new cranelift for trucks
+     */
     public void createTruckCrane() {
-        /*
-         * Creates a new cranelift for trucks
-         */
         TCraneLift = assetManager.loadModel("Models/Truckcrane/truckCraneLift.j3o");
         TCraneBase = assetManager.loadModel("Models/Truckcrane/truckCraneBase.j3o");
         TCraneHook = assetManager.loadModel("Models/Truckcrane/truckCraneHook.j3o");
@@ -83,10 +97,11 @@ public class TruckCrane extends Node{
         truckCraneNode.rotate(0, FastMath.PI / 2, 0);
     }
 
+    /**
+     * Moves base on the z axis by value zmove
+     * @param zmove
+     */
     public void moveBase(float zmove) {
-        /*
-         * Moves base on the z axis by value zmove
-         */
         mpBase = new MotionPath();
         mpBase.addWayPoint(craneLoc);
         mpBase.addWayPoint(new Vector3f(craneLoc.x, craneLoc.y, craneLoc.z + zmove));
@@ -98,10 +113,11 @@ public class TruckCrane extends Node{
         meTCrane.play();
     }
 
+    /**
+     * Moves the hook on the y axis by value ymove
+     * @param ymove
+     */
     public void moveHook(float ymove) {
-        /*
-         * Moves the hook on the y axis by value ymove
-         */
         mpHook = new MotionPath();
                 
         mpHook.addWayPoint(hookLoc);
@@ -114,27 +130,39 @@ public class TruckCrane extends Node{
         meTCHook.play();
     }
     
-    /*
+    /**
      * Method precision to round floats to two decimals to eliminate misstakes
+     * @param decimalPlace
+     * @param d
+     * @return
      */
-    
     public static Float precision(int decimalPlace, Float d) {
         BigDecimal bd = new BigDecimal(Float.toString(d));
         bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
         return bd.floatValue();
     }
     
-    /*
+    /**
      * Here the update variables are stored
      */
     public static int localID = 0;
+    /**
+     * Here the update variables are stored
+     */
     public static int craneID = 0;
     
+    /**
+     * bool busy, = true when crane in motion
+     */
     public static boolean busy = false;
+    /**
+     * bool loaded, true when a container is loaded onto it
+     */
     public static boolean loaded = false;
     
-    /*
+    /**
      * Update function that moves the cranes in the right sequence
+     * @param tpf
      */
     public void update(float tpf){
         
@@ -218,28 +246,48 @@ public class TruckCrane extends Node{
         }
     }
     
-    /*
-     * Functions that move containers from AGV/Truck to Crane or the other way around
+    /**
+     * Function that moves container from Truck to Crane
+     * @param truck
+     * @param crane
+     * @param container
      */
-    
     public void truckToCrane(Truck truck, TruckCrane crane, Container container){
         truck.truck.detachChild(container.contNode);
         crane.craneHook.attachChild(container.contNode);
         container.contNode.setLocalTranslation(0, 0.8f, 0);
     }
     
+    /**
+     * Function that moves container from crane to AGV
+     * @param agv
+     * @param truckCrane
+     * @param container
+     */
     public void craneToAgv(AGV agv, TruckCrane truckCrane, Container container){
         truckCrane.craneHook.detachChild(container.contNode);
         agv.agv.attachChild(container.contNode);
         container.contNode.setLocalTranslation(0,0.35f,0);
     }
     
+    /**
+     * Function that moves container from AGV to crane
+     * @param agv
+     * @param truckCrane
+     * @param container
+     */
     public void agvToCrane(AGV agv, TruckCrane truckCrane, Container container){
         agv.agv.detachChild(container.contNode);
         truckCrane.craneHook.attachChild(container.contNode);
         container.contNode.setLocalTranslation(0,0.4f,0);
     }
     
+    /**
+     * Function that moves container from crane to truck
+     * @param truck
+     * @param truckCrane
+     * @param container
+     */
     public void craneToTruck(Truck truck, TruckCrane truckCrane, Container container){
         truckCrane.craneHook.detachChild(container.contNode);
         truck.truck.attachChild(container.contNode);

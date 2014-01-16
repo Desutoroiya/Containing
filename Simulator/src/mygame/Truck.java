@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * class.Truck
  * @author Enzo van Kessel
  */
 public class Truck extends Node  {
@@ -30,14 +30,18 @@ public class Truck extends Node  {
     MotionEvent motionControl;
     Node truck = new Node();
 
+    /**
+     * Truck
+     * @param assetManager
+     */
     public Truck(AssetManager assetManager) {
         this.assetManager = assetManager;
     }
     
-    /*
-     * Move truck function
+    /**
+     * Move truck to plaats
+     * @param plaats
      */
-
     public void move(String plaats) {
         
         int Parking = Integer.parseInt(plaats);
@@ -61,14 +65,17 @@ public class Truck extends Node  {
         motionControl.play();
     }
 
+    /**
+     * check if truck is loaded
+     * @return
+     */
     public boolean Checkloaded() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
-    /*
-     * Method that creates a truck
-     */
     
+    /**
+     * Create a new truck
+     */
     public void createTruck() {
         Spatial Cart = assetManager.loadModel("Models/Truck/truckCart.j3o");
         Spatial Truck = assetManager.loadModel("Models/Truck/truckMachine.j3o");

@@ -11,7 +11,7 @@ import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 
 /**
- *
+ * class.Terrain
  * @author Fons
  */
 public class Terrain 
@@ -19,25 +19,28 @@ public class Terrain
     private AssetManager assetManager;
     private Node rootNode;
 
+    /**
+     * Terrain
+     * @param assetManager
+     * @param rootNode
+     */
     public Terrain(AssetManager assetManager, Node rootNode)
     {
         this.assetManager = assetManager;   
         this.rootNode = rootNode;
     }
     
-    //Returns a complete terrain with all it's attributes
+    /**
+     * loads the terrain
+     */
     public void initTerrain()
     {   
         rootNode.attachChild(loadTerrain());
     }    
     
-    /*
-     * In total 24 storage cranes on the terrain
-     */
-    
-    
-    /*
-     * Terrain set on -1 position so every model will be placed on the surface
+    /**
+     * load terrain at y = -1 so every model will be placed on surface (=0)
+     * @return
      */
     public Spatial loadTerrain()
     {

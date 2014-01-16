@@ -1,7 +1,7 @@
 package controller.containing;
 
 /**
- *
+ * class.Container
  * @author Niels Riemersma
  */
 public class Container {
@@ -57,6 +57,30 @@ public class Container {
     private String contentDangerCont;
     private String isoCode;
 
+    /**
+     * Container attributes
+     * @param id
+     * @param dateArrive
+     * @param timeArrive1
+     * @param timeArrive2
+     * @param vehicleArrive
+     * @param companyArrive
+     * @param xLoc
+     * @param yLoc
+     * @param zLoc
+     * @param dateDept
+     * @param timeDept1
+     * @param timeDept2
+     * @param vehicleDept
+     * @param companyDept
+     * @param ownerCont
+     * @param idCont
+     * @param weightCont
+     * @param contentCont
+     * @param contentTypeCont
+     * @param contentDangerCont
+     * @param isoCode
+     */
     public Container(int id, String dateArrive, double timeArrive1, double timeArrive2, String vehicleArrive, String companyArrive, int xLoc, int yLoc, int zLoc, String dateDept, double timeDept1, double timeDept2, String vehicleDept, String companyDept, String ownerCont, int idCont, int weightCont, String contentCont, String contentTypeCont, String contentDangerCont, String isoCode) {
         this.id = id;
         this.dateArrive = dateArrive;
@@ -91,23 +115,43 @@ public class Container {
         " " +  contentDangerCont + " " +  isoCode+ "]";
     }    
     
+    /**
+     * returns type of transport (for example: "vrachtwagen")
+     * @return
+     */
     public String getVervoerder()
     {
         return this.vehicleArrive;
     }
     
+    /**
+     * returns .x
+     * @return
+     */
     public int getxLoc(){
         return this.xLoc;
     }
     
+    /**
+     * returns .y
+     * @return
+     */
     public int getyLoc(){
         return this.yLoc;
     }
     
+    /**
+     * returns .z
+     * @return
+     */
     public int getzLoc(){
         return this.zLoc;
     }
     
+    /**
+     * returns id
+     * @return
+     */
     public int getID(){
         return this.id;
     }

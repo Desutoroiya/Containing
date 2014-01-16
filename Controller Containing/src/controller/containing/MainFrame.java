@@ -7,7 +7,7 @@ package controller.containing;
 import java.util.ArrayList;
 
 /**
- *
+ * class.MainFrame
  * @author Fons
  */
 public class MainFrame extends javax.swing.JFrame {
@@ -201,6 +201,10 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
     }
+    /**
+     * fills the window
+     * @param xml
+     */
     public void fillWindow(String xml){
         
         if(jTextArea1.getText().equals("")){

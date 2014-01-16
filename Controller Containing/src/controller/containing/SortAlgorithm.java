@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * class.SortAlgorithm
  * @author Niels
  */
 public class SortAlgorithm {
@@ -35,6 +35,11 @@ public class SortAlgorithm {
     double tot20 = 00.20;
     double tot60 = 01.00;        
     
+    /**
+     * timeArrive holds two times, the containers should be unloaded between these times
+     * @param timeArrive1
+     * @param timeArrive2
+     */
     public void arrivePeriod(double timeArrive1, double timeArrive2){
         /*
          * Aankomsttijdvak = aankomsttijd2-aankomsttijd1
@@ -65,6 +70,11 @@ public class SortAlgorithm {
         }
     }
     
+    /**
+     * timeDept holds two times, the containers should be loaded between these times
+     * @param timeDept1
+     * @param timeDept2
+     */
     public void deptPeriod(double timeDept1, double timeDept2){
         /*
          * Vertrektijdvak = vertrektijd2-vertrektijd1
@@ -108,6 +118,9 @@ public class SortAlgorithm {
     String soort_vervoer;
         
     
+    /**
+     * unfortunately this doesnt work, but this would have to take the highest container of the stack
+     */
     public void getHighest(){
         for (Container _container : x.getContainerList()){
             int id = _container.getID();
