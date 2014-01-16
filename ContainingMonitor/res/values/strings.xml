@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Containing Monitor</string>
+    <string name="action_settings">Settings</string>
+    <string name="bargraph_button">Create Bar Graph</string>
+    <string name="title_text">Containing Managing Panel</string>
+
+</resources>
