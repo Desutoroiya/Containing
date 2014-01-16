@@ -16,9 +16,18 @@ import android.graphics.Color;
 import android.graphics.Paint.Align;
 import android.os.Bundle;
 
+/**
+ * @author johan
+ */
+
 public class BarGraph {
 	
 	public Intent intent(Context context){
+		
+		/*
+		 * Creates a bargraph from given numbers.
+		 * In the future these will be given from the controller.
+		 */
 		
 	
 		int y[] = {440,3000,600,500,1242,480,454,2544,756,567};
@@ -48,6 +57,10 @@ public class BarGraph {
 			mRenderer.addXTextLabel(i+1, "Containers");	
 			
 		}
+		
+		/*
+		 * Visual style for the graph. Things like bar color, bar width and line colors are set here.
+		 */
 		
 		mRenderer.addSeriesRenderer(renderer);
 		mRenderer.setXLabels(0);

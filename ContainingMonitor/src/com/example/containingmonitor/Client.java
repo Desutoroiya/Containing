@@ -19,6 +19,10 @@ public class Client extends Activity{
 	}
 	public void BarGraphHandler(View view){
 		
+		/*
+		 * Creates the bar graph when the button is pressed in the beginscreen.
+		 */
+		
 		BarGraph bar = new BarGraph();
 		Intent lineIntent = bar.intent(this);
 		startActivity(lineIntent);
