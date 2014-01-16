@@ -16,21 +16,31 @@ import com.jme3.scene.Spatial;
 public class Barge extends Node implements VehController{
     AssetManager assetManager;
     Node barge = new Node();
-    
+
     public Barge(AssetManager assetManager){
         this.assetManager = assetManager;
     }
+    
+    /*
+     * Creates/loads a bargeship
+     */
     public void createBarge(){
         Spatial bargeSpat = assetManager.loadModel("Models/bargeship.j3o");
         barge.attachChild(bargeSpat);
         barge.rotate(0, FastMath.PI / 2, 0);
         
     }
-
+    
+    /*
+     * chekc if bargeship is loaded
+     */
     public boolean Checkloaded() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /*
+     * moves bargeship to a certain location
+     */
     public void move() {
         throw new UnsupportedOperationException("Not supported yet.");
     }

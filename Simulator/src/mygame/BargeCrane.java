@@ -44,6 +44,9 @@ public class BargeCrane extends Node {
         this.rootNode = rootNode;
     }
 
+    /*
+     * creates/loads a bargecrane
+     */
     public void createBargeCrane() {
         BargeCraneLift = assetManager.loadModel("Models/Bargecrane/bargeCraneLift.j3o");
         BargeCraneBase = assetManager.loadModel("Models/Bargecrane/bargeCraneBase.j3o");
@@ -63,6 +66,9 @@ public class BargeCrane extends Node {
     public Vector3f positionHook = bargeCraneHook.getLocalTranslation();
     public Vector3f positionLift = bargeCraneLift.getLocalTranslation();
 
+    /*
+     * Move the base of a bargecrane to a given location
+     */
     public void moveBase(float zmove) {
 
         bargeBase = new MotionPath();
@@ -75,6 +81,9 @@ public class BargeCrane extends Node {
         meBargeCrane.play();
     }
 
+    /*
+     * moves the hook of the batrgecrane to a given location
+     */
     public void moveHook(float ymove) {
         bargeHook = new MotionPath();
 
@@ -87,7 +96,10 @@ public class BargeCrane extends Node {
         meBargeHook.setSpeed(baseSpeed * 0.2f);
         meBargeHook.play();
     }
-
+    
+    /*
+     * moves the Lift of the batrgecrane to a given location
+     */
     public void moveLift(float xmove) {
         bargeLift = new MotionPath();
         bargeLift.addWayPoint(new Vector3f(positionLift));
@@ -114,22 +126,22 @@ public class BargeCrane extends Node {
     private int cranepos = 1;
     private boolean busy = false;
 
+    /*
+     * method which rounds of floats 
+     */
     public static Float precision(int decimalPlace, Float d) {
         BigDecimal bd = new BigDecimal(Float.toString(d));
         bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
         return bd.floatValue();
     }
 
+    /*
+     * updates the position of each element of the crane
+     */
     public void update(float tpf) {
-
-        float bargeCraneF = bargeCrane.getLocalTranslation().x;
-        float bargeCranePos = precision(2, bargeCraneF);
-
-        float bargecraneHookF = bargeCraneHook.getLocalTranslation().y;
-        float bargecraneHookPos = precision(2, bargecraneHookF);
-
-        float bargecraneLiftF = bargeCraneLift.getLocalTranslation().x;
-        float bargecraneLiftpos = precision(2, bargecraneLiftF);
+        float bargeCranePos = precision(2, bargeCrane.getLocalTranslation().x);
+        float bargecraneHookPos = precision(2, bargeCraneHook.getLocalTranslation().y);
+        float bargecraneLiftpos = precision(2, bargeCraneLift.getLocalTranslation().x);
 
 
         System.out.println("BARGECranepos  " + bargeCranePos);
