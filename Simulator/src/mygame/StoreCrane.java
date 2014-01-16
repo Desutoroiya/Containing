@@ -19,23 +19,33 @@ import java.util.ArrayList;
  * @author Ivar
  */
 public class StoreCrane extends Node {
+    /*
+     * Declaring values used in StoreCrane
+     */
 
     Spatial StoreCraneLift;
     Spatial StoreCraneBase;
     Spatial StoreCraneHook;
+    
     private Node rootNode;
+    
     Node storageCrane = new Node();
     Node storageCraneLift = new Node();
     Node storageCraneBase = new Node();
     Node storageCraneHook = new Node();
+    
     public AssetManager assetManager;
+    
     private MotionPath storeBase;
     private MotionPath storeHook;
     private MotionPath storeLift;
+    
     private MotionEvent meStoreCrane;
     private MotionEvent meStoreHook;
     private MotionEvent meStoreLift;
+    
     private float baseSpeed = 1.0f;
+    
     private ArrayList<Boolean> avgBuffer = new ArrayList<Boolean>();
     
 
@@ -43,6 +53,10 @@ public class StoreCrane extends Node {
         this.assetManager = assetManager;
         this.rootNode = rootNode;
     }
+    
+    /*
+     * Create a storecrane
+     */
 
     public void createStoreCrane() {
         StoreCraneLift = assetManager.loadModel("Models/Storagecrane/scraneLift.j3o");
@@ -65,12 +79,19 @@ public class StoreCrane extends Node {
         System.out.println(avgBuffer);
         
     }
+    
+    /*
+     * LocalTranslations for the nodes of the storageCrane
+     */
 
     public Vector3f locationBase = storageCrane.getLocalTranslation();
     public Vector3f locationLift = storageCraneLift.getLocalTranslation();  
     public Vector3f locationHook = storageCraneHook.getLocalTranslation();
     
     public void moveBase(float zmove) {
+        /*
+         * Moves the base on the z axis by value zmove
+         */
         storeBase = new MotionPath();
         storeBase.addWayPoint(locationBase);
         storeBase.addWayPoint(new Vector3f(locationBase.x, locationBase.y, locationBase.z + zmove));
@@ -83,6 +104,9 @@ public class StoreCrane extends Node {
     }
 
     public void moveHook(float ymove) {
+        /*
+         * Moves the hook on the y axis by value ymove
+         */
         storeHook = new MotionPath();
         storeHook.addWayPoint(new Vector3f(locationHook));
         storeHook.addWayPoint(new Vector3f(locationHook.x, locationHook.y + ymove, locationHook.z));
@@ -94,10 +118,13 @@ public class StoreCrane extends Node {
         meStoreHook.play();
     }
 
-    public void moveLift(float xmove) {
+    public void moveLift(float zmove) {
+        /*
+         * Move the lift on the z axis by value xmove
+         */
         storeLift = new MotionPath();
         storeLift.addWayPoint(locationLift);
-        storeLift.addWayPoint(new Vector3f(locationLift.x, locationLift.y, locationLift.z + xmove));
+        storeLift.addWayPoint(new Vector3f(locationLift.x, locationLift.y, locationLift.z + zmove));
 
         meStoreLift = new MotionEvent(storageCraneLift, storeLift);
         storeLift.setCurveTension(0f);
@@ -106,7 +133,7 @@ public class StoreCrane extends Node {
 
         storeHook = new MotionPath();
         storeHook.addWayPoint(locationLift);
-        storeHook.addWayPoint(new Vector3f(locationLift.x , locationLift.y, locationLift.z + xmove));
+        storeHook.addWayPoint(new Vector3f(locationLift.x , locationLift.y, locationLift.z + zmove));
 
         meStoreHook = new MotionEvent(storageCraneHook, storeHook);
         storeHook.setCurveTension(0f);
@@ -117,11 +144,19 @@ public class StoreCrane extends Node {
     private int cranepos = 1;
     private boolean busy = false;
     
+    /*
+     * Method precision to round floats to two decimals to eliminate misstakes
+     */
+    
     public static Float precision(int decimalPlace, Float d) {
         BigDecimal bd = new BigDecimal(Float.toString(d));
         bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
         return bd.floatValue();
     }
+    
+    /*
+     * Update function that moves the cranes in the right sequence
+     */
     
     public void update(float tpf){
         

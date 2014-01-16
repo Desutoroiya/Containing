@@ -29,6 +29,10 @@ public class AGV extends Node {
         
         
     }
+    
+    /*
+     * Does nothing now but would be used to change speed in case the AGV is loaded / unloaded
+     */
     private float Speed(boolean loaded){
         float speed;
         if(loaded){
@@ -40,10 +44,16 @@ public class AGV extends Node {
         return speed;
     }
     
+    /*
+     * Get localtranslation for the AGV
+     */
         float agvX = this.getLocalTranslation().x;
         float agvY = this.getLocalTranslation().y;
         float agvZ = this.getLocalTranslation().z;
         
+        /*
+         * This method sends the AGV to the crane
+         */
     public void moveToCrane(){
         
         path = new MotionPath();
@@ -54,7 +64,6 @@ public class AGV extends Node {
         path.addWayPoint(new Vector3f(4.5f,agvY,20f));
         path.addWayPoint(new Vector3f(42,agvY,20f));
         path.addWayPoint(new Vector3f(42,agvY,22f));
-//        path.addWayPoint(new Vector3f(42,agvY,20f));
 
         motionControl = new MotionEvent(agv,path);
         path.setCurveTension(0f);
@@ -71,6 +80,10 @@ public class AGV extends Node {
     public void dropContainer(){
         loaded = false;
     }
+    
+    /*
+     * Creates an AGV
+     */
     public Spatial CreateAGV(){
          Spatial AGV = assetManager.loadModel("Models/agv.j3o");
          agv.attachChild(AGV);

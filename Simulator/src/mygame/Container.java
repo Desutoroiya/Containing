@@ -16,6 +16,9 @@ import com.jme3.scene.Spatial;
  */
 public class Container 
 {
+    /*
+     * Declaring values that are use in Container
+     */
     AssetManager assetManager;
     Node rootNode;
     Node contNode = new Node();
@@ -27,7 +30,7 @@ public class Container
     }
     
     /*
-     * 
+     * Creates a container, with Material mat and Color : Random
      */
     public void loadContainer()
     {
@@ -44,14 +47,4 @@ public class Container
     public void attachContainer(Node container, Node vehicle){
         vehicle.attachChild(container);
     }
-    /*
-     * Get's the container by its type including it's data.
-     */
-//    public String getContainer()
-//    {
-//        String cont = container.getName();
-//        return cont;
-//    }
-    
-
 }

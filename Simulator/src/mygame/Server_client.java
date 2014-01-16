@@ -18,7 +18,9 @@ import java.util.List;
  * @author Fons
  */
 public class Server_client implements Runnable {
-
+    /*
+     * Declare values used in Server_client
+     */
     private static Socket clientSocket;
     private static PrintStream os;
     private static DataInputStream is;
@@ -31,14 +33,14 @@ public class Server_client implements Runnable {
     private static String recievedMessage;
     public static List<String> log = new ArrayList<String>();
 
+    /*
+     * Main, which is the start of the application
+     */
+    
     public static void main(String[] args) {
-
-
         hostname = "localhost";
         port = 6060;
         try {
-
-            
             clientSocket = new Socket(hostname, port);
             inputLine = new BufferedReader(new InputStreamReader(System.in));
             os = new PrintStream(clientSocket.getOutputStream());
@@ -53,16 +55,12 @@ public class Server_client implements Runnable {
         }
 
         if (clientSocket != null && os != null && is != null) {
-
             try {
-                
                 new Thread(new Server_client()).start();
                 os.println("Ready");
 
                 while (open) {
-                    
                     os.println(inputLine.readLine());
-
                 }
                 os.close();
                 is.close();
@@ -74,22 +72,13 @@ public class Server_client implements Runnable {
     }
 
     public void run() {
-
         try {
-            
             while (true) {
-
-                
                 recievedMessage = is.readLine();
                 System.out.println(recievedMessage);
-
                 if (recievedMessage.equals("Vrachtauto")) {
                 }
-
                 log.add(recievedMessage);
-
-                
-
             }
 
         } catch (IOException ex) {

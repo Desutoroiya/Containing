@@ -15,6 +15,10 @@ import java.math.BigDecimal;
  */
 public class TruckCrane extends Node{
     
+    /*
+     * Declaring values needed in TruckCrane
+     */
+    
     public AssetManager assetManager;
     
     Truck[] truck;
@@ -80,6 +84,9 @@ public class TruckCrane extends Node{
     }
 
     public void moveBase(float zmove) {
+        /*
+         * Moves base on the z axis by value zmove
+         */
         mpBase = new MotionPath();
         mpBase.addWayPoint(craneLoc);
         mpBase.addWayPoint(new Vector3f(craneLoc.x, craneLoc.y, craneLoc.z + zmove));
@@ -92,6 +99,9 @@ public class TruckCrane extends Node{
     }
 
     public void moveHook(float ymove) {
+        /*
+         * Moves the hook on the y axis by value ymove
+         */
         mpHook = new MotionPath();
                 
         mpHook.addWayPoint(hookLoc);
@@ -104,24 +114,32 @@ public class TruckCrane extends Node{
         meTCHook.play();
     }
     
-    public static boolean busy = false;
-    public static boolean loaded = false;
+    /*
+     * Method precision to round floats to two decimals to eliminate misstakes
+     */
     
     public static Float precision(int decimalPlace, Float d) {
         BigDecimal bd = new BigDecimal(Float.toString(d));
         bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
         return bd.floatValue();
     }
-    public static int yolo = 0;
+    
+    /*
+     * Here the update variables are stored
+     */
+    public static int localID = 0;
     public static int craneID = 0;
     
+    public static boolean busy = false;
+    public static boolean loaded = false;
+    
+    /*
+     * Update function that moves the cranes in the right sequence
+     */
     public void update(float tpf){
         
         float craneHookPos = precision(2, craneHook.getLocalTranslation().y);
         float truckCranePos = precision(2, truckCraneNode.getLocalTranslation().z);
-        
-//        System.out.println("TruckCrane  "+ truckCranePos);
-//        System.out.println("CraneHook  " + craneHookPos);
         
         switch (cranepos){
             case 0:
@@ -135,19 +153,18 @@ public class TruckCrane extends Node{
                     moveBase(2);
                 }
                 else if (truckCranePos == 24.0f && busy != false){
-                    //Truck, crane, container
                     cranepos = 2;
-//                    busy = false;
+                    busy = false;
                 }
                 break;
             case 2:
                 // MOVE HOOK DOWN
                 if (truckCranePos == 24.0f && craneHookPos == 0.0f){
-//                    busy = true;
+                    busy = true;
                     moveHook(-0.6f);
                 }
                 else if (craneHookPos == -0.6f && busy !=false){
-                    truckToCrane(Main.truck[yolo], Main.truckCrane[yolo], Main.container[yolo]);
+                    truckToCrane(Main.truck[localID], Main.truckCrane[localID], Main.container[localID]);
                     cranepos = 3;
                     busy = false;
                     loaded = true;
@@ -182,7 +199,7 @@ public class TruckCrane extends Node{
                     moveHook(-0.6f);
                 }
                 else if (craneHookPos == -0.6f && busy !=false){
-                    craneToAgv(Main.agv[0], Main.truckCrane[yolo], Main.container[yolo]);
+                    craneToAgv(Main.agv[0], Main.truckCrane[localID], Main.container[localID]);
                     cranepos = 6;
                     busy = false;
                 }
@@ -200,8 +217,9 @@ public class TruckCrane extends Node{
                 break;
         }
     }
+    
     /*
-     * From truck to crane
+     * Functions that move containers from AGV/Truck to Crane or the other way around
      */
     
     public void truckToCrane(Truck truck, TruckCrane crane, Container container){

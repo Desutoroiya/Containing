@@ -8,6 +8,10 @@ package mygame;
  *
  * @author Enzo van Kessel
  */
+
+/*
+ * Interface for vehicles
+ */
 public interface  VehController {
     public boolean Checkloaded();
     public void move();

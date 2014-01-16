@@ -18,6 +18,9 @@ import java.util.logging.Logger;
  * @author GROEP 8
  */
 public class Main extends SimpleApplication {
+    /*
+     * Declaration of variables.
+     */
     //TERRAIN LIGHT
     DirectionalLight sun;
     DirectionalLight sun2;
@@ -32,7 +35,9 @@ public class Main extends SimpleApplication {
     float truckSpawnX = 69;
     public static int truckcount = 0;
     
-    // DE LISTS
+    /*
+     * Lists for containers, vehicles and cranes
+     */
     public static Container[] container;
     List<Container> containerList;
     
@@ -66,13 +71,9 @@ public class Main extends SimpleApplication {
     TrainWagon[] trainWagon;
     List<TrainWagon> trainWagonList;
     
-//    public static void main(String[] args){
-//        Main app = new Main();
-//        app.start();
-//        app.setDisplayStatView(false);
-//        app.setDisplayFps(false);
-//    }
-
+    /*
+     * Initializes the application includes cranes, scene and other assets which are required.
+     */
     @Override
     public void simpleInitApp() {
         //SET LOCATION FOR CAMERA + SPEED
@@ -90,23 +91,24 @@ public class Main extends SimpleApplication {
         loadShips();
         loadBarges();
         
-//        ALS LAATSTE IVM VERWIJZING NAAR SHIPS
         loadContainers();
-//        bargeCrane[2].moveLift();
-//        System.out.println("CHECKDIT = " + truckCrane.length);
         readHandler();
+        
         agv[0].moveToCrane();
     }
 
+    /*
+     * Update function, here all things that should be updated go:
+     */
     @Override
     public void simpleUpdate(float tpf) {
-//        if (truckCrane != null){
-//            for (TruckCrane truckCrane : TruckCraneList){
-//                    truckCrane.update(tpf);
-//            }
-//        }
-        truckCrane[9].update(tpf);
-        truckCrane[8].update(tpf);
+        if (truckCrane != null){
+            for (TruckCrane truckCrane : TruckCraneList){
+                    truckCrane.update(tpf);
+            }
+        }
+//        truckCrane[9].update(tpf);
+//        truckCrane[8].update(tpf);
         
         if (shipCrane != null){
             for (ShipCrane shipCrane : ShipCraneList){
@@ -130,20 +132,28 @@ public class Main extends SimpleApplication {
         //TODO: add render code
     }
     
+    /*
+     * Variables for the readhandler
+     * readi = index for input from controller
+     * truckID = id given to truck from controller
+     */
     int readi = 0;
     public static int truckID = 0;
+    
+    /*
+     * Readhandler, this reads the input from the controller and creates trucks and containers
+     */
         
     public void readHandler(){
         
         for (String message : Server_client.log) {
             if(Server_client.log.get(readi).equals("vrachtauto") && truckCrane[truckID].busy == false){
-                TruckCrane.yolo = truckID;
+                TruckCrane.localID = truckID;
                 loadTrucks();
                 
                 System.out.println("check " + truckID);
                 
                 truckCrane[truckID].cranepos = 1;
-//                truckCrane[truckID].busy = true;
                 
                 truckID++;
             }
@@ -151,7 +161,11 @@ public class Main extends SimpleApplication {
         }
     }
     
+    
     public void createTrain(int wagons){
+    /*
+     * Method for initializing the train including wagons
+     */
         float Xtrainwagon = - 63;
         float Ytrainwagon = 0.1f;
         float Ztrainwagon = -28;
@@ -192,6 +206,10 @@ public class Main extends SimpleApplication {
     }
     
     public void loadTerrainLight(){
+        /*
+         * Method to create terrain and light
+         */
+        
         /**
          * A white, directional light source
          */
@@ -218,8 +236,7 @@ public class Main extends SimpleApplication {
     
     public void loadAGV(){
         /*
-         * AGV lijst
-         * 100 stuks
+         * Method to load 100 AGVs to the scene at the correct location
          */
 
         float Xagv = 6f;
@@ -255,6 +272,9 @@ public class Main extends SimpleApplication {
     }
     
     public void loadTruckCranes(){
+        /*
+         * Load truckcranes
+         */
         float XtruckCrane = 69f;
         float YtruckCrane = 0f;
         float ZtruckCrane = 22f;
@@ -276,6 +296,9 @@ public class Main extends SimpleApplication {
     }
     
     public void loadTrainCranes(){
+        /*
+         * Load traincranes
+         */
         float XtrainCrane = -63f;
         float YtrainCrane = 0;
         float ZtrainCrane = -27;
@@ -284,7 +307,6 @@ public class Main extends SimpleApplication {
         trainCrane = new TrainCrane[4];
 
         for (int i = 0; i < 4; i++) {
-            //hoi iedereen
             trainCrane[i] = new TrainCrane(assetManager, trainWagon);
             TrainCraneList.add(trainCrane[i]);
 
@@ -298,6 +320,9 @@ public class Main extends SimpleApplication {
     }
     
     public void loadStorageCranes(){
+        /*
+         * Load storagecranes
+         */
         float XstorecraneOne = -64.5f;
         float YstorecraneOne = 0;
         float ZstorecraneOne = 18;
@@ -335,6 +360,9 @@ public class Main extends SimpleApplication {
     }
     
     public void loadShipCranes(){
+        /*
+         * Load shipcranes (big ships)
+         */
         float Xshipcrane = -77;
         float Yshipcrane = 0;
         float Zshipcrane = -24;
@@ -355,6 +383,9 @@ public class Main extends SimpleApplication {
     }
     
     public void loadBargeCranes(){
+        /*
+         * Load bargecranes (small ships)
+         */
         float Xbargecrane = -64;
         float Ybargecrane = 0;
         float Zbargecrane = 29;
@@ -374,6 +405,9 @@ public class Main extends SimpleApplication {
     }
     
     public void loadContainers(){
+        /*
+         * Method to fill the boat with containers
+         */
         containerAmountVar = 0;
         containerAmount = 10000;
         
@@ -414,7 +448,9 @@ public class Main extends SimpleApplication {
     }
     
     public void loadTrucks(){
-        
+        /*
+         * Load trucks
+         */
         float truckSpawnY = 0;
         float truckSpawnZ = 24.25f;
         
@@ -436,6 +472,9 @@ public class Main extends SimpleApplication {
     }
     
     public void loadShips(){
+        /*
+         * Load ships (big ships)
+         */
         ShipList = new LinkedList<Ship>();
         schip = new Ship[2];
         
@@ -450,6 +489,9 @@ public class Main extends SimpleApplication {
     }
     
     public void loadBarges(){
+        /*
+         * Load barges (big ships)
+         */
         BargeList = new LinkedList<Barge>();
         barge = new Barge[2];
         
@@ -463,9 +505,9 @@ public class Main extends SimpleApplication {
         }
     }
     
-    public void moveContainer(int containerAmountVar, int i, int storageCrane){
-        container[containerAmountVar].contNode.getLocalTranslation();
-        container[containerAmountVar].contNode.setLocalTranslation(new Vector3f(shipCrane[i].shipCrane.getLocalTranslation().x, shipCrane[i].shipCrane.getLocalTranslation().y - 2, shipCrane[i].shipCrane.getLocalTranslation().z));
-    }
+//    public void moveContainer(int containerAmountVar, int i, int storageCrane){
+//        container[containerAmountVar].contNode.getLocalTranslation();
+//        container[containerAmountVar].contNode.setLocalTranslation(new Vector3f(shipCrane[i].shipCrane.getLocalTranslation().x, shipCrane[i].shipCrane.getLocalTranslation().y - 2, shipCrane[i].shipCrane.getLocalTranslation().z));
+//    }
     
 }

@@ -15,6 +15,11 @@ import com.jme3.scene.Spatial;
  * @author Enzo van Kessel
  */
 public class Ship extends Node {
+    
+    /*
+     * Declaring values used in StoreCrane
+     */
+    
     AssetManager assetManager;
     Node rootNode;
     
@@ -25,6 +30,11 @@ public class Ship extends Node {
         this.assetManager = assetManager;
         this.rootNode = rootNode;
     }
+    
+    /*
+     * Create ship
+     */
+    
     public void createShip(){
         Spatial shipSpat = assetManager.loadModel("Models/ship.j3o");
         shipSpat.rotate(0, FastMath.PI * 1.5f, 0);

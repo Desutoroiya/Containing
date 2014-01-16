@@ -21,6 +21,10 @@ import java.util.List;
  */
 public class Truck extends Node  {
 
+    /*
+     * Declaring values that are used in Truck
+     */
+    
     AssetManager assetManager;
     MotionPath path;
     MotionEvent motionControl;
@@ -29,6 +33,10 @@ public class Truck extends Node  {
     public Truck(AssetManager assetManager) {
         this.assetManager = assetManager;
     }
+    
+    /*
+     * Move truck function
+     */
 
     public void move(String plaats) {
         
@@ -57,6 +65,10 @@ public class Truck extends Node  {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /*
+     * Method that creates a truck
+     */
+    
     public void createTruck() {
         Spatial Cart = assetManager.loadModel("Models/Truck/truckCart.j3o");
         Spatial Truck = assetManager.loadModel("Models/Truck/truckMachine.j3o");

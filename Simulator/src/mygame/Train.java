@@ -25,14 +25,14 @@ public class Train extends Node implements VehController {
     public void move() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+    
+    /*
+     * Creates a single train
+     */
     public void createTrain(){
-  
        Spatial trainMachine = assetManager.loadModel("Models/Train/trainMachine.j3o");
        this.attachChild(trainMachine);
        trainMachine.setLocalScale(1.5f);
        trainMachine.setLocalTranslation(0.40f, 0, 0);
-       
-       
-       
     }
 }
